@@ -1,3 +1,14 @@
 <resources>
-  <string name="app_name">My Application</string>
+  <string name="app_name">Sudoku</string>
+  <string name="vDefault"/>
+  <string name="v0">1</string>
+  <string name="v1">2</string>
+  <string name="v2">3</string>
+  <string name="v3">4</string>
+  <string name="v4">5</string>
+  <string name="v5">6</string>
+  <string name="v6">7</string>
+  <string name="v7">8</string>
+  <string name="v8">9</string>
+  <string name="calculate">Calculate!</string>
 </resources>
