@@ -12,4 +12,5 @@
   <string name="v7">8</string>
   <string name="v8">9</string>
   <string name="calculate">Calculate!</string>
+  <string name="done">Done!</string>
 </resources>

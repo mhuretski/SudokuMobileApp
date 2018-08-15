@@ -4,6 +4,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickCalculate(View view) {
-        TextView cell;
         int[][] buttons = new int[][]{
                 {R.id.b00, R.id.b01, R.id.b02, R.id.b03, R.id.b04, R.id.b05, R.id.b06, R.id.b07, R.id.b08},
                 {R.id.b10, R.id.b11, R.id.b12, R.id.b13, R.id.b14, R.id.b15, R.id.b16, R.id.b17, R.id.b18},
@@ -52,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
                 {R.id.b70, R.id.b71, R.id.b72, R.id.b73, R.id.b74, R.id.b75, R.id.b76, R.id.b77, R.id.b78},
                 {R.id.b80, R.id.b81, R.id.b82, R.id.b83, R.id.b84, R.id.b85, R.id.b86, R.id.b87, R.id.b88}
         };
+
+        getUserValues(buttons);
+        Executor ex = findSolution();
+        showSolution(buttons);
+        isDone(ex);
+    }
+
+    private void getUserValues(int[][] buttons) {
+        TextView cell;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 cell = findViewById(buttons[i][j]);
@@ -60,13 +69,31 @@ public class MainActivity extends AppCompatActivity {
                 else sudoku[i][j] = 0;
             }
         }
+    }
+
+    private Executor findSolution() {
         Executor ex = new Executor(sudoku);
         sudoku = ex.getSudoku();
+        return ex;
+    }
+
+    private void showSolution(int[][] buttons) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                cell = findViewById(buttons[i][j]);
-                cell.setText(String.valueOf(sudoku[i][j]));
+                if (sudoku[i][j] != 0) {
+                    cell = findViewById(buttons[i][j]);
+                    cell.setText(String.valueOf(sudoku[i][j]));
+                }
             }
+        }
+    }
+
+    private void isDone(Executor ex) {
+        if (ex.isDone()) {
+            Button calc = findViewById(R.id.calculate);
+            calc.setText(R.string.done);
+            calc.setClickable(false);
+            calc.setFocusable(false);
         }
     }
 }
