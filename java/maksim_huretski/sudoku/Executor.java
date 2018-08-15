@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 class Executor {
 
-    private static final boolean debug = false;
     private static final int SUDOKU_VALUE = 45;
     private int[] tempNumbers = new int[9];
     private int tempData;
@@ -18,7 +17,7 @@ class Executor {
     private boolean isFilled = true;
     private int[][][][] sudoku = new int[9][9][2][];
 
-    public int[][] getSudoku(){
+    public int[][] getSudoku() {
         int[][] tempSudoku = new int[9][9];
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -26,6 +25,10 @@ class Executor {
             }
         }
         return tempSudoku;
+    }
+
+    public boolean isDone() {
+        return isValid && isFilled;
     }
 
     Executor(int[][] sudoku) {
@@ -37,7 +40,6 @@ class Executor {
     private void goSudoku() {
         fillCells();
         checkSudoku();
-        if (debug || isValid && isFilled) show();
     }
 
     private void fillCells() {
@@ -69,56 +71,32 @@ class Executor {
     }
 
     private void checkSudoku() {
-        for (int i = 0; i < sudoku.length; i++) {
+        for (int[][][] aSudoku1 : sudoku) {
             tempData = 0;
-            for (int j = 0; j < sudoku[i].length; j++) {
-                if (sudoku[i][j][0][0] > 9) {
-                    isValid = false;
-                    if (debug)
-                        System.out.println("Incorrect row: " + i + " value:" + sudoku[i][j][0][0]);
-                }
-                tempData += sudoku[i][j][0][0];
+            for (int[][] anASudoku1 : aSudoku1) {
+                if (anASudoku1[0][0] > 9) isValid = false;
+                tempData += anASudoku1[0][0];
             }
-            if (tempData != SUDOKU_VALUE) {
-                isValid = false;
-                if (debug)
-                    System.out.println("Incorrect row: " + i + " sum: " + tempData);
-            }
+            if (tempData != SUDOKU_VALUE) isValid = false;
         }
         int j = 0;
         for (int i = 0; i < sudoku[0].length; i++) {
             tempData = 0;
             for (; j < sudoku.length; j++) {
-                if (sudoku[i][j][0][0] > 9) {
-                    isValid = false;
-                    if (debug)
-                        System.out.println("Incorrect column: " + i + " value:" + sudoku[i][j]);
-                }
+                if (sudoku[i][j][0][0] > 9) isValid = false;
                 tempData += sudoku[j][i][0][0];
             }
-            if (tempData != SUDOKU_VALUE && j != 9) {
-                isValid = false;
-                if (debug)
-                    System.out.println("Incorrect column: " + j + " sum: " + tempData);
-            }
+            if (tempData != SUDOKU_VALUE && j != 9) isValid = false;
         }
         for (int i = 0; i < 9; i++) {
             blockInitializer(i);
             tempData = 0;
             for (int[] aTempBlock : tempBlocks)
                 for (int anATempBlock : aTempBlock) {
-                    if (anATempBlock > 9) {
-                        isValid = false;
-                        if (debug)
-                            System.out.println("Incorrect block: " + i + " value:" + anATempBlock);
-                    }
+                    if (anATempBlock > 9) isValid = false;
                     tempData += anATempBlock;
                 }
-            if (tempData != SUDOKU_VALUE) {
-                isValid = false;
-                if (debug)
-                    System.out.println("Incorrect block: " + i + " sum: " + tempData);
-            }
+            if (tempData != SUDOKU_VALUE) isValid = false;
         }
         for (int[][][] aSudoku : sudoku) {
             for (int[][] anASudoku : aSudoku) {
@@ -129,8 +107,6 @@ class Executor {
             }
             if (!isFilled) break;
         }
-        if (isValid && isFilled) System.out.println("Congratulations!");
-        else System.out.println("Not valid sudoku!");
     }
 
     private void addDataToSudoku() {
@@ -184,8 +160,6 @@ class Executor {
             for (int k = 0; k < sudoku[row][column][1].length; k++)
                 sudoku[row][column][1][k] = 0;
         }
-        if (debug)
-            System.out.println("row set " + tempData + " to [" + row + ";" + column + "]");
     }
 
 
@@ -218,8 +192,6 @@ class Executor {
             for (int k = 0; k < sudoku[row][column][1].length; k++)
                 sudoku[row][column][1][k] = 0;
         }
-        if (debug)
-            System.out.println("column set " + tempData + " to [" + row + ";" + column + "]");
     }
 
     private void checkBlock() {
@@ -297,31 +269,6 @@ class Executor {
             sudoku[row][column][0][0] = tempData;
         for (int k = 0; k < sudoku[row][column][1].length; k++)
             sudoku[row][column][1][k] = 0;
-        if (debug)
-            System.out.println("block set " + tempData + " to [" + row + ";" + column + "]");
-    }
-
-
-    private void show() {
-        String space = " ";
-        String squareSpace = "∎ ";
-        for (int[][][] aSudoku : sudoku) {
-            for (int[][] anASudoku : aSudoku) {
-                if (anASudoku[0][0] == 0) System.out.print(squareSpace);
-                else System.out.print(anASudoku[0][0] + space);
-                if (debug) debugMessage(anASudoku);
-            }
-            System.out.println();
-        }
-    }
-
-    private void debugMessage(int[][] anASudoku) {
-        System.out.print("[");
-        for (int i = 0; i < anASudoku[1].length; i++) {
-            /*if (anASudoku[1][i] != 0)*/
-            System.out.print(anASudoku[1][i]);
-        }
-        System.out.print("] ");
     }
 
     private void minimizePossibleValuesInRow(int row) {
@@ -454,8 +401,6 @@ class Executor {
         minimizePossibleValuesInColumn(i);
         minimizePossibleValuesInRow(i);
         minimizePossibleValuesInBlock(row, i);
-        if (debug)
-            System.out.println("min row set " + sudoku[row][i][0][0] + " to [" + row + ";" + i + "]");
         for (int l = 0; l < sudoku[row][i][1].length; l++) {
             if (sudoku[row][i][1][l] != 0) {
                 sudoku[row][i][1][l] = 0;
@@ -482,7 +427,7 @@ class Executor {
                                 if (!isOne) break;
                             }
                             if (isOne) {
-                                columnIsOne(i,column,j);
+                                columnIsOne(i, column, j);
                             }
                         }
                     }
@@ -491,14 +436,12 @@ class Executor {
         }
     }
 
-    private void columnIsOne(int i, int column, int j){
+    private void columnIsOne(int i, int column, int j) {
         goFurther = true;
         sudoku[i][column][0][0] = sudoku[i][column][1][j];
         minimizePossibleValuesInColumn(i);
         minimizePossibleValuesInRow(i);
         minimizePossibleValuesInBlock(i, column);
-        if (debug)
-            System.out.println("min column set " + sudoku[i][column][0][0] + " to [" + i + ";" + column + "]");
         for (int l = 0; l < sudoku[i][column][1].length; l++) {
             if (sudoku[i][column][1][l] != 0) {
                 sudoku[i][column][1][l] = 0;
@@ -560,8 +503,6 @@ class Executor {
     private void setOnePossibleValueToBlock(int i, int j, int n, int block) {
         goFurther = true;
         sudoku[i][j][0][0] = sudoku[i][j][1][n];
-        if (debug)
-            System.out.println("min block set " + sudoku[i][j][0][0] + " to [" + i + ";" + j + "]");
         for (int l = 0; l < sudoku[i][j][1].length; l++) {
             if (sudoku[i][j][1][l] != 0) {
                 sudoku[i][j][1][l] = 0;
@@ -588,8 +529,6 @@ class Executor {
                 if (tempData == 1) {
                     goFurther = true;
                     sudoku[i][j][0][0] = tempValue;
-                    if (debug)
-                        System.out.println("set the only possible " + sudoku[i][j][0][0] + " to [" + i + ";" + j + "]");
                     minimizePossibleValuesInColumn(i);
                     minimizePossibleValuesInRow(i);
                     minimizePossibleValuesInBlock(i, j);
@@ -690,8 +629,6 @@ class Executor {
     private void deleteUnnecessaryValueInBlockGottenFromRow(int i, int j, int value) {
         for (int m = 0; m < sudoku[i][j][1].length; m++) {
             if (sudoku[i][j][1][m] == value) {
-                if (debug)
-                    System.out.println("(block, from row) deleted impossible value " + sudoku[i][j][1][m] + " [" + i + "; " + j + "]");
                 sudoku[i][j][1][m] = 0;
                 goFurther = true;
             }
@@ -705,8 +642,6 @@ class Executor {
                     for (int m = 0; m < 9; m++) {
                         if (sudoku[row][k][1][m] == value) {
                             goFurther = true;
-                            if (debug)
-                                System.out.println("(row) deleted impossible value " + sudoku[row][k][1][m] + " from row [" + row + "; " + k + "]");
                             sudoku[row][k][1][m] = 0;
                         }
                     }
@@ -802,8 +737,6 @@ class Executor {
     private void deleteUnnecessaryValueInBlockGottenFromColumn(int i, int j, int value) {
         for (int m = 0; m < sudoku[i][j][1].length; m++) {
             if (sudoku[i][j][1][m] == value) {
-                if (debug)
-                    System.out.println("(block, from column) deleted impossible value " + sudoku[i][j][1][m] + " [" + i + "; " + j + "]");
                 sudoku[i][j][1][m] = 0;
                 goFurther = true;
             }
@@ -817,8 +750,6 @@ class Executor {
                     for (int m = 0; m < 9; m++) {
                         if (sudoku[k][column][1][m] == value) {
                             goFurther = true;
-                            if (debug)
-                                System.out.println("(column) deleted impossible value " + sudoku[k][column][1][m] + " from column [" + k + "; " + column + "]");
                             sudoku[k][column][1][m] = 0;
                         }
                     }
@@ -900,8 +831,6 @@ class Executor {
                     for (int j = 0; j < 9; j++) {
                         if (tempNumbers[j] != 0 && sudoku[i][column][1][j] != 0) {
                             goFurther = true;
-                            if (debug)
-                                System.out.println("(exclude column) value " + tempNumbers[j] + " from [" + i + ", " + column + "]");
                             sudoku[i][column][1][j] = 0;
                         }
                     }
@@ -913,8 +842,6 @@ class Executor {
                     for (int j = 0; j < 9; j++) {
                         if (tempNumbers[j] != 0 && sudoku[i][column][1][j] != 0) {
                             goFurther = true;
-                            if (debug)
-                                System.out.println("(exclude column) value " + tempNumbers[j] + " from [" + i + ", " + column + "]");
                             sudoku[i][column][1][j] = 0;
                         }
                     }
@@ -930,8 +857,6 @@ class Executor {
                     for (int j = 0; j < 9; j++) {
                         if (tempNumbers[j] != 0 && sudoku[i][column][1][j] != 0) {
                             goFurther = true;
-                            if (debug)
-                                System.out.println("(exclude column) value " + tempNumbers[j] + " from [" + i + ", " + column + "]");
                             sudoku[i][column][1][j] = 0;
                         }
                     }
@@ -1013,8 +938,6 @@ class Executor {
                     for (int j = 0; j < 9; j++) {
                         if (tempNumbers[j] != 0 && sudoku[row][i][1][j] != 0) {
                             goFurther = true;
-                            if (debug)
-                                System.out.println("(exclude row) value " + tempNumbers[j] + " from [" + row + ", " + i + "]");
                             sudoku[row][i][1][j] = 0;
                         }
                     }
@@ -1026,8 +949,6 @@ class Executor {
                     for (int j = 0; j < 9; j++) {
                         if (tempNumbers[j] != 0 && sudoku[row][i][1][j] != 0) {
                             goFurther = true;
-                            if (debug)
-                                System.out.println("(exclude row) value " + tempNumbers[j] + " from [" + row + ", " + i + "]");
                             sudoku[row][i][1][j] = 0;
                         }
                     }
@@ -1043,8 +964,6 @@ class Executor {
                     for (int j = 0; j < 9; j++) {
                         if (tempNumbers[j] != 0 && sudoku[row][i][1][j] != 0) {
                             goFurther = true;
-                            if (debug)
-                                System.out.println("(exclude row) value " + tempNumbers[j] + " from [" + row + ", " + i + "]");
                             sudoku[row][i][1][j] = 0;
                         }
                     }
