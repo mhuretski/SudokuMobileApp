@@ -202,15 +202,35 @@ class Executor {
     }
 
     private void blockInitializer(int block) {
-        if (block == 0) tempBlocks = feelTheBlock(0, 3, 0, 3);
-        else if (block == 1) tempBlocks = feelTheBlock(0, 3, 3, 6);
-        else if (block == 2) tempBlocks = feelTheBlock(0, 3, 6, 9);
-        else if (block == 3) tempBlocks = feelTheBlock(3, 6, 0, 3);
-        else if (block == 4) tempBlocks = feelTheBlock(3, 6, 3, 6);
-        else if (block == 5) tempBlocks = feelTheBlock(3, 6, 6, 9);
-        else if (block == 6) tempBlocks = feelTheBlock(6, 9, 0, 3);
-        else if (block == 7) tempBlocks = feelTheBlock(6, 9, 3, 6);
-        else if (block == 8) tempBlocks = feelTheBlock(6, 9, 6, 9);
+        switch (block) {
+            case 0:
+                tempBlocks = feelTheBlock(0, 3, 0, 3);
+                break;
+            case 1:
+                tempBlocks = feelTheBlock(0, 3, 3, 6);
+                break;
+            case 2:
+                tempBlocks = feelTheBlock(0, 3, 6, 9);
+                break;
+            case 3:
+                tempBlocks = feelTheBlock(3, 6, 0, 3);
+                break;
+            case 4:
+                tempBlocks = feelTheBlock(3, 6, 3, 6);
+                break;
+            case 5:
+                tempBlocks = feelTheBlock(3, 6, 6, 9);
+                break;
+            case 6:
+                tempBlocks = feelTheBlock(6, 9, 0, 3);
+                break;
+            case 7:
+                tempBlocks = feelTheBlock(6, 9, 3, 6);
+                break;
+            case 8:
+                tempBlocks = feelTheBlock(6, 9, 6, 9);
+                break;
+        }
     }
 
     private void fillBlock(int block) {
@@ -312,15 +332,35 @@ class Executor {
     }
 
     private void minimizePossibleValuesInBlock(int block) {
-        if (block == 0) getPossibleValuesInBlock(0, 3, 0, 3);
-        else if (block == 1) getPossibleValuesInBlock(0, 3, 3, 6);
-        else if (block == 2) getPossibleValuesInBlock(0, 3, 6, 9);
-        else if (block == 3) getPossibleValuesInBlock(3, 6, 0, 3);
-        else if (block == 4) getPossibleValuesInBlock(3, 6, 3, 6);
-        else if (block == 5) getPossibleValuesInBlock(3, 6, 6, 9);
-        else if (block == 6) getPossibleValuesInBlock(6, 9, 0, 3);
-        else if (block == 7) getPossibleValuesInBlock(6, 9, 3, 6);
-        else if (block == 8) getPossibleValuesInBlock(6, 9, 6, 9);
+        switch (block) {
+            case 0:
+                getPossibleValuesInBlock(0, 3, 0, 3);
+                break;
+            case 1:
+                getPossibleValuesInBlock(0, 3, 3, 6);
+                break;
+            case 2:
+                getPossibleValuesInBlock(0, 3, 6, 9);
+                break;
+            case 3:
+                getPossibleValuesInBlock(3, 6, 0, 3);
+                break;
+            case 4:
+                getPossibleValuesInBlock(3, 6, 3, 6);
+                break;
+            case 5:
+                getPossibleValuesInBlock(3, 6, 6, 9);
+                break;
+            case 6:
+                getPossibleValuesInBlock(6, 9, 0, 3);
+                break;
+            case 7:
+                getPossibleValuesInBlock(6, 9, 3, 6);
+                break;
+            case 8:
+                getPossibleValuesInBlock(6, 9, 6, 9);
+                break;
+        }
     }
 
     private void minimizePossibleValuesInBlock(int row, int column) {
@@ -334,15 +374,35 @@ class Executor {
         else if (row < 9 && column < 3) block = 6;
         else if (row < 9 && column < 6) block = 7;
         else if (row < 9 && column < 9) block = 8;
-        if (block == 0) getPossibleValuesInBlock(0, 3, 0, 3);
-        else if (block == 1) getPossibleValuesInBlock(0, 3, 3, 6);
-        else if (block == 2) getPossibleValuesInBlock(0, 3, 6, 9);
-        else if (block == 3) getPossibleValuesInBlock(3, 6, 0, 3);
-        else if (block == 4) getPossibleValuesInBlock(3, 6, 3, 6);
-        else if (block == 5) getPossibleValuesInBlock(3, 6, 6, 9);
-        else if (block == 6) getPossibleValuesInBlock(6, 9, 0, 3);
-        else if (block == 7) getPossibleValuesInBlock(6, 9, 3, 6);
-        else if (block == 8) getPossibleValuesInBlock(6, 9, 6, 9);
+        switch (block) {
+            case 0:
+                getPossibleValuesInBlock(0, 3, 0, 3);
+                break;
+            case 1:
+                getPossibleValuesInBlock(0, 3, 3, 6);
+                break;
+            case 2:
+                getPossibleValuesInBlock(0, 3, 6, 9);
+                break;
+            case 3:
+                getPossibleValuesInBlock(3, 6, 0, 3);
+                break;
+            case 4:
+                getPossibleValuesInBlock(3, 6, 3, 6);
+                break;
+            case 5:
+                getPossibleValuesInBlock(3, 6, 6, 9);
+                break;
+            case 6:
+                getPossibleValuesInBlock(6, 9, 0, 3);
+                break;
+            case 7:
+                getPossibleValuesInBlock(6, 9, 3, 6);
+                break;
+            case 8:
+                getPossibleValuesInBlock(6, 9, 6, 9);
+                break;
+        }
     }
 
     private void getPossibleValuesInBlock(int startRow, int endRow, int startColumn, int endColumn) {
@@ -451,15 +511,35 @@ class Executor {
 
     private void fillIfOnlyOnePossibleValueInBlock() {
         for (int block = 0; block < 9; block++) {
-            if (block == 0) getOnePossibleValuesInBlock(0, 3, 0, 3, 0);
-            else if (block == 1) getOnePossibleValuesInBlock(0, 3, 3, 6, 1);
-            else if (block == 2) getOnePossibleValuesInBlock(0, 3, 6, 9, 2);
-            else if (block == 3) getOnePossibleValuesInBlock(3, 6, 0, 3, 3);
-            else if (block == 4) getOnePossibleValuesInBlock(3, 6, 3, 6, 4);
-            else if (block == 5) getOnePossibleValuesInBlock(3, 6, 6, 9, 5);
-            else if (block == 6) getOnePossibleValuesInBlock(6, 9, 0, 3, 6);
-            else if (block == 7) getOnePossibleValuesInBlock(6, 9, 3, 6, 7);
-            else getOnePossibleValuesInBlock(6, 9, 6, 9, 8);
+            switch (block) {
+                case 0:
+                    getOnePossibleValuesInBlock(0, 3, 0, 3, 0);
+                    break;
+                case 1:
+                    getOnePossibleValuesInBlock(0, 3, 3, 6, 1);
+                    break;
+                case 2:
+                    getOnePossibleValuesInBlock(0, 3, 6, 9, 2);
+                    break;
+                case 3:
+                    getOnePossibleValuesInBlock(3, 6, 0, 3, 3);
+                    break;
+                case 4:
+                    getOnePossibleValuesInBlock(3, 6, 3, 6, 4);
+                    break;
+                case 5:
+                    getOnePossibleValuesInBlock(3, 6, 6, 9, 5);
+                    break;
+                case 6:
+                    getOnePossibleValuesInBlock(6, 9, 0, 3, 6);
+                    break;
+                case 7:
+                    getOnePossibleValuesInBlock(6, 9, 3, 6, 7);
+                    break;
+                default:
+                    getOnePossibleValuesInBlock(6, 9, 6, 9, 8);
+                    break;
+            }
         }
     }
 
@@ -591,24 +671,35 @@ class Executor {
             else if (row < 9 && column1 < 3) block = 6;
             else if (row < 9 && column1 < 6) block = 7;
             else if (row < 9) block = 8;
-            if (block == 0)
-                deleteUnnecessaryValuesInBlockGottenFromRow(0, 3, 0, 3, row, column1, column2);
-            else if (block == 1)
-                deleteUnnecessaryValuesInBlockGottenFromRow(0, 3, 3, 6, row, column1, column2);
-            else if (block == 2)
-                deleteUnnecessaryValuesInBlockGottenFromRow(0, 3, 6, 9, row, column1, column2);
-            else if (block == 3)
-                deleteUnnecessaryValuesInBlockGottenFromRow(3, 6, 0, 3, row, column1, column2);
-            else if (block == 4)
-                deleteUnnecessaryValuesInBlockGottenFromRow(3, 6, 3, 6, row, column1, column2);
-            else if (block == 5)
-                deleteUnnecessaryValuesInBlockGottenFromRow(3, 6, 6, 9, row, column1, column2);
-            else if (block == 6)
-                deleteUnnecessaryValuesInBlockGottenFromRow(6, 9, 0, 3, row, column1, column2);
-            else if (block == 7)
-                deleteUnnecessaryValuesInBlockGottenFromRow(6, 9, 3, 6, row, column1, column2);
-            else if (block == 8)
-                deleteUnnecessaryValuesInBlockGottenFromRow(6, 9, 6, 9, row, column1, column2);
+            switch (block) {
+                case 0:
+                    deleteUnnecessaryValuesInBlockGottenFromRow(0, 3, 0, 3, row, column1, column2);
+                    break;
+                case 1:
+                    deleteUnnecessaryValuesInBlockGottenFromRow(0, 3, 3, 6, row, column1, column2);
+                    break;
+                case 2:
+                    deleteUnnecessaryValuesInBlockGottenFromRow(0, 3, 6, 9, row, column1, column2);
+                    break;
+                case 3:
+                    deleteUnnecessaryValuesInBlockGottenFromRow(3, 6, 0, 3, row, column1, column2);
+                    break;
+                case 4:
+                    deleteUnnecessaryValuesInBlockGottenFromRow(3, 6, 3, 6, row, column1, column2);
+                    break;
+                case 5:
+                    deleteUnnecessaryValuesInBlockGottenFromRow(3, 6, 6, 9, row, column1, column2);
+                    break;
+                case 6:
+                    deleteUnnecessaryValuesInBlockGottenFromRow(6, 9, 0, 3, row, column1, column2);
+                    break;
+                case 7:
+                    deleteUnnecessaryValuesInBlockGottenFromRow(6, 9, 3, 6, row, column1, column2);
+                    break;
+                case 8:
+                    deleteUnnecessaryValuesInBlockGottenFromRow(6, 9, 6, 9, row, column1, column2);
+                    break;
+            }
         }
     }
 
@@ -699,24 +790,35 @@ class Executor {
             else if (column < 3) block = 6;
             else if (column < 6) block = 7;
             else block = 8;
-            if (block == 0)
-                deleteUnnecessaryValuesInBlockGottenFromColumn(0, 3, 0, 3, column, row1, row2);
-            else if (block == 1)
-                deleteUnnecessaryValuesInBlockGottenFromColumn(0, 3, 3, 6, column, row1, row2);
-            else if (block == 2)
-                deleteUnnecessaryValuesInBlockGottenFromColumn(0, 3, 6, 9, column, row1, row2);
-            else if (block == 3)
-                deleteUnnecessaryValuesInBlockGottenFromColumn(3, 6, 0, 3, column, row1, row2);
-            else if (block == 4)
-                deleteUnnecessaryValuesInBlockGottenFromColumn(3, 6, 3, 6, column, row1, row2);
-            else if (block == 5)
-                deleteUnnecessaryValuesInBlockGottenFromColumn(3, 6, 6, 9, column, row1, row2);
-            else if (block == 6)
-                deleteUnnecessaryValuesInBlockGottenFromColumn(6, 9, 0, 3, column, row1, row2);
-            else if (block == 7)
-                deleteUnnecessaryValuesInBlockGottenFromColumn(6, 9, 3, 6, column, row1, row2);
-            else
-                deleteUnnecessaryValuesInBlockGottenFromColumn(6, 9, 6, 9, column, row1, row2);
+            switch (block) {
+                case 0:
+                    deleteUnnecessaryValuesInBlockGottenFromColumn(0, 3, 0, 3, column, row1, row2);
+                    break;
+                case 1:
+                    deleteUnnecessaryValuesInBlockGottenFromColumn(0, 3, 3, 6, column, row1, row2);
+                    break;
+                case 2:
+                    deleteUnnecessaryValuesInBlockGottenFromColumn(0, 3, 6, 9, column, row1, row2);
+                    break;
+                case 3:
+                    deleteUnnecessaryValuesInBlockGottenFromColumn(3, 6, 0, 3, column, row1, row2);
+                    break;
+                case 4:
+                    deleteUnnecessaryValuesInBlockGottenFromColumn(3, 6, 3, 6, column, row1, row2);
+                    break;
+                case 5:
+                    deleteUnnecessaryValuesInBlockGottenFromColumn(3, 6, 6, 9, column, row1, row2);
+                    break;
+                case 6:
+                    deleteUnnecessaryValuesInBlockGottenFromColumn(6, 9, 0, 3, column, row1, row2);
+                    break;
+                case 7:
+                    deleteUnnecessaryValuesInBlockGottenFromColumn(6, 9, 3, 6, column, row1, row2);
+                    break;
+                default:
+                    deleteUnnecessaryValuesInBlockGottenFromColumn(6, 9, 6, 9, column, row1, row2);
+                    break;
+            }
         }
     }
 
@@ -760,23 +862,35 @@ class Executor {
 
     private void findExcludedValuesUsingColumn() {
         for (int block = 0; block < 9; block++) {
-            if (block == 0)
-                checkBlockForExistingValuesInBlockColumn(0, 3, 0, 3);
-            else if (block == 1)
-                checkBlockForExistingValuesInBlockColumn(0, 3, 3, 6);
-            else if (block == 2)
-                checkBlockForExistingValuesInBlockColumn(0, 3, 6, 9);
-            else if (block == 3)
-                checkBlockForExistingValuesInBlockColumn(3, 6, 0, 3);
-            else if (block == 4)
-                checkBlockForExistingValuesInBlockColumn(3, 6, 3, 6);
-            else if (block == 5)
-                checkBlockForExistingValuesInBlockColumn(3, 6, 6, 9);
-            else if (block == 6)
-                checkBlockForExistingValuesInBlockColumn(6, 9, 0, 3);
-            else if (block == 7)
-                checkBlockForExistingValuesInBlockColumn(6, 9, 3, 6);
-            else checkBlockForExistingValuesInBlockColumn(6, 9, 6, 9);
+            switch (block) {
+                case 0:
+                    checkBlockForExistingValuesInBlockColumn(0, 3, 0, 3);
+                    break;
+                case 1:
+                    checkBlockForExistingValuesInBlockColumn(0, 3, 3, 6);
+                    break;
+                case 2:
+                    checkBlockForExistingValuesInBlockColumn(0, 3, 6, 9);
+                    break;
+                case 3:
+                    checkBlockForExistingValuesInBlockColumn(3, 6, 0, 3);
+                    break;
+                case 4:
+                    checkBlockForExistingValuesInBlockColumn(3, 6, 3, 6);
+                    break;
+                case 5:
+                    checkBlockForExistingValuesInBlockColumn(3, 6, 6, 9);
+                    break;
+                case 6:
+                    checkBlockForExistingValuesInBlockColumn(6, 9, 0, 3);
+                    break;
+                case 7:
+                    checkBlockForExistingValuesInBlockColumn(6, 9, 3, 6);
+                    break;
+                default:
+                    checkBlockForExistingValuesInBlockColumn(6, 9, 6, 9);
+                    break;
+            }
         }
     }
 
@@ -867,23 +981,35 @@ class Executor {
 
     private void findExcludedValuesUsingRow() {
         for (int block = 0; block < 9; block++) {
-            if (block == 0)
-                checkBlockForExistingValuesInBlockRow(0, 3, 0, 3);
-            else if (block == 1)
-                checkBlockForExistingValuesInBlockRow(0, 3, 3, 6);
-            else if (block == 2)
-                checkBlockForExistingValuesInBlockRow(0, 3, 6, 9);
-            else if (block == 3)
-                checkBlockForExistingValuesInBlockRow(3, 6, 0, 3);
-            else if (block == 4)
-                checkBlockForExistingValuesInBlockRow(3, 6, 3, 6);
-            else if (block == 5)
-                checkBlockForExistingValuesInBlockRow(3, 6, 6, 9);
-            else if (block == 6)
-                checkBlockForExistingValuesInBlockRow(6, 9, 0, 3);
-            else if (block == 7)
-                checkBlockForExistingValuesInBlockRow(6, 9, 3, 6);
-            else checkBlockForExistingValuesInBlockRow(6, 9, 6, 9);
+            switch (block) {
+                case 0:
+                    checkBlockForExistingValuesInBlockRow(0, 3, 0, 3);
+                    break;
+                case 1:
+                    checkBlockForExistingValuesInBlockRow(0, 3, 3, 6);
+                    break;
+                case 2:
+                    checkBlockForExistingValuesInBlockRow(0, 3, 6, 9);
+                    break;
+                case 3:
+                    checkBlockForExistingValuesInBlockRow(3, 6, 0, 3);
+                    break;
+                case 4:
+                    checkBlockForExistingValuesInBlockRow(3, 6, 3, 6);
+                    break;
+                case 5:
+                    checkBlockForExistingValuesInBlockRow(3, 6, 6, 9);
+                    break;
+                case 6:
+                    checkBlockForExistingValuesInBlockRow(6, 9, 0, 3);
+                    break;
+                case 7:
+                    checkBlockForExistingValuesInBlockRow(6, 9, 3, 6);
+                    break;
+                default:
+                    checkBlockForExistingValuesInBlockRow(6, 9, 6, 9);
+                    break;
+            }
         }
     }
 
