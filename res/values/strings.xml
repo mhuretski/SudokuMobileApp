@@ -1,6 +1,7 @@
 <resources>
   <string name="app_name">Sudoku</string>
   <string name="vDefault"/>
+  <string name="vZero">0</string>
   <string name="v0">1</string>
   <string name="v1">2</string>
   <string name="v2">3</string>
