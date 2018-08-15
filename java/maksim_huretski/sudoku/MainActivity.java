@@ -1,4 +1,4 @@
-package maksim_huretski.myapplication;
+package maksim_huretski.sudoku;
 
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -60,24 +60,13 @@ public class MainActivity extends AppCompatActivity {
                 else sudoku[i][j] = 0;
             }
         }
-        System.out.println(1);
         Executor ex = new Executor(sudoku);
-        System.out.println(2);
         sudoku = ex.getSudoku();
-        System.out.println(3);
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                System.out.print(sudoku[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println(4);
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 cell = findViewById(buttons[i][j]);
                 cell.setText(String.valueOf(sudoku[i][j]));
             }
         }
-        System.out.println(5);
     }
 }

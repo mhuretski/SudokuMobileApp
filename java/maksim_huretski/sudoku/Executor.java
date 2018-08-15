@@ -1,4 +1,4 @@
-package maksim_huretski.myapplication;
+package maksim_huretski.sudoku;
 
 import java.util.Arrays;
 
@@ -247,9 +247,8 @@ class Executor {
         tempColumn = 0;
         int row = 0;
         int column = 0;
-        if (block < 3) row = 0;
-        else if (block < 6) row = 1;
-        else if (block < 9) row = 2;
+        if (block > 2 && block < 6) row = 1;
+        else if (block > 5 && block < 9) row = 2;
         if (block == 1 || block == 4 || block == 7) column = 1;
         else if (block == 2 || block == 5 || block == 8) column = 2;
         for (int i = 0; i < 3; i++) {
@@ -899,7 +898,7 @@ class Executor {
             for (int i = 3; i < 9; i++) {
                 if (sudoku[i][column][0][0] == 0) {
                     for (int j = 0; j < 9; j++) {
-                        if (tempNumbers[j] != 0) {
+                        if (tempNumbers[j] != 0 && sudoku[i][column][1][j] != 0) {
                             goFurther = true;
                             if (debug)
                                 System.out.println("(exclude column) value " + tempNumbers[j] + " from [" + i + ", " + column + "]");
@@ -1012,7 +1011,7 @@ class Executor {
             for (int i = 3; i < 9; i++) {
                 if (sudoku[row][i][0][0] == 0) {
                     for (int j = 0; j < 9; j++) {
-                        if (tempNumbers[j] != 0) {
+                        if (tempNumbers[j] != 0 && sudoku[row][i][1][j] != 0) {
                             goFurther = true;
                             if (debug)
                                 System.out.println("(exclude row) value " + tempNumbers[j] + " from [" + row + ", " + i + "]");
