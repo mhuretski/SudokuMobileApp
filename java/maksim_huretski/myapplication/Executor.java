@@ -247,7 +247,8 @@ class Executor {
         tempColumn = 0;
         int row = 0;
         int column = 0;
-        if (block > 2 && block < 6) row = 1;
+        if (block < 3) row = 0;
+        else if (block < 6) row = 1;
         else if (block < 9) row = 2;
         if (block == 1 || block == 4 || block == 7) column = 1;
         else if (block == 2 || block == 5 || block == 8) column = 2;
