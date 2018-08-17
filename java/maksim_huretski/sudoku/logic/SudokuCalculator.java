@@ -1,8 +1,8 @@
-package maksim_huretski.sudoku;
+package maksim_huretski.sudoku.logic;
 
 import java.util.Arrays;
 
-class Executor {
+class SudokuCalculator {
 
     private static final int SUDOKU_VALUE = 45;
     private int[] tempNumbers = new int[9];
@@ -16,6 +16,7 @@ class Executor {
     private boolean isValid = true;
     private boolean isFilled = true;
     private int[][][][] sudoku = new int[9][9][2][];
+
 
     public int[][] getSudoku() {
         int[][] tempSudoku = new int[9][9];
@@ -31,13 +32,12 @@ class Executor {
         return isValid && isFilled;
     }
 
-    Executor(int[][] sudoku) {
+    SudokuCalculator(int[][] sudoku) {
         addDataToSudoku();
         addValuesToSudoku(sudoku);
-        goSudoku();
     }
 
-    private void goSudoku() {
+    public void calculateSudoku() {
         fillCells();
         checkSudoku();
     }

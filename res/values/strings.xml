@@ -11,6 +11,8 @@
   <string name="v6">7</string>
   <string name="v7">8</string>
   <string name="v8">9</string>
-  <string name="calculate">Calculate!</string>
+  <string name="calculate">Calculate</string>
+  <string name="invalidInput">Incorrect input data</string>
+  <string name="congratulations">Solved!</string>
   <string name="done">Done!</string>
 </resources>

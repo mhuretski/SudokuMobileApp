@@ -6,17 +6,28 @@
   android:background="@color/border"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".MainActivity">
+  tools:context=".MainActivity" tools:ignore="Overdraw">
+
+  <TextView
+    android:text="@string/vDefault"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/messages"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginTop="16dp"/>
+
 
   <android.support.constraint.ConstraintLayout
     android:id="@+id/table"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
+    app:layout_constraintHorizontal_weight="1"
+    android:layout_marginTop="16dp"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
-    app:layout_constraintHorizontal_weight="1"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toBottomOf="@+id/messages">
 
     <TextView
       android:background="@drawable/dark_border"
@@ -1103,7 +1114,8 @@
       app:layout_constraintTop_toTopOf="@+id/b80"
       app:layout_constraintRight_toLeftOf="@+id/b85"
       app:layout_constraintLeft_toRightOf="@+id/b83"
-      app:layout_constraintDimensionRatio="1:1"/>
+      app:layout_constraintDimensionRatio="1:1"
+      tools:ignore="TooManyViews"/>
     <TextView
       android:background="@drawable/light_border"
       android:id="@+id/b85"
@@ -1117,8 +1129,7 @@
       app:layout_constraintTop_toTopOf="@+id/b80"
       app:layout_constraintRight_toLeftOf="@+id/b86"
       app:layout_constraintLeft_toRightOf="@+id/b84"
-      app:layout_constraintDimensionRatio="1:1"
-      tools:ignore="TooManyViews"/>
+      app:layout_constraintDimensionRatio="1:1"/>
     <TextView
       android:background="@drawable/dark_border"
       android:id="@+id/b86"
