@@ -107,4 +107,8 @@ class UserInputValidation {
     public Set<Integer> getIncorrectBlocks() {
         return incorrectBlocks;
     }
+
+    public int[][] getBlockIdentifications() {
+        return blockIdentifications;
+    }
 }

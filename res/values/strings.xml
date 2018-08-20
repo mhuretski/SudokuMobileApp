@@ -14,5 +14,5 @@
   <string name="calculate">Calculate</string>
   <string name="invalidInput">Incorrect input data</string>
   <string name="congratulations">Solved!</string>
-  <string name="done">Done!</string>
+  <string name="reset">Reset</string>
 </resources>

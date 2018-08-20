@@ -17,6 +17,9 @@ public abstract class SudokuWindow extends AppCompatActivity {
     private GradientDrawable drawable;
     private boolean isCorrectUserInput = true;
     private int[][] sudoku = new int[9][9];
+    private int[][] blockIdentifications;
+    private boolean isSolved = false;
+    private boolean isClickable = true;
     private static final int[][] CELLS = new int[][]{
             {R.id.b00, R.id.b01, R.id.b02, R.id.b03, R.id.b04, R.id.b05, R.id.b06, R.id.b07, R.id.b08},
             {R.id.b10, R.id.b11, R.id.b12, R.id.b13, R.id.b14, R.id.b15, R.id.b16, R.id.b17, R.id.b18},
@@ -37,26 +40,32 @@ public abstract class SudokuWindow extends AppCompatActivity {
     }
 
     public void onClickValue(View view) {
-        TextView value = findViewById(view.getId());
-        String cellText = String.valueOf(value.getText());
-        if (!cellText.equals("0")) {
-            cell.setText(cellText);
-            cell.setTypeface(cell.getTypeface(), Typeface.BOLD);
-        } else {
-            cell.setText(R.string.vDefault);
-            cell.setTypeface(null, Typeface.NORMAL);
+        if (isClickable) {
+            TextView value = findViewById(view.getId());
+            String cellText = value.getText().toString();
+            if (!cellText.equals("0")) {
+                cell.setText(cellText);
+                cell.setTypeface(cell.getTypeface(), Typeface.BOLD);
+            } else {
+                cell.setText(R.string.vDefault);
+                cell.setTypeface(null, Typeface.NORMAL);
+            }
+            drawable.setStroke(3, getResources().getColor(R.color.border));
+            possibleValues.setVisibility(View.GONE);
         }
-        drawable.setStroke(3, getResources().getColor(R.color.border));
-        possibleValues.setVisibility(View.GONE);
     }
 
     public void onClickCalculate(View view) {
-        getUserValues();
-        SudokuCalculator sc = new SudokuCalculator(sudoku);
-        UserInputValidation iv = new UserInputValidation(sc.getSudoku());
-        isCorrectUserInput = iv.checkUserInput();
-        if (isCorrectUserInput) findSolution(sc);
-        else showIncorrectValues(iv);
+        if (!isSolved) {
+            drawable.setStroke(3, getResources().getColor(R.color.border));
+            possibleValues.setVisibility(View.GONE);
+            getUserValues();
+            SudokuCalculator sc = new SudokuCalculator(sudoku);
+            UserInputValidation iv = new UserInputValidation(sc.getSudoku());
+            isCorrectUserInput = iv.checkUserInput();
+            if (isCorrectUserInput) findSolution(sc);
+            else showIncorrectValues(iv);
+        } else resetSudoku();
     }
 
     private void getUserValues() {
@@ -100,8 +109,16 @@ public abstract class SudokuWindow extends AppCompatActivity {
 
     private void highLightIncorrectBlock(UserInputValidation iv) {
         Set<Integer> incorrectBlocks = iv.getIncorrectBlocks();
+        if (blockIdentifications == null)
+            blockIdentifications = iv.getBlockIdentifications();
         for (int block : incorrectBlocks) {
-            System.out.println("incorrect block " + block);
+            for (int i = blockIdentifications[block][0];
+                 i < blockIdentifications[block][1]; i++) {
+                for (int j = blockIdentifications[block][2];
+                     j < blockIdentifications[block][3]; j++) {
+                    highlightedStyle(CELLS[i][j]);
+                }
+            }
         }
     }
 
@@ -134,9 +151,27 @@ public abstract class SudokuWindow extends AppCompatActivity {
     private void isDone(SudokuCalculator ex) {
         if (ex.isDone()) {
             Button calc = findViewById(R.id.calculate);
-            calc.setVisibility(View.GONE);
+            calc.setText(R.string.reset);
+            isSolved = true;
+            isClickable = false;
             TextView messages = findViewById(R.id.messages);
             messages.setText(R.string.congratulations);
+        }
+    }
+
+    private void resetSudoku() {
+        isSolved = false;
+        isClickable = true;
+        TextView messages = findViewById(R.id.messages);
+        messages.setText(R.string.vDefault);
+        Button calc = findViewById(R.id.calculate);
+        calc.setText(R.string.calculate);
+        for (int[] cells : CELLS) {
+            for (int cell : cells) {
+                this.cell = findViewById(cell);
+                this.cell.setTypeface(null, Typeface.NORMAL);
+                this.cell.setText(R.string.vDefault);
+            }
         }
     }
 
