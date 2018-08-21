@@ -1,7 +1,6 @@
 package maksim_huretski.sudoku.logic;
 
 import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -14,12 +13,12 @@ public abstract class SudokuWindow extends AppCompatActivity {
 
     private TextView cell;
     protected View possibleValues;
-    private GradientDrawable drawable;
     private boolean isCorrectUserInput = true;
     private int[][] sudoku = new int[9][9];
     private int[][] blockIdentifications;
     private boolean isSolved = false;
     private boolean isClickable = true;
+    private boolean highlightedBlockExist = false;
     private static final int[][] CELLS = new int[][]{
             {R.id.b00, R.id.b01, R.id.b02, R.id.b03, R.id.b04, R.id.b05, R.id.b06, R.id.b07, R.id.b08},
             {R.id.b10, R.id.b11, R.id.b12, R.id.b13, R.id.b14, R.id.b15, R.id.b16, R.id.b17, R.id.b18},
@@ -34,13 +33,14 @@ public abstract class SudokuWindow extends AppCompatActivity {
 
     public void onClickCell(View view) {
         if (!isCorrectUserInput) getDefaultBorderState();
-        if (drawable != null) normalStyle(cell.getId());
+        if (highlightedBlockExist) normalStyle(cell.getId());
         possibleValues.setVisibility(View.VISIBLE);
         highlightedStyle(view.getId());
     }
 
     public void onClickValue(View view) {
         if (isClickable) {
+            normalStyle(cell.getId());
             TextView value = findViewById(view.getId());
             String cellText = value.getText().toString();
             if (!cellText.equals("0")) {
@@ -50,14 +50,13 @@ public abstract class SudokuWindow extends AppCompatActivity {
                 cell.setText(R.string.vDefault);
                 cell.setTypeface(null, Typeface.NORMAL);
             }
-            drawable.setStroke(3, getResources().getColor(R.color.border));
             possibleValues.setVisibility(View.GONE);
         }
     }
 
     public void onClickCalculate(View view) {
         if (!isSolved) {
-            drawable.setStroke(3, getResources().getColor(R.color.border));
+            if (highlightedBlockExist) normalStyle(cell.getId());
             possibleValues.setVisibility(View.GONE);
             getUserValues();
             SudokuCalculator sc = new SudokuCalculator(sudoku);
@@ -177,13 +176,15 @@ public abstract class SudokuWindow extends AppCompatActivity {
 
     private void highlightedStyle(int id) {
         this.cell = findViewById(id);
-        drawable = (GradientDrawable) this.cell.getBackground();
-        drawable.setStroke(10, getResources().getColor(R.color.highlighted));
+        cell.setBackgroundResource(R.drawable.highlighted_block);
+        highlightedBlockExist = true;
     }
 
     private void normalStyle(int id) {
         this.cell = findViewById(id);
-        drawable = (GradientDrawable) this.cell.getBackground();
-        drawable.setStroke(3, getResources().getColor(R.color.border));
+        if (cell.getTag().equals(getResources().getString(R.string.light)))
+            cell.setBackgroundResource(R.drawable.light_block);
+        else
+            cell.setBackgroundResource(R.drawable.dark_block);
     }
 }

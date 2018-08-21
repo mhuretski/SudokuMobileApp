@@ -1,12 +1,11 @@
-package maksim_huretski.sudoku;
+package maksim_huretski.sudoku.parts;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import maksim_huretski.sudoku.R;
 
 public class Sudoku1of3 extends Fragment {
 

@@ -33,7 +33,7 @@
     <fragment
       android:layout_height="wrap_content"
       android:layout_width="match_parent"
-      android:name="maksim_huretski.sudoku.Sudoku1of3"
+      android:name="maksim_huretski.sudoku.parts.Sudoku1of3"
       android:id="@+id/sudoku1of3Main"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintRight_toRightOf="parent"
@@ -43,7 +43,7 @@
     <fragment
       android:layout_height="wrap_content"
       android:layout_width="match_parent"
-      android:name="maksim_huretski.sudoku.Sudoku2of3"
+      android:name="maksim_huretski.sudoku.parts.Sudoku2of3"
       android:id="@+id/sudoku2of3Main"
       app:layout_constraintTop_toBottomOf="@+id/sudoku1of3Main"
       app:layout_constraintRight_toRightOf="parent"
@@ -53,7 +53,7 @@
     <fragment
       android:layout_height="wrap_content"
       android:layout_width="match_parent"
-      android:name="maksim_huretski.sudoku.Sudoku3of3"
+      android:name="maksim_huretski.sudoku.parts.Sudoku3of3"
       android:id="@+id/sudoku3of3Main"
       app:layout_constraintTop_toBottomOf="@+id/sudoku2of3Main"
       app:layout_constraintRight_toRightOf="parent"
@@ -70,13 +70,13 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintBottom_toTopOf="@+id/calculate"
-    android:name="maksim_huretski.sudoku.PossibleValues"
+    android:name="maksim_huretski.sudoku.parts.PossibleValues"
     android:id="@+id/possibleValuesMain"/>
 
   <Button
     android:text="@string/calculate"
     android:id="@+id/calculate"
-    android:background="@drawable/dark_border"
+    android:background="@drawable/dark_block"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:onClick="onClickCalculate"

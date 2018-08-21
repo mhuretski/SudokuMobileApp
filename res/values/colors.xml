@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#3F51B5</color>
-  <color name="colorPrimaryDark">#000000</color>
-  <color name="highlighted">#ff4081</color>
+  <color name="black">#000000</color>
+  <color name="highlighted_light">#c4bdde</color>
+  <color name="highlighted_dark">#645794</color>
   <color name="border">#528eaf</color>
-  <color name="dark">#caced1</color>
-  <color name="light">#f9fbfc</color>
-
+  <color name="dark">#c4ddef</color>
+  <color name="light">#d7dcdf</color>
+  <color name="other_dark">#9eadb9</color>
+  <color name="other_light">#a7c1d4</color>
 </resources>
