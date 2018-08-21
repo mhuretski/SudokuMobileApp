@@ -12,7 +12,7 @@ public class MainActivity extends SudokuWindow {
         super.onCreate(savedInstanceState);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         setContentView(R.layout.activity_main);
-        possibleValues = findViewById(R.id.possibleValues);
+        possibleValues = findViewById(R.id.possibleValuesMain);
         possibleValues.setVisibility(View.GONE);
     }
 
@@ -27,4 +27,5 @@ public class MainActivity extends SudokuWindow {
     public void onClickCell(View view) {
         super.onClickCell(view);
     }
+
 }

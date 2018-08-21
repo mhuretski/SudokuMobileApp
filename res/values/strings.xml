@@ -15,4 +15,5 @@
   <string name="invalidInput">Incorrect input data</string>
   <string name="congratulations">Solved!</string>
   <string name="reset">Reset</string>
+  <integer name="margin">3</integer>
 </resources>
