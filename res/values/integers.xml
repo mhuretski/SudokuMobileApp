@@ -1,0 +1,4 @@
+<resources>
+  <integer name="one">1</integer>
+  <integer name="angle">45</integer>
+</resources>

@@ -1,0 +1,11 @@
+<resources>
+  <dimen name="zero_block_margin">0dp</dimen>
+  <dimen name="default_block_margin">2dp</dimen>
+  <dimen name="top_block_margin">4dp</dimen>
+  <dimen name="default_layout_margin">16dp</dimen>
+  <dimen name="layout_margin_small">8dp</dimen>
+  <dimen name="layout_width">0dp</dimen>
+  <dimen name="layout_height">0dp</dimen>
+  <dimen name="radius">10dp</dimen>
+  <dimen name="gradient_radius">23dp</dimen>
+</resources>

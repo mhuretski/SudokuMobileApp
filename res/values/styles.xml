@@ -27,9 +27,9 @@
     <item name="android:clickable">true</item>
     <item name="android:focusable">true</item>
     <item name="android:gravity">center</item>
-    <item name="android:layout_width">0dp</item>
-    <item name="android:layout_height">0dp</item>
-    <item name="android:layout_marginStart">2dp</item>
-    <item name="android:layout_marginEnd">2dp</item>
+    <item name="android:layout_width">@dimen/layout_width</item>
+    <item name="android:layout_height">@dimen/layout_height</item>
+    <item name="android:layout_marginStart">@dimen/default_block_margin</item>
+    <item name="android:layout_marginEnd">@dimen/default_block_margin</item>
   </style>
 </resources>

@@ -2,6 +2,6 @@
   <gradient android:type="radial"
             android:endColor="@color/other_dark"
             android:startColor="@color/dark"
-            android:gradientRadius="50"/>
-  <corners android:radius="10dp"/>
+            android:gradientRadius="@dimen/gradient_radius"/>
+  <corners android:radius="@dimen/radius"/>
 </shape>

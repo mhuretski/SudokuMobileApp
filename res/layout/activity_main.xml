@@ -17,17 +17,17 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    android:layout_marginTop="16dp"/>
+    android:layout_marginTop="@dimen/default_layout_margin"/>
 
 
   <android.support.constraint.ConstraintLayout
     android:id="@+id/table"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:layout_constraintHorizontal_weight="1"
-    android:layout_marginTop="16dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
+    app:layout_constraintHorizontal_weight="@integer/one"
+    android:layout_marginTop="@dimen/default_layout_margin"
+    android:layout_marginStart="@dimen/layout_margin_small"
+    android:layout_marginEnd="@dimen/layout_margin_small"
     app:layout_constraintTop_toBottomOf="@+id/messages">
 
     <fragment
@@ -64,8 +64,8 @@
   <fragment
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
+    android:layout_marginStart="@dimen/default_layout_margin"
+    android:layout_marginEnd="@dimen/default_layout_margin"
     app:layout_constraintTop_toBottomOf="@+id/table"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -76,13 +76,13 @@
   <Button
     android:text="@string/calculate"
     android:id="@+id/calculate"
-    android:background="@drawable/dark_block"
+    android:background="@drawable/calculate_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:onClick="onClickCalculate"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
-    android:layout_marginBottom="16dp"/>
+    android:layout_marginBottom="@dimen/default_layout_margin"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -18,7 +18,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b00"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintRight_toLeftOf="@+id/b01"
@@ -26,7 +26,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b01"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b00"
       app:layout_constraintRight_toLeftOf="@+id/b02"
       app:layout_constraintLeft_toRightOf="@+id/b00"
@@ -34,7 +34,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b02"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b00"
       app:layout_constraintRight_toLeftOf="@+id/b03"
       app:layout_constraintLeft_toRightOf="@+id/b01"
@@ -42,7 +42,7 @@
     <TextView
       style="@style/lightBlocks"
       android:id="@+id/b03"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b00"
       app:layout_constraintRight_toLeftOf="@+id/b04"
       app:layout_constraintLeft_toRightOf="@+id/b02"
@@ -50,7 +50,7 @@
     <TextView
       style="@style/lightBlocks"
       android:id="@+id/b04"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b00"
       app:layout_constraintRight_toLeftOf="@+id/b05"
       app:layout_constraintLeft_toRightOf="@+id/b03"
@@ -58,7 +58,7 @@
     <TextView
       style="@style/lightBlocks"
       android:id="@+id/b05"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b00"
       app:layout_constraintRight_toLeftOf="@+id/b06"
       app:layout_constraintLeft_toRightOf="@+id/b04"
@@ -66,7 +66,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b06"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b00"
       app:layout_constraintRight_toLeftOf="@+id/b07"
       app:layout_constraintLeft_toRightOf="@+id/b05"
@@ -74,7 +74,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b07"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b00"
       app:layout_constraintRight_toLeftOf="@+id/b08"
       app:layout_constraintLeft_toRightOf="@+id/b06"
@@ -82,7 +82,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b08"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b00"
       app:layout_constraintRight_toRightOf="parent"
       app:layout_constraintLeft_toRightOf="@+id/b07"
@@ -91,8 +91,8 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b10"
-      android:layout_marginTop="4dp"
-      app:layout_constraintHorizontal_weight="1"
+      android:layout_marginTop="@dimen/top_block_margin"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/b00"
       app:layout_constraintRight_toLeftOf="@+id/b11"
@@ -100,7 +100,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b11"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b10"
       app:layout_constraintRight_toLeftOf="@+id/b12"
       app:layout_constraintLeft_toRightOf="@+id/b10"
@@ -108,7 +108,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b12"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b10"
       app:layout_constraintRight_toLeftOf="@+id/b13"
       app:layout_constraintLeft_toRightOf="@+id/b11"
@@ -116,7 +116,7 @@
     <TextView
       style="@style/lightBlocks"
       android:id="@+id/b13"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b10"
       app:layout_constraintRight_toLeftOf="@+id/b14"
       app:layout_constraintLeft_toRightOf="@+id/b12"
@@ -124,7 +124,7 @@
     <TextView
       style="@style/lightBlocks"
       android:id="@+id/b14"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b10"
       app:layout_constraintRight_toLeftOf="@+id/b15"
       app:layout_constraintLeft_toRightOf="@+id/b13"
@@ -132,7 +132,7 @@
     <TextView
       style="@style/lightBlocks"
       android:id="@+id/b15"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b10"
       app:layout_constraintRight_toLeftOf="@+id/b16"
       app:layout_constraintLeft_toRightOf="@+id/b14"
@@ -140,7 +140,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b16"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b10"
       app:layout_constraintRight_toLeftOf="@+id/b17"
       app:layout_constraintLeft_toRightOf="@+id/b15"
@@ -148,7 +148,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b17"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b10"
       app:layout_constraintRight_toLeftOf="@+id/b18"
       app:layout_constraintLeft_toRightOf="@+id/b16"
@@ -156,7 +156,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b18"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b10"
       app:layout_constraintRight_toRightOf="parent"
       app:layout_constraintLeft_toRightOf="@+id/b17"
@@ -165,8 +165,8 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b20"
-      android:layout_marginTop="4dp"
-      app:layout_constraintHorizontal_weight="1"
+      android:layout_marginTop="@dimen/top_block_margin"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/b10"
       app:layout_constraintRight_toLeftOf="@+id/b21"
@@ -174,7 +174,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b21"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b20"
       app:layout_constraintRight_toLeftOf="@+id/b22"
       app:layout_constraintLeft_toRightOf="@+id/b20"
@@ -182,7 +182,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b22"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b20"
       app:layout_constraintRight_toLeftOf="@+id/b23"
       app:layout_constraintLeft_toRightOf="@+id/b21"
@@ -190,7 +190,7 @@
     <TextView
       style="@style/lightBlocks"
       android:id="@+id/b23"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b20"
       app:layout_constraintRight_toLeftOf="@+id/b24"
       app:layout_constraintLeft_toRightOf="@+id/b22"
@@ -198,7 +198,7 @@
     <TextView
       style="@style/lightBlocks"
       android:id="@+id/b24"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b20"
       app:layout_constraintRight_toLeftOf="@+id/b25"
       app:layout_constraintLeft_toRightOf="@+id/b23"
@@ -206,7 +206,7 @@
     <TextView
       style="@style/lightBlocks"
       android:id="@+id/b25"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b20"
       app:layout_constraintRight_toLeftOf="@+id/b26"
       app:layout_constraintLeft_toRightOf="@+id/b24"
@@ -214,7 +214,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b26"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b20"
       app:layout_constraintRight_toLeftOf="@+id/b27"
       app:layout_constraintLeft_toRightOf="@+id/b25"
@@ -222,7 +222,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b27"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b20"
       app:layout_constraintRight_toLeftOf="@+id/b28"
       app:layout_constraintLeft_toRightOf="@+id/b26"
@@ -230,7 +230,7 @@
     <TextView
       style="@style/darkBlocks"
       android:id="@+id/b28"
-      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/b20"
       app:layout_constraintRight_toRightOf="parent"
       app:layout_constraintLeft_toRightOf="@+id/b27"
