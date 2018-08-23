@@ -738,10 +738,13 @@ class SudokuCalculator {
 
     private void deleteOutOfClosedPairsInRow(int row, int startColumn, int endColumn) {
         tempData = 0;
+        amountOfRemainingValuesInClosedPair();
+        int amountOfMatchedValues = amountOfMatchedCellsInClosedPairsInRow(row, startColumn, endColumn);
+        deleteValuesFromClosedPairsInRow(amountOfMatchedValues, row, startColumn, endColumn);
+    }
+
+    private int amountOfMatchedCellsInClosedPairsInRow(int row, int startColumn, int endColumn) {
         int amountOfMatchedValues = 0;
-        for (int j = 0; j < 9; j++) {
-            if (tempNumbers[j] != 0) tempData++;
-        }
         for (int j = startColumn; j < endColumn; j++) {
             if (sudoku[row][j][0][0] == 0) {
                 for (int k = 0; k < 9; k++) {
@@ -752,20 +755,60 @@ class SudokuCalculator {
                 }
             }
         }
-        if (tempData == amountOfMatchedValues
-                && tempData != 0 && amountOfMatchedValues != 1) {
-            for (int j = startColumn; j < endColumn; j++) {
-                if (sudoku[row][j][0][0] == 0) {
-                    for (int k = 0; k < 9; k++) {
-                        if (tempNumbers[k] == 0 && sudoku[row][j][1][k] != 0) {
-                            sudoku[row][j][1][k] = 0;
-                            goFurther = true;
-                        }
+        return amountOfMatchedValues;
+    }
+
+    private void deleteValuesFromClosedPairsInRow(int amountOfMatchedValues, int row, int startColumn, int endColumn) {
+        if (tempData == amountOfMatchedValues && tempData != 0) {
+            switch (amountOfMatchedValues) {
+                case 2:
+                    deleteValuesFromClosedPairsInRowFromDouble(row, startColumn, endColumn);
+                    break;
+                case 3:
+                    deleteValuesFromClosedPairsInRowFromTriple(row, startColumn, endColumn);
+                    break;
+            }
+        }
+    }
+
+    private void deleteValuesFromClosedPairsInRowFromTriple(int row, int startColumn, int endColumn) {
+        for (int j = startColumn; j < endColumn; j++) {
+            if (sudoku[row][j][0][0] == 0) {
+                for (int k = 0; k < 9; k++) {
+                    if (tempNumbers[k] == 0 && sudoku[row][j][1][k] != 0) {
+                        sudoku[row][j][1][k] = 0;
+                        goFurther = true;
                     }
                 }
             }
         }
     }
+
+    private void deleteValuesFromClosedPairsInRowFromDouble(int row, int startColumn, int endColumn) {
+        int[] columnsWithSuitableValues = new int[2];
+        for (int j = startColumn; j < endColumn; j++) {
+            if (sudoku[row][j][0][0] == 0) {
+                for (int k = 0; k < 9; k++) {
+                    if (tempNumbers[k] != 0 && sudoku[row][j][1][k] != 0) {
+                        if (columnsWithSuitableValues[0] == 0) columnsWithSuitableValues[0] = j;
+                        else columnsWithSuitableValues[1] = j;
+                        break;
+                    }
+                }
+            }
+        }
+        for (int column : columnsWithSuitableValues) {
+            if (sudoku[row][column][0][0] == 0) {
+                for (int k = 0; k < 9; k++) {
+                    if (tempNumbers[k] == 0 && sudoku[row][column][1][k] != 0) {
+                        sudoku[row][column][1][k] = 0;
+                        goFurther = true;
+                    }
+                }
+            }
+        }
+    }
+
 
 
     private void checkBlocksForClosedPairsInColumn(int block) {
@@ -852,10 +895,19 @@ class SudokuCalculator {
 
     private void deleteOutOfClosedPairsInColumn(int column, int startRow, int endRow) {
         tempData = 0;
-        int amountOfMatchedValues = 0;
+        amountOfRemainingValuesInClosedPair();
+        int amountOfMatchedValues = amountOfMatchedCellsInClosedPairsInColumn(column, startRow, endRow);
+        deleteValuesFromClosedPairsInColumn(amountOfMatchedValues, column, startRow, endRow);
+    }
+
+    private void amountOfRemainingValuesInClosedPair() {
         for (int j = 0; j < 9; j++) {
             if (tempNumbers[j] != 0) tempData++;
         }
+    }
+
+    private int amountOfMatchedCellsInClosedPairsInColumn(int column, int startRow, int endRow) {
+        int amountOfMatchedValues = 0;
         for (int j = startRow; j < endRow; j++) {
             if (sudoku[j][column][0][0] == 0) {
                 for (int k = 0; k < 9; k++) {
@@ -866,20 +918,60 @@ class SudokuCalculator {
                 }
             }
         }
-        if (tempData == amountOfMatchedValues
-                && tempData != 0 && amountOfMatchedValues != 1) {
-            for (int j = startRow; j < endRow; j++) {
-                if (sudoku[j][column][0][0] == 0) {
-                    for (int k = 0; k < 9; k++) {
-                        if (tempNumbers[k] == 0 && sudoku[j][column][1][k] != 0) {
-                            sudoku[j][column][1][k] = 0;
-                            goFurther = true;
-                        }
+        return amountOfMatchedValues;
+    }
+
+    private void deleteValuesFromClosedPairsInColumn(int amountOfMatchedValues, int column, int startRow, int endRow) {
+        if (tempData == amountOfMatchedValues && tempData != 0) {
+            switch (amountOfMatchedValues) {
+                case 2:
+                    deleteValuesFromClosedPairsInColumnFromDouble(column, startRow, endRow);
+                    break;
+                case 3:
+                    deleteValuesFromClosedPairsInColumnFromTriple(column, startRow, endRow);
+                    break;
+            }
+        }
+    }
+
+    private void deleteValuesFromClosedPairsInColumnFromTriple(int column, int startRow, int endRow) {
+        for (int j = startRow; j < endRow; j++) {
+            if (sudoku[j][column][0][0] == 0) {
+                for (int k = 0; k < 9; k++) {
+                    if (tempNumbers[k] == 0 && sudoku[j][column][1][k] != 0) {
+                        sudoku[j][column][1][k] = 0;
+                        goFurther = true;
                     }
                 }
             }
         }
     }
+
+    private void deleteValuesFromClosedPairsInColumnFromDouble(int column, int startRow, int endRow) {
+        int[] rowsWithSuitableValues = new int[2];
+        for (int j = startRow; j < endRow; j++) {
+            if (sudoku[j][column][0][0] == 0) {
+                for (int k = 0; k < 9; k++) {
+                    if (tempNumbers[k] != 0 && sudoku[j][column][1][k] != 0) {
+                        if (rowsWithSuitableValues[0] == 0) rowsWithSuitableValues[0] = j;
+                        else rowsWithSuitableValues[1] = j;
+                        break;
+                    }
+                }
+            }
+        }
+        for (int row : rowsWithSuitableValues) {
+            if (sudoku[row][column][0][0] == 0) {
+                for (int k = 0; k < 9; k++) {
+                    if (tempNumbers[k] == 0 && sudoku[row][column][1][k] != 0) {
+                        sudoku[row][column][1][k] = 0;
+                        goFurther = true;
+                    }
+                }
+            }
+        }
+    }
+
 
     private void findOpenPairsInRows() {
         for (int row = 0; row < 9; row++) {
