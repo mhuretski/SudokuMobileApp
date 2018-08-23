@@ -12,7 +12,7 @@
   <string name="v7">8</string>
   <string name="v8">9</string>
   <string name="calculate">Calculate</string>
-  <string name="invalidInput">Incorrect data</string>
+  <string name="invalidInput">Incorrect values</string>
   <string name="congratulations">Solved!</string>
   <string name="reset">Reset</string>
   <string name="light">light</string>

@@ -6,6 +6,8 @@
   <dimen name="layout_margin_small">8dp</dimen>
   <dimen name="layout_width">0dp</dimen>
   <dimen name="layout_height">0dp</dimen>
+  <dimen name="highlighted_radius">11dp</dimen>
   <dimen name="radius">10dp</dimen>
   <dimen name="gradient_radius">23dp</dimen>
+  <dimen name="message_text">20sp</dimen>
 </resources>

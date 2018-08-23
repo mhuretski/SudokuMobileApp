@@ -4,19 +4,19 @@ import java.util.Arrays;
 
 class SudokuCalculator {
 
-    private static final int SUDOKU_VALUE = 45;
-    private int[] tempNumbers = new int[9];
+    private final int SUDOKU_VALUE = 45;
+    private final int[] tempNumbers = new int[9];
     private int tempData;
     private int tempRow;
     private int tempColumn;
-    private int[][] blockIdentifications = new int[9][4];
+    private final int[][] blockIdentifications = new int[9][4];
     private int[][] tempBlocks = new int[3][3];
-    private int[] tempValues = new int[2];
+    private final int[] tempValues = new int[2];
     private boolean goFurther = false;
     private boolean isOne = false;
     private boolean isValid = true;
     private boolean isFilled = true;
-    private int[][][][] sudoku = new int[9][9][2][];
+    private final int[][][][] sudoku = new int[9][9][2][];
 
 
     public int[][] getSudoku() {
@@ -651,15 +651,23 @@ class SudokuCalculator {
     private void checkBlocksForClosedPairsInRow(int block) {
         boolean isStartColumn;
         boolean isEndColumn;
-        if (block == 0 || block == 3 || block == 6) {
-            isStartColumn = true;
-            isEndColumn = false;
-        } else if (block == 1 || block == 4 || block == 7) {
-            isStartColumn = false;
-            isEndColumn = false;
-        } else {
-            isStartColumn = false;
-            isEndColumn = true;
+        switch (block) {
+            case 0:
+            case 3:
+            case 6:
+                isStartColumn = true;
+                isEndColumn = false;
+                break;
+            case 1:
+            case 4:
+            case 7:
+                isStartColumn = false;
+                isEndColumn = false;
+                break;
+            default:
+                isStartColumn = false;
+                isEndColumn = true;
+                break;
         }
         closedPairsBlockIdentifierInRow(
                 blockIdentifications[block][0],

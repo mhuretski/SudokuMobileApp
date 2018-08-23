@@ -16,16 +16,4 @@ public class MainActivity extends SudokuWindow {
         super.possibleValues.setVisibility(View.GONE);
     }
 
-    public void onClickCalculate(View view) {
-        super.onClickCalculate(view);
-    }
-
-    public void onClickValue(View view) {
-        super.onClickValue(view);
-    }
-
-    public void onClickCell(View view) {
-        super.onClickCell(view);
-    }
-
 }

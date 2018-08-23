@@ -19,7 +19,7 @@ public abstract class SudokuWindow extends AppCompatActivity {
     private boolean isSolved = false;
     private boolean isClickable = true;
     private boolean highlightedBlockExist = false;
-    private static final int[][] CELLS = new int[][]{
+    private final int[][] CELLS = new int[][]{
             {R.id.b00, R.id.b01, R.id.b02, R.id.b03, R.id.b04, R.id.b05, R.id.b06, R.id.b07, R.id.b08},
             {R.id.b10, R.id.b11, R.id.b12, R.id.b13, R.id.b14, R.id.b15, R.id.b16, R.id.b17, R.id.b18},
             {R.id.b20, R.id.b21, R.id.b22, R.id.b23, R.id.b24, R.id.b25, R.id.b26, R.id.b27, R.id.b28},
@@ -31,13 +31,25 @@ public abstract class SudokuWindow extends AppCompatActivity {
             {R.id.b80, R.id.b81, R.id.b82, R.id.b83, R.id.b84, R.id.b85, R.id.b86, R.id.b87, R.id.b88}
     };
 
+    @SuppressWarnings("unused")
     public void onClickCell(View view) {
         if (!isCorrectUserInput) getDefaultBorderState();
-        if (highlightedBlockExist) normalStyle(cell.getId());
-        possibleValues.setVisibility(View.VISIBLE);
-        highlightedStyle(view.getId());
+        if (this.cell == null || this.cell.getId() != view.getId()) {
+            if (highlightedBlockExist) {
+                assert cell != null;
+                normalStyle(cell.getId());
+            }
+            possibleValues.setVisibility(View.VISIBLE);
+            highlightedStyle(view.getId());
+        } else {
+            highlightedBlockExist = false;
+            normalStyle(cell.getId());
+            possibleValues.setVisibility(View.GONE);
+            this.cell = null;
+        }
     }
 
+    @SuppressWarnings("unused")
     public void onClickValue(View view) {
         if (isClickable) {
             normalStyle(cell.getId());
@@ -54,6 +66,7 @@ public abstract class SudokuWindow extends AppCompatActivity {
         }
     }
 
+    @SuppressWarnings("unused")
     public void onClickCalculate(View view) {
         if (!isSolved) {
             if (highlightedBlockExist) normalStyle(cell.getId());
@@ -80,6 +93,7 @@ public abstract class SudokuWindow extends AppCompatActivity {
     }
 
     private void showIncorrectValues(UserInputValidation iv) {
+        ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.invalidInput);
         if (iv.getIncorrectRows().size() != 0)
             highLightIncorrectRow(iv);
         if (iv.getIncorrectColumns().size() != 0)
@@ -122,6 +136,7 @@ public abstract class SudokuWindow extends AppCompatActivity {
     }
 
     private void getDefaultBorderState() {
+        ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.vDefault);
         for (int[] cellRow : CELLS) {
             for (int cell : cellRow) {
                 normalStyle(cell);
@@ -133,14 +148,14 @@ public abstract class SudokuWindow extends AppCompatActivity {
         ex.calculateSudoku();
         sudoku = ex.getSudoku();
         isDone(ex);
-        showSolution(CELLS);
+        showSolution();
     }
 
-    private void showSolution(int[][] buttons) {
+    private void showSolution() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (sudoku[i][j] != 0) {
-                    cell = findViewById(buttons[i][j]);
+                    cell = findViewById(CELLS[i][j]);
                     cell.setText(String.valueOf(sudoku[i][j]));
                 }
             }
@@ -153,15 +168,14 @@ public abstract class SudokuWindow extends AppCompatActivity {
             calc.setText(R.string.reset);
             isSolved = true;
             isClickable = false;
-            TextView messages = findViewById(R.id.messages);
-            messages.setText(R.string.congratulations);
+            ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.congratulations);
         }
     }
 
     private void resetSudoku() {
         isSolved = false;
         isClickable = true;
-        TextView messages = findViewById(R.id.messages);
+        TextView messages = findViewById(R.id.messageAtTop);
         messages.setText(R.string.vDefault);
         Button calc = findViewById(R.id.calculate);
         calc.setText(R.string.calculate);
@@ -176,12 +190,15 @@ public abstract class SudokuWindow extends AppCompatActivity {
 
     private void highlightedStyle(int id) {
         this.cell = findViewById(id);
-        cell.setBackgroundResource(R.drawable.highlighted_block);
+        if (cell.getTag().equals(getResources().getString(R.string.light)))
+            cell.setBackgroundResource(R.drawable.highlighted_light);
+        else
+            cell.setBackgroundResource(R.drawable.highlighted_dark);
         highlightedBlockExist = true;
     }
 
     private void normalStyle(int id) {
-        this.cell = findViewById(id);
+        TextView cell = findViewById(id);
         if (cell.getTag().equals(getResources().getString(R.string.light)))
             cell.setBackgroundResource(R.drawable.light_block);
         else

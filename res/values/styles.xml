@@ -4,24 +4,23 @@
     <item name="android:windowNoTitle">true</item>
     <item name="android:colorPrimaryDark">@color/black</item>
   </style>
-
   <style name="possibleValuesStyle" parent="blocks">
     <item name="android:background">@drawable/possible_values_drawable</item>
     <item name="android:onClick">onClickValue</item>
   </style>
-
-  <style name="lightBlocks" parent="blocks">
+  <style name="lightBlocks" parent="cell">
     <item name="android:tag">@string/light</item>
     <item name="android:background">@drawable/light_block</item>
     <item name="android:onClick">onClickCell</item>
   </style>
-
-  <style name="darkBlocks" parent="blocks">
+  <style name="darkBlocks" parent="cell">
     <item name="android:tag">@string/dark</item>
     <item name="android:background">@drawable/dark_block</item>
     <item name="android:onClick">onClickCell</item>
   </style>
-
+  <style name="cell" parent="blocks">
+    <item name="android:onClick">onClickCell</item>
+  </style>
   <style name="blocks">
     <item name="android:textColor">@color/black</item>
     <item name="android:clickable">true</item>
@@ -32,4 +31,14 @@
     <item name="android:layout_marginStart">@dimen/default_block_margin</item>
     <item name="android:layout_marginEnd">@dimen/default_block_margin</item>
   </style>
+
+  <style name="calculate">
+    <item name="android:background">@drawable/calculate_button</item>
+    <item name="android:onClick">onClickCalculate</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginBottom">@dimen/default_layout_margin</item>
+    <item name="android:gravity">center</item>
+  </style>
+
 </resources>

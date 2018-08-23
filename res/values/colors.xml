@@ -1,8 +1,6 @@
 <resources>
   <color name="black">#000000</color>
-  <color name="highlighted_light">#c4bdde</color>
-  <color name="highlighted_dark">#a1507e</color>
-  <color name="border">#528eaf</color>
+  <color name="white">#ffffff</color>
   <color name="dark">#c4ddef</color>
   <color name="light">#d7dcdf</color>
   <color name="other_dark">#9eadb9</color>

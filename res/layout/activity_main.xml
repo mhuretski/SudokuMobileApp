@@ -4,7 +4,6 @@
   xmlns:tools="http://schemas.android.com/tools"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:id="@+id/main_window"
-  android:background="@color/border"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context=".MainActivity">
@@ -12,27 +11,27 @@
   <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
     <ImageView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:contentDescription="@string/vDefault"
-      android:scaleType = "centerCrop"
+      android:scaleType="centerCrop"
       app:srcCompat="@drawable/background_image"
       android:id="@+id/backgroundImage"/>
-
   </FrameLayout>
+
   <TextView
     android:text="@string/vDefault"
+    android:textColor="@color/white"
+    android:textSize="@dimen/message_text"
+    android:gravity="center"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/messages"
+    android:id="@+id/messageAtTop"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     android:layout_marginTop="@dimen/default_layout_margin"/>
-
 
   <android.support.constraint.ConstraintLayout
     android:id="@+id/table"
@@ -42,7 +41,7 @@
     android:layout_marginTop="@dimen/default_layout_margin"
     android:layout_marginStart="@dimen/layout_margin_small"
     android:layout_marginEnd="@dimen/layout_margin_small"
-    app:layout_constraintTop_toBottomOf="@+id/messages">
+    app:layout_constraintTop_toBottomOf="@+id/messageAtTop">
 
     <fragment
       android:layout_height="wrap_content"
@@ -88,15 +87,11 @@
     android:id="@+id/possibleValuesMain"/>
 
   <Button
-    android:text="@string/calculate"
+    style="@style/calculate"
     android:id="@+id/calculate"
-    android:background="@drawable/calculate_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:onClick="onClickCalculate"
+    android:text="@string/calculate"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    android:layout_marginBottom="@dimen/default_layout_margin"/>
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
