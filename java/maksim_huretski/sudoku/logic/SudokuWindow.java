@@ -62,8 +62,8 @@ public abstract class SudokuWindow extends AppCompatActivity {
         TextView value = findViewById(view.getId());
         String cellText = value.getText().toString();
         if (!cellText.equals("0")) {
+            cell.setTypeface(null, Typeface.BOLD);
             cell.setText(cellText);
-            cell.setTypeface(cell.getTypeface(), Typeface.BOLD);
         } else {
             cell.setText(R.string.vDefault);
             cell.setTypeface(null, Typeface.NORMAL);
@@ -234,6 +234,7 @@ public abstract class SudokuWindow extends AppCompatActivity {
             for (int j = 0; j < 9; j++) {
                 if (sudoku[i][j] != 0) {
                     block = findViewById(CELLS[i][j]);
+                    block.setTypeface(null, Typeface.BOLD);
                     block.setText(String.valueOf(sudoku[i][j]));
                 }
             }
