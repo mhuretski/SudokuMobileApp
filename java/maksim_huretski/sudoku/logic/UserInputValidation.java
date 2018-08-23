@@ -4,18 +4,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 class UserInputValidation {
-    private final int[][] sudoku;
+    private int[][] sudoku;
     private final int[][] blockIdentifications = new int[9][4];
     private final Set<Integer> incorrectRows = new HashSet<>();
     private final Set<Integer> incorrectColumns = new HashSet<>();
     private final Set<Integer> incorrectBlocks = new HashSet<>();
 
-    UserInputValidation(int[][] sudoku) {
-        this.sudoku = sudoku;
+    UserInputValidation() {
         setBlockIdentifications();
     }
 
-    public boolean checkUserInput() {
+    public void setSudoku(int[][] sudoku){
+        this.sudoku = sudoku;
+    }
+
+    public boolean checkInput() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 checkRow(i, j);

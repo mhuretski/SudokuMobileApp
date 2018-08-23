@@ -18,6 +18,7 @@ public abstract class SudokuWindow extends AppCompatActivity {
     private int[][] blockIdentifications;
     private boolean isSolved = false;
     private boolean isClickable = true;
+    private boolean isValidSudoku = true;
     private boolean highlightedBlockExist = false;
     private final int[][] CELLS = new int[][]{
             {R.id.b00, R.id.b01, R.id.b02, R.id.b03, R.id.b04, R.id.b05, R.id.b06, R.id.b07, R.id.b08},
@@ -33,37 +34,41 @@ public abstract class SudokuWindow extends AppCompatActivity {
 
     @SuppressWarnings("unused")
     public void onClickCell(View view) {
-        if (!isCorrectUserInput) getDefaultBorderState();
-        if (this.cell == null || this.cell.getId() != view.getId()) {
-            if (highlightedBlockExist) {
-                assert cell != null;
-                normalStyle(cell.getId());
+        if (isClickable) {
+            if (!isCorrectUserInput) getDefaultBorderState();
+            if (!isValidSudoku) {
+                isValidSudoku = true;
+                ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.vDefault);
             }
-            possibleValues.setVisibility(View.VISIBLE);
-            highlightedStyle(view.getId());
-        } else {
-            highlightedBlockExist = false;
-            normalStyle(cell.getId());
-            possibleValues.setVisibility(View.GONE);
-            this.cell = null;
+            if (this.cell == null || this.cell.getId() != view.getId()) {
+                if (highlightedBlockExist) {
+                    assert cell != null;
+                    normalStyle(cell.getId());
+                }
+                possibleValues.setVisibility(View.VISIBLE);
+                highlightedStyle(view.getId());
+            } else {
+                highlightedBlockExist = false;
+                normalStyle(cell.getId());
+                possibleValues.setVisibility(View.GONE);
+                this.cell = null;
+            }
         }
     }
 
     @SuppressWarnings("unused")
     public void onClickValue(View view) {
-        if (isClickable) {
-            normalStyle(cell.getId());
-            TextView value = findViewById(view.getId());
-            String cellText = value.getText().toString();
-            if (!cellText.equals("0")) {
-                cell.setText(cellText);
-                cell.setTypeface(cell.getTypeface(), Typeface.BOLD);
-            } else {
-                cell.setText(R.string.vDefault);
-                cell.setTypeface(null, Typeface.NORMAL);
-            }
-            possibleValues.setVisibility(View.GONE);
+        normalStyle(cell.getId());
+        TextView value = findViewById(view.getId());
+        String cellText = value.getText().toString();
+        if (!cellText.equals("0")) {
+            cell.setText(cellText);
+            cell.setTypeface(cell.getTypeface(), Typeface.BOLD);
+        } else {
+            cell.setText(R.string.vDefault);
+            cell.setTypeface(null, Typeface.NORMAL);
         }
+        possibleValues.setVisibility(View.GONE);
     }
 
     @SuppressWarnings("unused")
@@ -73,9 +78,10 @@ public abstract class SudokuWindow extends AppCompatActivity {
             possibleValues.setVisibility(View.GONE);
             getUserValues();
             SudokuCalculator sc = new SudokuCalculator(sudoku);
-            UserInputValidation iv = new UserInputValidation(sc.getSudoku());
-            isCorrectUserInput = iv.checkUserInput();
-            if (isCorrectUserInput) findSolution(sc);
+            UserInputValidation iv = new UserInputValidation();
+            iv.setSudoku(sc.getSudoku());
+            isCorrectUserInput = iv.checkInput();
+            if (isCorrectUserInput) findSolution(sc, iv);
             else showIncorrectValues(iv);
         } else resetSudoku();
     }
@@ -144,11 +150,18 @@ public abstract class SudokuWindow extends AppCompatActivity {
         }
     }
 
-    private void findSolution(SudokuCalculator ex) {
-        ex.calculateSudoku();
-        sudoku = ex.getSudoku();
-        isDone(ex);
-        showSolution();
+    private void findSolution(SudokuCalculator sc, UserInputValidation iv) {
+        sc.calculateSudoku();
+        iv.setSudoku(sc.getSudoku());
+        if (iv.checkInput()) {
+            sudoku = sc.getSudoku();
+            isDone(sc);
+            showSolution();
+        } else {
+            isSolved = false;
+            isValidSudoku = false;
+            ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.invalidSudoku);
+        }
     }
 
     private void showSolution() {
@@ -204,4 +217,27 @@ public abstract class SudokuWindow extends AppCompatActivity {
         else
             cell.setBackgroundResource(R.drawable.dark_block);
     }
+
+    protected void debugFinalSudoku() {
+        final int[][] sudoku = new int[][]{
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 3, 6, 0, 0, 0},
+                {0, 0, 0, 8, 0, 0, 0, 1, 2},
+                {0, 0, 1, 6, 0, 0, 9, 7, 8},
+                {0, 0, 0, 0, 7, 0, 0, 0, 0},
+                {0, 0, 5, 0, 0, 0, 0, 2, 4},
+                {0, 0, 0, 0, 0, 7, 0, 4, 0},
+                {0, 6, 9, 0, 5, 0, 1, 0, 0},
+                {3, 0, 0, 0, 0, 0, 0, 0, 0}};
+        TextView block;
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (sudoku[i][j] != 0) {
+                    block = findViewById(CELLS[i][j]);
+                    block.setText(String.valueOf(sudoku[i][j]));
+                }
+            }
+        }
+    }
+
 }
