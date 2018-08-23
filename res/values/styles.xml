@@ -19,6 +19,7 @@
     <item name="android:onClick">onClickCell</item>
   </style>
   <style name="cell" parent="blocks">
+    <item name="android:textSize">@dimen/cell_text</item>
     <item name="android:onClick">onClickCell</item>
   </style>
   <style name="blocks">
