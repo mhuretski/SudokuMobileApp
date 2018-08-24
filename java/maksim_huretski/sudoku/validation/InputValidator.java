@@ -1,20 +1,21 @@
-package maksim_huretski.sudoku.logic;
+package maksim_huretski.sudoku.validation;
 
 import java.util.HashSet;
 import java.util.Set;
 
-class UserInputValidation {
+public class InputValidator {
+
     private int[][] sudoku;
-    private final int[][] blockIdentifications = new int[9][4];
+    private int[][] blockIDs;
     private final Set<Integer> incorrectRows = new HashSet<>();
     private final Set<Integer> incorrectColumns = new HashSet<>();
     private final Set<Integer> incorrectBlocks = new HashSet<>();
 
-    UserInputValidation() {
-        setBlockIdentifications();
+    public void init(int[][] blockIDs) {
+        this.blockIDs = blockIDs;
     }
 
-    public void setSudoku(int[][] sudoku){
+    public void setSudoku(int[][] sudoku) {
         this.sudoku = sudoku;
     }
 
@@ -53,26 +54,11 @@ class UserInputValidation {
         }
     }
 
-    private void setBlockIdentifications() {
-        int[] ids = new int[]{0, 3, 0, 3};
-        for (int i = 0; i < 9; i++, ids[2] += 3, ids[3] += 3) {
-            if (i != 0 && i % 3 == 0) {
-                ids[0] += 3;
-                ids[1] += 3;
-            }
-            if (ids[2] > 6) {
-                ids[2] = 0;
-                ids[3] = 3;
-            }
-            System.arraycopy(ids, 0, blockIdentifications[i], 0, 4);
-        }
-    }
-
     private void checkBlocks(int block) {
-        checkBlock(blockIdentifications[block][0],
-                blockIdentifications[block][1],
-                blockIdentifications[block][2],
-                blockIdentifications[block][3],
+        checkBlock(blockIDs[block][0],
+                blockIDs[block][1],
+                blockIDs[block][2],
+                blockIDs[block][3],
                 block);
     }
 
@@ -111,7 +97,4 @@ class UserInputValidation {
         return incorrectBlocks;
     }
 
-    public int[][] getBlockIdentifications() {
-        return blockIdentifications;
-    }
 }

@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import maksim_huretski.sudoku.R;
 
-public class Sudoku3of3 extends Fragment {
+public class Container3of3 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

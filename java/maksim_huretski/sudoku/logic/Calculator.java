@@ -2,46 +2,43 @@ package maksim_huretski.sudoku.logic;
 
 import java.util.Arrays;
 
-class SudokuCalculator {
+public class Calculator {
 
     private final int SUDOKU_VALUE = 45;
     private final int[] tempNumbers = new int[9];
     private int tempData;
     private int tempRow;
     private int tempColumn;
-    private final int[][] blockIdentifications = new int[9][4];
+    private int[][] blockIDs;
     private int[][] tempBlocks = new int[3][3];
     private final int[] tempValues = new int[2];
     private boolean goFurther = false;
     private boolean isOne = false;
-    private boolean isValid = true;
-    private boolean isFilled = true;
     private final int[][][][] sudoku = new int[9][9][2][];
+    private final int[][] calculatedSudoku = new int[9][9];
 
 
     public int[][] getSudoku() {
-        int[][] tempSudoku = new int[9][9];
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                tempSudoku[i][j] = sudoku[i][j][0][0];
-            }
-        }
-        return tempSudoku;
+        return calculatedSudoku;
     }
 
-    public boolean isDone() {
-        return isValid && isFilled;
-    }
-
-    SudokuCalculator(int[][] sudoku) {
-        setBlockIdentifications();
+    public void init(int[][] sudoku, int[][] blockIDs) {
+        setBlockIDs(blockIDs);
         addDataToSudoku();
         addValuesToSudoku(sudoku);
     }
 
     public void calculateSudoku() {
         fillCells();
-        checkSudoku();
+        setCalculatedSudoku();
+    }
+
+    private void setCalculatedSudoku() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                calculatedSudoku[i][j] = sudoku[i][j][0][0];
+            }
+        }
     }
 
     private void fillCells() {
@@ -72,45 +69,6 @@ class SudokuCalculator {
 
             findClosedPairs();
         } while (goFurther);
-    }
-
-    private void checkSudoku() {
-        for (int[][][] aSudoku1 : sudoku) {
-            tempData = 0;
-            for (int[][] anASudoku1 : aSudoku1) {
-                if (anASudoku1[0][0] > 9) isValid = false;
-                tempData += anASudoku1[0][0];
-            }
-            if (tempData != SUDOKU_VALUE) isValid = false;
-        }
-        int j = 0;
-        for (int i = 0; i < sudoku[0].length; i++) {
-            tempData = 0;
-            for (; j < sudoku.length; j++) {
-                if (sudoku[i][j][0][0] > 9) isValid = false;
-                tempData += sudoku[j][i][0][0];
-            }
-            if (tempData != SUDOKU_VALUE && j != 9) isValid = false;
-        }
-        for (int i = 0; i < 9; i++) {
-            blockInitializer(i);
-            tempData = 0;
-            for (int[] aTempBlock : tempBlocks)
-                for (int anATempBlock : aTempBlock) {
-                    if (anATempBlock > 9) isValid = false;
-                    tempData += anATempBlock;
-                }
-            if (tempData != SUDOKU_VALUE) isValid = false;
-        }
-        for (int[][][] aSudoku : sudoku) {
-            for (int[][] anASudoku : aSudoku) {
-                if (anASudoku[0][0] == 0) {
-                    isFilled = false;
-                    break;
-                }
-            }
-            if (!isFilled) break;
-        }
     }
 
     private void addDataToSudoku() {
@@ -626,19 +584,8 @@ class SudokuCalculator {
         }
     }
 
-    private void setBlockIdentifications() {
-        int[] ids = new int[]{0, 3, 0, 3};
-        for (int i = 0; i < 9; i++, ids[2] += 3, ids[3] += 3) {
-            if (i != 0 && i % 3 == 0) {
-                ids[0] += 3;
-                ids[1] += 3;
-            }
-            if (ids[2] > 6) {
-                ids[2] = 0;
-                ids[3] = 3;
-            }
-            System.arraycopy(ids, 0, blockIdentifications[i], 0, 4);
-        }
+    private void setBlockIDs(int[][] blockIDs) {
+        this.blockIDs = blockIDs;
     }
 
     private void findClosedPairs() {
@@ -670,10 +617,10 @@ class SudokuCalculator {
                 break;
         }
         closedPairsBlockIdentifierInRow(
-                blockIdentifications[block][0],
-                blockIdentifications[block][1],
-                blockIdentifications[block][2],
-                blockIdentifications[block][3],
+                blockIDs[block][0],
+                blockIDs[block][1],
+                blockIDs[block][2],
+                blockIDs[block][3],
                 isStartColumn, isEndColumn);
     }
 
@@ -798,7 +745,8 @@ class SudokuCalculator {
             if (sudoku[row][j][0][0] == 0) {
                 for (int k = 0; k < 9; k++) {
                     if (tempNumbers[k] != 0 && sudoku[row][j][1][k] != 0) {
-                        if (columnsWithSuitableValues[0] == 0) columnsWithSuitableValues[0] = j;
+                        if (columnsWithSuitableValues[0] == 0)
+                            columnsWithSuitableValues[0] = j;
                         else columnsWithSuitableValues[1] = j;
                         break;
                     }
@@ -817,8 +765,6 @@ class SudokuCalculator {
         }
     }
 
-
-
     private void checkBlocksForClosedPairsInColumn(int block) {
         boolean isStartRow;
         boolean isEndRow;
@@ -833,10 +779,10 @@ class SudokuCalculator {
             isEndRow = true;
         }
         closedPairsBlockIdentifierInColumn(
-                blockIdentifications[block][0],
-                blockIdentifications[block][1],
-                blockIdentifications[block][2],
-                blockIdentifications[block][3],
+                blockIDs[block][0],
+                blockIDs[block][1],
+                blockIDs[block][2],
+                blockIDs[block][3],
                 isStartRow, isEndRow);
     }
 
@@ -961,7 +907,8 @@ class SudokuCalculator {
             if (sudoku[j][column][0][0] == 0) {
                 for (int k = 0; k < 9; k++) {
                     if (tempNumbers[k] != 0 && sudoku[j][column][1][k] != 0) {
-                        if (rowsWithSuitableValues[0] == 0) rowsWithSuitableValues[0] = j;
+                        if (rowsWithSuitableValues[0] == 0)
+                            rowsWithSuitableValues[0] = j;
                         else rowsWithSuitableValues[1] = j;
                         break;
                     }
