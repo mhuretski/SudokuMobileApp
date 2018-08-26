@@ -11,4 +11,5 @@
   <dimen name="gradient_radius">23dp</dimen>
   <dimen name="message_text">20sp</dimen>
   <dimen name="cell_text">22sp</dimen>
+  <dimen name="calc_padding">20dp</dimen>
 </resources>

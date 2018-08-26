@@ -38,6 +38,8 @@
     <item name="android:onClick">onClickCalculate</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
+    <item name="android:paddingStart">@dimen/calc_padding</item>
+    <item name="android:paddingEnd">@dimen/calc_padding</item>
     <item name="android:layout_marginBottom">@dimen/default_layout_margin</item>
     <item name="android:gravity">center</item>
   </style>
