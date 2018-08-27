@@ -3,6 +3,8 @@
   <color name="white">#ffffff</color>
   <color name="dark">#c4ddef</color>
   <color name="light">#d7dcdf</color>
+  <color name="highlighted">#e8f0f7</color>
   <color name="other_dark">#9eadb9</color>
   <color name="other_light">#a7c1d4</color>
+  <color name="other_highlighted">#bfd0de</color>
 </resources>
