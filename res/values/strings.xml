@@ -12,6 +12,11 @@
   <string name="v7">8</string>
   <string name="v8">9</string>
   <string name="calculate">Calculate</string>
+  <string name="newGame">New game</string>
+  <string name="difficulty">Choose difficulty</string>
+  <string name="sudokuSolver">Sudoku calculator</string>
+  <string name="statistics">Statistics</string>
+  <string name="exit">Quit</string>
   <string name="invalidInput">Incorrect values</string>
   <string name="invalidSudoku">Invalid sudoku</string>
   <string name="congratulations">Solved!</string>

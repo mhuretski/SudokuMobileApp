@@ -1,22 +1,23 @@
-package maksim_huretski.sudoku;
+package maksim_huretski.sudoku.activities;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import maksim_huretski.sudoku.logic.Calculator;
-import maksim_huretski.sudoku.logic.Screen;
+import maksim_huretski.sudoku.R;
+import maksim_huretski.sudoku.calculation.Calc;
+import maksim_huretski.sudoku.generation.Solver;
+import maksim_huretski.sudoku.parts.Screen;
 import maksim_huretski.sudoku.validation.InputValidator;
 
-public class MainActivity extends Screen {
+public class Calculator extends Screen {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-        setContentView(R.layout.activity_main);
-        debugFinalSudoku();
+        setContentView(R.layout.activity_calculator);
         setBlockIDs();
         super.possibleValues = findViewById(R.id.possibleValuesMain);
         super.possibleValues.setVisibility(View.GONE);
@@ -74,18 +75,40 @@ public class MainActivity extends Screen {
             /*UI end*/
             /*Logic start*/
             getUserValues();
-            Calculator calculator = new Calculator();
-            calculator.init(sudoku, blockIDs);
+            Solver solver = new Solver();
+            solver.init(sudoku, blockIDs);
             InputValidator iv = new InputValidator();
             iv.init(blockIDs);
             iv.setSudoku(sudoku);
             isCorrectSudoku = iv.checkInput();
             /*Logic end*/
-            if (isCorrectSudoku) findSolution(calculator, iv);
+            if (isCorrectSudoku) findSolution(solver, iv);
                 /*UI start*/
             else highlightIncorrectBlocks(iv);
         } else resetSudoku();
         /*UI end*/
+    }
+
+    @Override
+    protected void findSolution(Calc calc, InputValidator iv) {
+        /*Logic start*/
+        boolean isValid = calc.calculateSudoku();
+        iv.setSudoku(calc.getSudoku());
+        if (iv.checkInput() && isValid) {
+            sudoku = calc.getSudoku();
+            isDone();
+            /*Logic end*/
+            /*UI start*/
+            showSolution();
+            /*UI end*/
+        } else {
+            /*UI start*/
+            isSolved = false;
+            isCorrectSudoku = false;
+            highlighted = true;
+            ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.invalidSudoku);
+            /*UI end*/
+        }
     }
 
 }

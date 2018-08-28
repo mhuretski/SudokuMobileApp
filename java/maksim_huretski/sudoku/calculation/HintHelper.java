@@ -1,8 +1,10 @@
-package maksim_huretski.sudoku.logic;
+package maksim_huretski.sudoku.calculation;
+
+import maksim_huretski.sudoku.calculation.hint_types.Irreducible;
 
 import java.util.Arrays;
 
-public class Calculator {
+public class HintHelper extends Calc {
 
     private final int SUDOKU_VALUE = 45;
     private final int[] tempNumbers = new int[9];
@@ -14,7 +16,7 @@ public class Calculator {
     private final int[] tempValues = new int[2];
     private boolean goFurther = false;
     private boolean isOne = false;
-    private final int[][][][] sudoku = new int[9][9][2][];
+    private int[][][][] sudoku = new int[9][9][2][];
     private final int[][] calculatedSudoku = new int[9][9];
 
 
@@ -28,9 +30,10 @@ public class Calculator {
         addValuesToSudoku(sudoku);
     }
 
-    public void calculateSudoku() {
+    public boolean calculateSudoku() {
         fillCells();
         setCalculatedSudoku();
+        return true;
     }
 
     private void setCalculatedSudoku() {
@@ -42,6 +45,7 @@ public class Calculator {
     }
 
     private void fillCells() {
+        Irreducible irreducible = new Irreducible();
         do {
             goFurther = false;
 
@@ -68,6 +72,11 @@ public class Calculator {
             findExcludedValuesUsingRow();
 
             findClosedPairs();
+
+            irreducible.reduce(sudoku, blockIDs, goFurther);
+            sudoku = irreducible.getSudoku();
+            goFurther = irreducible.isGoFurther();
+
         } while (goFurther);
     }
 
@@ -421,7 +430,7 @@ public class Calculator {
         goFurther = true;
         sudoku[row][i][0][0] = sudoku[row][i][1][j];
         minimizePossibleValuesInColumn(i);
-        minimizePossibleValuesInRow(i);
+        minimizePossibleValuesInRow(row);
         minimizePossibleValuesInBlock(row, i);
         for (int l = 0; l < sudoku[row][i][1].length; l++) {
             if (sudoku[row][i][1][l] != 0) {
@@ -461,7 +470,7 @@ public class Calculator {
     private void columnIsOne(int i, int column, int j) {
         goFurther = true;
         sudoku[i][column][0][0] = sudoku[i][column][1][j];
-        minimizePossibleValuesInColumn(i);
+        minimizePossibleValuesInColumn(column);
         minimizePossibleValuesInRow(i);
         minimizePossibleValuesInBlock(i, column);
         for (int l = 0; l < sudoku[i][column][1].length; l++) {
@@ -571,7 +580,7 @@ public class Calculator {
                 if (tempData == 1) {
                     goFurther = true;
                     sudoku[i][j][0][0] = tempValue;
-                    minimizePossibleValuesInColumn(i);
+                    minimizePossibleValuesInColumn(j);
                     minimizePossibleValuesInRow(i);
                     minimizePossibleValuesInBlock(i, j);
                     for (int l = 0; l < sudoku[i][j][1].length; l++) {

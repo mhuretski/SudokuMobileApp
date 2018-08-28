@@ -1,5 +1,5 @@
 <resources>
-  <dimen name="zero_block_margin">0dp</dimen>
+  <dimen name="zero">0dp</dimen>
   <dimen name="default_block_margin">2dp</dimen>
   <dimen name="top_block_margin">4dp</dimen>
   <dimen name="default_layout_margin">16dp</dimen>
@@ -12,4 +12,6 @@
   <dimen name="message_text">20sp</dimen>
   <dimen name="cell_text">22sp</dimen>
   <dimen name="calc_padding">20dp</dimen>
+  <dimen name="main_menu_margin">70dp</dimen>
+  <dimen name="main_menu_bottom_margin">20dp</dimen>
 </resources>

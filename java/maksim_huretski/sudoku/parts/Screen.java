@@ -1,4 +1,4 @@
-package maksim_huretski.sudoku.logic;
+package maksim_huretski.sudoku.parts;
 
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
+import maksim_huretski.sudoku.calculation.Calc;
 import maksim_huretski.sudoku.calculation.BlockIDs;
 import maksim_huretski.sudoku.validation.Checker;
 import maksim_huretski.sudoku.validation.InputValidator;
@@ -22,7 +23,7 @@ public abstract class Screen extends AppCompatActivity {
     protected boolean isClickable = true;
     protected boolean isCorrectSudoku = true;
     protected boolean highlighted = false;
-    private final int[][] CELLS = new int[][]{
+    protected final int[][] CELLS = new int[][]{
             {R.id.b00, R.id.b01, R.id.b02, R.id.b03, R.id.b04, R.id.b05, R.id.b06, R.id.b07, R.id.b08},
             {R.id.b10, R.id.b11, R.id.b12, R.id.b13, R.id.b14, R.id.b15, R.id.b16, R.id.b17, R.id.b18},
             {R.id.b20, R.id.b21, R.id.b22, R.id.b23, R.id.b24, R.id.b25, R.id.b26, R.id.b27, R.id.b28},
@@ -97,28 +98,9 @@ public abstract class Screen extends AppCompatActivity {
         }
     }
 
-    protected void findSolution(Calculator calculator, InputValidator iv) {
-        /*Logic start*/
-        calculator.calculateSudoku();
-        iv.setSudoku(calculator.getSudoku());
-        if (iv.checkInput()) {
-            sudoku = calculator.getSudoku();
-            isDone();
-            /*Logic end*/
-            /*UI start*/
-            showSolution();
-            /*UI end*/
-        } else {
-            /*UI start*/
-            isSolved = false;
-            isCorrectSudoku = false;
-            highlighted = true;
-            ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.invalidSudoku);
-            /*UI end*/
-        }
-    }
+    protected abstract void findSolution(Calc calc, InputValidator iv);
 
-    private void isDone() {
+    protected void isDone() {
         Checker checker = new Checker();
         checker.checkSudoku(sudoku, blockIDs);
         if (checker.isDone()) {
@@ -130,7 +112,7 @@ public abstract class Screen extends AppCompatActivity {
         }
     }
 
-    private void showSolution() {
+    protected void showSolution() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (sudoku[i][j] != 0) {
@@ -172,29 +154,6 @@ public abstract class Screen extends AppCompatActivity {
             cell.setBackgroundResource(R.drawable.light_block);
         else
             cell.setBackgroundResource(R.drawable.dark_block);
-    }
-
-    protected void debugFinalSudoku() {
-        final int[][] sudoku = new int[][]{
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 1, 0, 0, 3, 6, 0, 0, 0},
-                {0, 0, 0, 8, 0, 0, 0, 1, 2},
-                {0, 0, 1, 6, 0, 0, 9, 7, 8},
-                {0, 0, 0, 0, 7, 0, 0, 0, 0},
-                {0, 0, 5, 0, 0, 0, 0, 2, 4},
-                {0, 0, 0, 0, 0, 7, 0, 4, 0},
-                {0, 6, 9, 0, 5, 0, 1, 0, 0},
-                {3, 0, 0, 0, 0, 0, 0, 0, 0}};
-        TextView block;
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (sudoku[i][j] != 0) {
-                    block = findViewById(CELLS[i][j]);
-                    block.setTypeface(null, Typeface.BOLD);
-                    block.setText(String.valueOf(sudoku[i][j]));
-                }
-            }
-        }
     }
 
     protected void setBlockIDs() {

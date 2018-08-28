@@ -6,92 +6,63 @@
   android:id="@+id/main_window"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".MainActivity">
+  tools:context=".activities.MainActivity">
 
   <FrameLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ImageView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:contentDescription="@string/vDefault"
-      android:scaleType="centerCrop"
-      app:srcCompat="@drawable/background_image"
-      android:id="@+id/backgroundImage"/>
-  </FrameLayout>
-
-  <TextView
-    android:text="@string/vDefault"
-    android:textColor="@color/white"
-    android:textSize="@dimen/message_text"
-    android:gravity="center"
+    android:layout_height="match_parent" android:id="@+id/frameLayout">
+  <ImageView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/messageAtTop"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:layout_marginTop="@dimen/default_layout_margin"/>
+    android:contentDescription="@string/vDefault"
+    android:scaleType="centerCrop"
+    app:srcCompat="@drawable/background_image"
+    android:id="@+id/backgroundImage"/>
+  </FrameLayout>
 
-  <android.support.constraint.ConstraintLayout
-    android:id="@+id/table"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintHorizontal_weight="@integer/one"
-    android:layout_marginTop="@dimen/default_layout_margin"
-    android:layout_marginStart="@dimen/layout_margin_small"
-    android:layout_marginEnd="@dimen/layout_margin_small"
-    app:layout_constraintTop_toBottomOf="@+id/messageAtTop">
-
-    <fragment
-      android:layout_height="wrap_content"
-      android:layout_width="match_parent"
-      android:name="maksim_huretski.sudoku.parts.Container1of3"
-      android:id="@+id/sudoku1of3Main"
+    <ImageView
+      android:layout_height="@dimen/zero"
+      android:layout_width="@dimen/zero"
+      android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
+      android:contentDescription="@string/vDefault"
+      android:scaleType="centerCrop"
+      app:srcCompat="@drawable/logo"
+      android:id="@+id/logo"
+      app:layout_constraintDimensionRatio="1:1"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintBottom_toTopOf="@+id/sudoku2of3Main"/>
+      app:layout_constraintBottom_toTopOf="@id/mainMenuButtons"
+    />
 
-    <fragment
-      android:layout_height="wrap_content"
-      android:layout_width="match_parent"
-      android:name="maksim_huretski.sudoku.parts.Container2of3"
-      android:id="@+id/sudoku2of3Main"
-      app:layout_constraintTop_toBottomOf="@+id/sudoku1of3Main"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintBottom_toTopOf="@+id/sudoku3of3Main"/>
-
-    <fragment
-      android:layout_height="wrap_content"
-      android:layout_width="match_parent"
-      android:name="maksim_huretski.sudoku.parts.Container3of3"
-      android:id="@+id/sudoku3of3Main"
-      app:layout_constraintTop_toBottomOf="@+id/sudoku2of3Main"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintLeft_toLeftOf="parent"/>
-
-  </android.support.constraint.ConstraintLayout>
-
-  <fragment
-    android:layout_height="wrap_content"
+  <LinearLayout
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_marginStart="@dimen/default_layout_margin"
-    android:layout_marginEnd="@dimen/default_layout_margin"
-    app:layout_constraintTop_toBottomOf="@+id/table"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintBottom_toTopOf="@+id/calculate"
-    android:name="maksim_huretski.sudoku.parts.PossibleValues"
-    android:id="@+id/possibleValuesMain"/>
-
-  <Button
-    style="@style/calculate"
-    android:id="@+id/calculate"
-    android:text="@string/calculate"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"/>
+    android:layout_height="wrap_content"
+    android:id="@+id/mainMenuButtons"
+    android:layout_marginBottom="8dp"
+    app:layout_constraintBottom_toBottomOf="parent">
+    <Button
+      style="@style/mainMenu"
+      android:id="@+id/newGame"
+      android:text="@string/newGame"/>
+    <Button
+      style="@style/mainMenu"
+      android:id="@+id/difficulty"
+      android:text="@string/difficulty"/>
+    <Button
+      style="@style/mainMenu"
+      android:id="@+id/sudokuSolver"
+      android:text="@string/sudokuSolver"/>
+    <Button
+      style="@style/mainMenu"
+      android:id="@+id/statistics"
+      android:text="@string/statistics"/>
+    <Button
+      style="@style/mainMenu"
+      android:id="@+id/exit"
+      android:text="@string/exit"/>
+  </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
