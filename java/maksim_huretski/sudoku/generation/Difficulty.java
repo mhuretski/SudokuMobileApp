@@ -2,7 +2,7 @@ package maksim_huretski.sudoku.generation;
 
 class Difficulty {
 
-    private int amountOfCellsShown = 40;
+    private int amountOfCellsShown = 41;
     private final int[] positions = new int[9];
     private final int[] amountOfShownCellsInEachRow = new int[9];
     private final boolean[][] shown = new boolean[9][9];
@@ -62,19 +62,19 @@ class Difficulty {
     public int setDifficulty(int difficulty) {
         switch (difficulty) {
             case 1:
-                amountOfCellsShown = 20;
+                amountOfCellsShown = 21;
                 break;
             case 2:
-                amountOfCellsShown = 30;
+                amountOfCellsShown = 31;
                 break;
             case 3:
-                amountOfCellsShown = 40;
+                amountOfCellsShown = 41;
                 break;
             case 4:
-                amountOfCellsShown = 50;
+                amountOfCellsShown = 51;
                 break;
             case 5:
-                amountOfCellsShown = 60;
+                amountOfCellsShown = 61;
                 break;
         }
         return amountOfCellsShown;

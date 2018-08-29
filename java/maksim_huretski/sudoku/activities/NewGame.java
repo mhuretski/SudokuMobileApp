@@ -3,9 +3,11 @@ package maksim_huretski.sudoku.activities;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
+import maksim_huretski.sudoku.animation.BoardAppearanceAnimation;
 import maksim_huretski.sudoku.calculation.Calc;
 import maksim_huretski.sudoku.calculation.HintHelper;
 import maksim_huretski.sudoku.generation.InitialSudoku;
@@ -15,15 +17,26 @@ import maksim_huretski.sudoku.validation.InputValidator;
 
 public class NewGame extends Screen {
 
+    private boolean isFirstTime = true;
+    private BoardAppearanceAnimation board;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         setContentView(R.layout.activity_new_game);
-        setInitialSudoku();
         setBlockIDs();
+        board = new BoardAppearanceAnimation();
+        board.setCellsHidden(this, CELLS);
+        setInitialSudoku();
         super.possibleValues = findViewById(R.id.possibleValuesMain);
         super.possibleValues.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (isFirstTime) isFirstTime = board.setCellsShown(this, CELLS, sudoku);
     }
 
     @SuppressWarnings("unused") /*It's used. The value is set in styles.*/
@@ -107,14 +120,11 @@ public class NewGame extends Screen {
         sudoku = new InitialSudoku().generateInitialSudoku();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (sudoku[i][j] != 0) {
-                    cell = findViewById(CELLS[i][j]);
-                    cell.setText(String.valueOf(sudoku[i][j]));
-                    cell.setTypeface(null, Typeface.BOLD);
-                    cell.setClickable(false);
-                    cell.setFocusable(false);
-                }
+                cell = findViewById(CELLS[i][j]);
+                cell.setClickable(false);
+                cell.setFocusable(false);
             }
         }
     }
+
 }
