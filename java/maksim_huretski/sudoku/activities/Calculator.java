@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
+import maksim_huretski.sudoku.animation.BoardAnimationCalc;
 import maksim_huretski.sudoku.calculation.Calc;
 import maksim_huretski.sudoku.generation.Solver;
 import maksim_huretski.sudoku.parts.Screen;
@@ -19,11 +20,18 @@ public class Calculator extends Screen {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         setContentView(R.layout.activity_calculator);
         setBlockIDs();
+        setUnClickable();
         super.possibleValues = findViewById(R.id.possibleValuesMain);
-        super.possibleValues.setVisibility(View.GONE);
+        super.possibleValues.setVisibility(View.INVISIBLE);
     }
 
-    @SuppressWarnings("unused") /*It's used. The value is set in styles.*/
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (isFirstTime) isFirstTime = new BoardAnimationCalc().setCellsShown(this, CELLS, sudoku);
+    }
+
+    @Override
     public void onClickCell(View view) {
         if (isClickable) {
             if (!isCorrectSudoku) getDefaultBorderState();
@@ -37,7 +45,7 @@ public class Calculator extends Screen {
                 } else {
                     highlighted = false;
                     normalStyle(cell.getId());
-                    possibleValues.setVisibility(View.GONE);
+                    possibleValues.setVisibility(View.INVISIBLE);
                 }
             } else {
                 possibleValues.setVisibility(View.VISIBLE);
@@ -47,7 +55,7 @@ public class Calculator extends Screen {
         }
     }
 
-    @SuppressWarnings("unused") /*It's used. The value is set in styles.*/
+    @Override
     public void onClickValue(View view) {
         normalStyle(cell.getId());
         TextView value = findViewById(view.getId());
@@ -66,14 +74,11 @@ public class Calculator extends Screen {
     @SuppressWarnings("unused") /*It's used. The value is set in styles.*/
     public void onClickCalculate(View view) {
         if (!isSolved) {
-            /*UI start*/
             if (highlighted) {
                 highlighted = false;
                 normalStyle(cell.getId());
                 possibleValues.setVisibility(View.GONE);
             }
-            /*UI end*/
-            /*Logic start*/
             getUserValues();
             Solver solver = new Solver();
             solver.init(sudoku, blockIDs);
@@ -81,33 +86,34 @@ public class Calculator extends Screen {
             iv.init(blockIDs);
             iv.setSudoku(sudoku);
             isCorrectSudoku = iv.checkInput();
-            /*Logic end*/
             if (isCorrectSudoku) findSolution(solver, iv);
-                /*UI start*/
             else highlightIncorrectBlocks(iv);
         } else resetSudoku();
-        /*UI end*/
     }
 
     @Override
     protected void findSolution(Calc calc, InputValidator iv) {
-        /*Logic start*/
         boolean isValid = calc.calculateSudoku();
         iv.setSudoku(calc.getSudoku());
         if (iv.checkInput() && isValid) {
             sudoku = calc.getSudoku();
             isDone();
-            /*Logic end*/
-            /*UI start*/
             showSolution();
-            /*UI end*/
         } else {
-            /*UI start*/
             isSolved = false;
             isCorrectSudoku = false;
             highlighted = true;
             ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.invalidSudoku);
-            /*UI end*/
+        }
+    }
+
+    private void setUnClickable() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                cell = findViewById(CELLS[i][j]);
+                cell.setClickable(false);
+                cell.setFocusable(false);
+            }
         }
     }
 

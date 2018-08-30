@@ -23,6 +23,7 @@ public abstract class Screen extends AppCompatActivity {
     protected boolean isClickable = true;
     protected boolean isCorrectSudoku = true;
     protected boolean highlighted = false;
+    protected boolean isFirstTime = true;
     protected final int[][] CELLS = new int[][]{
             {R.id.b00, R.id.b01, R.id.b02, R.id.b03, R.id.b04, R.id.b05, R.id.b06, R.id.b07, R.id.b08},
             {R.id.b10, R.id.b11, R.id.b12, R.id.b13, R.id.b14, R.id.b15, R.id.b16, R.id.b17, R.id.b18},
@@ -34,6 +35,12 @@ public abstract class Screen extends AppCompatActivity {
             {R.id.b70, R.id.b71, R.id.b72, R.id.b73, R.id.b74, R.id.b75, R.id.b76, R.id.b77, R.id.b78},
             {R.id.b80, R.id.b81, R.id.b82, R.id.b83, R.id.b84, R.id.b85, R.id.b86, R.id.b87, R.id.b88}
     };
+
+    protected abstract void onClickCell(View view);
+
+    protected abstract void findSolution(Calc calc, InputValidator iv);
+
+    protected abstract void onClickValue(View view);
 
     protected void getUserValues() {
         TextView cell;
@@ -97,8 +104,6 @@ public abstract class Screen extends AppCompatActivity {
             }
         }
     }
-
-    protected abstract void findSolution(Calc calc, InputValidator iv);
 
     protected void isDone() {
         Checker checker = new Checker();
