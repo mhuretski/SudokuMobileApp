@@ -1,6 +1,7 @@
 package maksim_huretski.sudoku.activities;
 
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -29,7 +30,8 @@ public class NewGame extends Screen {
     @Override
     protected void onStart() {
         super.onStart();
-        if (isFirstTime) isFirstTime = new BoardAnimationNewGame().setCellsShown(this, CELLS, sudoku);
+        if (isFirstTime)
+            isFirstTime = new BoardAnimationNewGame().setCellsShown(this, CELLS, sudoku);
     }
 
     @Override
@@ -112,9 +114,12 @@ public class NewGame extends Screen {
         sudoku = new InitialSudoku().generateInitialSudoku();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                cell = findViewById(CELLS[i][j]);
-                cell.setClickable(false);
-                cell.setFocusable(false);
+                if (sudoku[i][j] != 0) {
+                    cell = findViewById(CELLS[i][j]);
+                    cell.setTypeface(null, Typeface.BOLD);
+                    cell.setClickable(false);
+                    cell.setFocusable(false);
+                }
             }
         }
     }

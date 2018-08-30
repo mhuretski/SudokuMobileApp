@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
-import maksim_huretski.sudoku.animation.BoardAnimationCalc;
 import maksim_huretski.sudoku.calculation.Calc;
 import maksim_huretski.sudoku.generation.Solver;
 import maksim_huretski.sudoku.parts.Screen;
@@ -20,15 +19,8 @@ public class Calculator extends Screen {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         setContentView(R.layout.activity_calculator);
         setBlockIDs();
-        setUnClickable();
         super.possibleValues = findViewById(R.id.possibleValuesMain);
         super.possibleValues.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (isFirstTime) isFirstTime = new BoardAnimationCalc().setCellsShown(this, CELLS, sudoku);
     }
 
     @Override
@@ -98,22 +90,11 @@ public class Calculator extends Screen {
         if (iv.checkInput() && isValid) {
             sudoku = calc.getSudoku();
             isDone();
-            showSolution();
         } else {
             isSolved = false;
             isCorrectSudoku = false;
             highlighted = true;
             ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.invalidSudoku);
-        }
-    }
-
-    private void setUnClickable() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                cell = findViewById(CELLS[i][j]);
-                cell.setClickable(false);
-                cell.setFocusable(false);
-            }
         }
     }
 

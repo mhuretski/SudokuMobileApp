@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
+import maksim_huretski.sudoku.animation.BoardAnimationCalc;
 import maksim_huretski.sudoku.calculation.Calc;
 import maksim_huretski.sudoku.calculation.BlockIDs;
 import maksim_huretski.sudoku.validation.Checker;
@@ -36,10 +37,13 @@ public abstract class Screen extends AppCompatActivity {
             {R.id.b80, R.id.b81, R.id.b82, R.id.b83, R.id.b84, R.id.b85, R.id.b86, R.id.b87, R.id.b88}
     };
 
+    @SuppressWarnings("unused")
     protected abstract void onClickCell(View view);
 
+    @SuppressWarnings("unused")
     protected abstract void findSolution(Calc calc, InputValidator iv);
 
+    @SuppressWarnings("unused")
     protected abstract void onClickValue(View view);
 
     protected void getUserValues() {
@@ -113,18 +117,7 @@ public abstract class Screen extends AppCompatActivity {
             calc.setText(R.string.reset);
             isSolved = true;
             isClickable = false;
-            ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.congratulations);
-        }
-    }
-
-    protected void showSolution() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (sudoku[i][j] != 0) {
-                    cell = findViewById(CELLS[i][j]);
-                    cell.setText(String.valueOf(sudoku[i][j]));
-                }
-            }
+            showSolution();
         }
     }
 
@@ -165,6 +158,10 @@ public abstract class Screen extends AppCompatActivity {
         BlockIDs blockIDs = new BlockIDs();
         blockIDs.init();
         this.blockIDs = blockIDs.getBlockIDs();
+    }
+
+    private void showSolution() {
+        new BoardAnimationCalc().setCellsShown(this, CELLS, sudoku);
     }
 
 }
