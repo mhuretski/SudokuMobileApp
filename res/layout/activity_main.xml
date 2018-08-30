@@ -33,36 +33,18 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintBottom_toTopOf="@id/mainMenuButtons"
+      app:layout_constraintBottom_toTopOf="@id/mainMenuButtonsFrame"
     />
 
-  <LinearLayout
+  <fragment
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/mainMenuButtons"
+    android:id="@+id/mainMenuButtonsFrame"
+    android:name="maksim_huretski.sudoku.parts.MainMenu"
     android:layout_marginBottom="8dp"
-    app:layout_constraintBottom_toBottomOf="parent">
-    <Button
-      style="@style/mainMenu"
-      android:id="@+id/newGame"
-      android:text="@string/newGame"/>
-    <Button
-      style="@style/mainMenu"
-      android:id="@+id/difficulty"
-      android:text="@string/difficulty"/>
-    <Button
-      style="@style/mainMenu"
-      android:id="@+id/sudokuSolver"
-      android:text="@string/sudokuSolver"/>
-    <Button
-      style="@style/mainMenu"
-      android:id="@+id/statistics"
-      android:text="@string/statistics"/>
-    <Button
-      style="@style/mainMenu"
-      android:id="@+id/exit"
-      android:text="@string/exit"/>
-  </LinearLayout>
+    app:layout_constraintBottom_toBottomOf="parent"/>
+
+
 
 </android.support.constraint.ConstraintLayout>

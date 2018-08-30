@@ -24,6 +24,11 @@ public class HintHelper extends Calc {
         return calculatedSudoku;
     }
 
+/* TODO uncomment when hints are refactored
+    public int[][][][] getSudokuPossibleValues() {
+        return sudoku;
+    }*/
+
     public void init(int[][] sudoku, int[][] blockIDs) {
         setBlockIDs(blockIDs);
         addDataToSudoku();

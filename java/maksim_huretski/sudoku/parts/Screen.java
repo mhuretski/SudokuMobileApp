@@ -41,10 +41,10 @@ public abstract class Screen extends AppCompatActivity {
     protected abstract void onClickCell(View view);
 
     @SuppressWarnings("unused")
-    protected abstract void findSolution(Calc calc, InputValidator iv);
+    protected abstract void onClickValue(View view);
 
     @SuppressWarnings("unused")
-    protected abstract void onClickValue(View view);
+    protected abstract void findSolution(Calc calc, InputValidator iv);
 
     protected void getUserValues() {
         TextView cell;

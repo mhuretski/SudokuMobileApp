@@ -7,11 +7,9 @@ public class BoardAnimationNewGame extends BoardAnimationCalc {
 
     @Override
     public boolean setCellsShown(final Activity game, final int[][] CELLS, final int[][] sudoku) {
-        super.delayBeforeStart = 1000;
-        super.delayUntilFirstFinished = delayBeforeStart + (LENGTH - 1) * delay;
+        super.delayBeforeStart = 1100;
         sudokuToString(sudoku);
-        firstAnimationFromLeftToRight(game, CELLS);
-        secondAnimationFromRightToLeft(game, CELLS, sudoku);
+        firstAnimationFromLeftToRight(game, CELLS, sudoku);
         return false;
     }
 

@@ -9,22 +9,21 @@ public class BoardAnimationCalc {
 
     TextView sudokuCell;
     int delayBeforeStart = 100;
-    final int delay = 50;
-    final int LENGTH = 9;
-    int delayUntilFirstFinished = delayBeforeStart + (LENGTH - 1) * delay;
+    private final int delay = 50;
+    private final int LENGTH = 9;
+    private int delayUntilFirstFinished = (LENGTH - 1) * delay;
     final String[][] sudokuValues = new String[9][9];
     private final Handler handler = new Handler();
 
     @SuppressWarnings("SameReturnValue")
     public boolean setCellsShown(final Activity game, final int[][] CELLS, final int[][] sudoku) {
         sudokuToString(sudoku);
-        firstAnimationFromLeftToRight(game, CELLS);
-        secondAnimationFromRightToLeft(game, CELLS, sudoku);
+        firstAnimationFromLeftToRight(game, CELLS, sudoku);
         congratulationsMessage(game);
         return false;
     }
 
-    void firstAnimationFromLeftToRight(final Activity game, final int[][] CELLS) {
+    void firstAnimationFromLeftToRight(final Activity game, final int[][] CELLS, final int[][] sudoku) {
         for (int i = 0; i < LENGTH; i++) {
             final int a = i;
             handler.postDelayed(new Runnable() {
@@ -39,12 +38,13 @@ public class BoardAnimationCalc {
                             }
                         }, delay * j);
                     }
+                    secondAnimationFromRightToLeft(game, CELLS, sudoku);
                 }
             }, delayBeforeStart);
         }
     }
 
-    void secondAnimationFromRightToLeft(final Activity game, final int[][] CELLS, final int[][] sudoku) {
+    private void secondAnimationFromRightToLeft(final Activity game, final int[][] CELLS, final int[][] sudoku) {
         for (int i = LENGTH - 1; i >= 0; i--) {
             final int a = i;
             handler.postDelayed(new Runnable() {
@@ -82,8 +82,8 @@ public class BoardAnimationCalc {
             sudokuCell.setBackgroundResource(R.drawable.light_block);
     }
 
-    private void congratulationsMessage(final Activity game){
-        int delayAfterAll = delayUntilFirstFinished + (LENGTH + 1) * delay;
+    private void congratulationsMessage(final Activity game) {
+        int delayAfterAll = delayBeforeStart + delayUntilFirstFinished + 2 * (LENGTH - 1) * delay;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -16,6 +16,13 @@ import maksim_huretski.sudoku.validation.InputValidator;
 
 public class NewGame extends Screen {
 
+    private HintHelper hintHelper = new HintHelper();
+/* TODO uncomment when hints are refactored
+    private final int[] possibleValuesNumbers = new int[]
+            {R.id.vZero, R.id.v0, R.id.v1, R.id.v2, R.id.v3, R.id.v4, R.id.v5, R.id.v6, R.id.v7, R.id.v8};
+    private int[][][][] sudokuPossibleValues = new int[9][9][][];
+    private TextView possibleValue;*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +35,8 @@ public class NewGame extends Screen {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         if (isFirstTime)
             isFirstTime = new BoardAnimationNewGame().setCellsShown(this, CELLS, sudoku);
     }
@@ -44,6 +51,8 @@ public class NewGame extends Screen {
                     highlighted = true;
                     normalStyle(cell.getId());
                     possibleValues.setVisibility(View.VISIBLE);
+/* TODO uncomment when hints are refactored
+                    setPossibleValuesNumbers();*/
                     highlightedStyle(view.getId());
                 } else {
                     highlighted = false;
@@ -52,11 +61,44 @@ public class NewGame extends Screen {
                 }
             } else {
                 possibleValues.setVisibility(View.VISIBLE);
+/* TODO uncomment when hints are refactored
+                setPossibleValuesNumbers();*/
                 highlightedStyle(view.getId());
                 highlighted = true;
             }
         }
     }
+
+/* TODO uncomment when hints are refactored
+    private void setPossibleValuesNumbers() {
+        for (int k = 0; k < 10; k++) {
+                possibleValue = findViewById(possibleValuesNumbers[k]);
+                possibleValue.setVisibility(View.VISIBLE);
+        }
+        hintHelper.init(sudoku, blockIDs);
+        hintHelper.calculateSudoku();
+        sudokuPossibleValues = hintHelper.getSudokuPossibleValues();
+        int position = cell.getId();
+        int row = 0;
+        int column = 0;
+        label:
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (CELLS[i][j] == position) {
+                    row = i;
+                    column = j;
+                    break label;
+                }
+            }
+        }
+        for (int k = 0; k < 9; k++) {
+            System.out.println(sudokuPossibleValues[row][column][1][k]);
+            if (sudokuPossibleValues[row][column][1][k] % 2 != 0) {
+                possibleValue = findViewById(possibleValuesNumbers[k + 1]);
+                possibleValue.setVisibility(View.INVISIBLE);
+            }
+        }
+    }*/
 
     @Override
     public void onClickValue(View view) {
@@ -80,7 +122,6 @@ public class NewGame extends Screen {
             possibleValues.setVisibility(View.GONE);
         }
         getUserValues();
-        HintHelper hintHelper = new HintHelper();
         hintHelper.init(sudoku, blockIDs);
         InputValidator iv = new InputValidator();
         iv.init(blockIDs);

@@ -23,4 +23,8 @@
   <string name="reset">Reset</string>
   <string name="light">light</string>
   <string name="dark">dark</string>
+  <string name="insane">Insane</string>
+  <string name="hard">Hard</string>
+  <string name="normal">Normal</string>
+  <string name="easy">Easy</string>
 </resources>
