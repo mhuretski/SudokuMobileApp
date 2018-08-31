@@ -1,5 +1,7 @@
 package maksim_huretski.sudoku.generation;
 
+import maksim_huretski.sudoku.R;
+
 class Difficulty {
 
     private int amountOfCellsShown = 41;
@@ -59,25 +61,21 @@ class Difficulty {
         } while (checkResult != amountOfCellsShown);
     }
 
-    public int setDifficulty(int difficulty) {
+    public void setDifficulty(int difficulty) {
         switch (difficulty) {
-            case 1:
-                amountOfCellsShown = 21;
+            case R.id.easy:
+                amountOfCellsShown = 36;
                 break;
-            case 2:
-                amountOfCellsShown = 31;
+            case R.id.normal:
+                amountOfCellsShown = 45;
                 break;
-            case 3:
-                amountOfCellsShown = 41;
+            case R.id.hard:
+                amountOfCellsShown = 54;
                 break;
-            case 4:
-                amountOfCellsShown = 51;
-                break;
-            case 5:
-                amountOfCellsShown = 61;
+            case R.id.insane:
+                amountOfCellsShown = 64;
                 break;
         }
-        return amountOfCellsShown;
     }
 
 }

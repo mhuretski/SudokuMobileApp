@@ -16,7 +16,8 @@ import maksim_huretski.sudoku.validation.InputValidator;
 
 public class NewGame extends Screen {
 
-    private HintHelper hintHelper = new HintHelper();
+    private final HintHelper hintHelper = new HintHelper();
+    private int difficulty;
 /* TODO uncomment when hints are refactored
     private final int[] possibleValuesNumbers = new int[]
             {R.id.vZero, R.id.v0, R.id.v1, R.id.v2, R.id.v3, R.id.v4, R.id.v5, R.id.v6, R.id.v7, R.id.v8};
@@ -29,6 +30,7 @@ public class NewGame extends Screen {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         setContentView(R.layout.activity_new_game);
         setBlockIDs();
+        difficulty = getIntent().getIntExtra(getString(R.string.difficultyLevel), R.id.normal);
         setInitialSudoku();
         super.possibleValues = findViewById(R.id.possibleValuesMain);
         super.possibleValues.setVisibility(View.INVISIBLE);
@@ -152,7 +154,7 @@ public class NewGame extends Screen {
     }
 
     private void setInitialSudoku() {
-        sudoku = new InitialSudoku().generateInitialSudoku();
+        sudoku = new InitialSudoku().generateInitialSudoku(difficulty);
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (sudoku[i][j] != 0) {

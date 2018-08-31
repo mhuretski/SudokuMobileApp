@@ -5,7 +5,7 @@ public class InitialSudoku {
     private int[][] sudoku;
     private boolean isSolved = false;
 
-    public int[][] generateInitialSudoku() {
+    public int[][] generateInitialSudoku(int difficulty) {
         Generator generator = new Generator();
         Solver sudokuSolver = new Solver();
 
@@ -14,7 +14,7 @@ public class InitialSudoku {
             solvedSudoku(sudokuSolver);
         } while (!isSolved);
         sudoku = sudokuSolver.getSudoku();
-        hideSudoku();
+        hideSudoku(difficulty);
         return sudoku;
     }
 
@@ -27,8 +27,9 @@ public class InitialSudoku {
         isSolved = sudokuSolver.calculateSudoku();
     }
 
-    private void hideSudoku(){
+    private void hideSudoku(int difficultyLevel){
         Difficulty difficulty = new Difficulty();
+        difficulty.setDifficulty(difficultyLevel);
         boolean[][] shownCells = difficulty.shownCells();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {

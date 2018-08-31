@@ -7,7 +7,7 @@ import android.view.View;
 
 public class MenuAnimation {
 
-    private int heightPixels;
+    private final int heightPixels;
     private final Handler handler = new Handler();
     private final int SLOW = 700;
 

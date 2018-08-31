@@ -11,7 +11,7 @@ public class BoardAnimationCalc {
     int delayBeforeStart = 100;
     private final int delay = 50;
     private final int LENGTH = 9;
-    private int delayUntilFirstFinished = (LENGTH - 1) * delay;
+    private final int delayUntilFirstFinished = (LENGTH - 1) * delay;
     final String[][] sudokuValues = new String[9][9];
     private final Handler handler = new Handler();
 
@@ -83,7 +83,7 @@ public class BoardAnimationCalc {
     }
 
     private void congratulationsMessage(final Activity game) {
-        int delayAfterAll = delayBeforeStart + delayUntilFirstFinished + 2 * (LENGTH - 1) * delay;
+        int delayAfterAll = delayBeforeStart + delayUntilFirstFinished + (LENGTH + 2) * delay;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
