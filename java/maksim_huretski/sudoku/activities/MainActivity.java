@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         menuAnimation = new MenuAnimation(this);
         menuAnimation.hide(R.id.menuDifficulty, true, this);
+        menuAnimation.hide(R.id.mainMenuButtons, true, this);
+        menuAnimation.show(R.id.mainMenuButtons, this);
         getDifficulty();
     }
 
@@ -39,14 +41,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.difficulty:
-                showMenu();
+                showDifficulty();
                 break;
             case R.id.insane:
             case R.id.hard:
             case R.id.normal:
             case R.id.easy:
                 setDifficulty(view);
-                showDifficulty();
+                showMenu();
                 break;
             default:
                 break;
@@ -67,12 +69,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         difficultyLevel = sharedPref.getInt(getString(R.string.difficultyLevel), R.id.normal);
     }
 
-    private void showMenu() {
+    private void showDifficulty() {
         menuAnimation.hide(R.id.mainMenuButtons, false, this);
         menuAnimation.show(R.id.menuDifficulty, this);
     }
 
-    private void showDifficulty() {
+    private void showMenu() {
         menuAnimation.hide(R.id.menuDifficulty, false, this);
         menuAnimation.show(R.id.mainMenuButtons, this);
     }
