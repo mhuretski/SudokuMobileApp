@@ -14,25 +14,25 @@
     android:layout_marginBottom="8dp"
     app:layout_constraintBottom_toBottomOf="parent">
     <Button
-      style="@style/mainMenu"
+      style="@style/menu"
+      android:id="@+id/continueGame"
+      android:text="@string/continueGame"/>
+    <Button
+      style="@style/menu"
       android:id="@+id/newGame"
       android:text="@string/newGame"/>
     <Button
-      style="@style/mainMenu"
+      style="@style/menu"
       android:id="@+id/difficulty"
       android:text="@string/difficulty"/>
     <Button
-      style="@style/mainMenu"
+      style="@style/menu"
       android:id="@+id/sudokuSolver"
       android:text="@string/sudokuSolver"/>
     <Button
-      style="@style/mainMenu"
+      style="@style/menu"
       android:id="@+id/statistics"
       android:text="@string/statistics"/>
-    <Button
-      style="@style/mainMenu"
-      android:id="@+id/exit"
-      android:text="@string/exit"/>
   </LinearLayout>
 
   <LinearLayout
@@ -43,19 +43,19 @@
     android:layout_marginBottom="8dp"
     app:layout_constraintBottom_toBottomOf="parent">
     <Button
-      style="@style/mainMenu"
+      style="@style/menu"
       android:id="@+id/insane"
       android:text="@string/insane"/>
     <Button
-      style="@style/mainMenu"
+      style="@style/menu"
       android:id="@+id/hard"
       android:text="@string/hard"/>
     <Button
-      style="@style/mainMenu"
+      style="@style/menu"
       android:id="@+id/normal"
       android:text="@string/normal"/>
     <Button
-      style="@style/mainMenu"
+      style="@style/menu"
       android:id="@+id/easy"
       android:text="@string/easy"/>
   </LinearLayout>

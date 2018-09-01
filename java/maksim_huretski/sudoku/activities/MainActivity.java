@@ -14,17 +14,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private MenuAnimation menuAnimation;
     private int difficultyLevel;
+    private boolean isSavedSudoku = false;
+    private View continueBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         setContentView(R.layout.activity_main);
-        menuAnimation = new MenuAnimation(this);
-        menuAnimation.hide(R.id.menuDifficulty, true, this);
-        menuAnimation.hide(R.id.mainMenuButtons, true, this);
-        menuAnimation.show(R.id.mainMenuButtons, this);
+        hideContinue();
+        setMenuAnimation();
         getDifficulty();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isSavedSudoku) showContinue();
     }
 
     @Override
@@ -36,8 +42,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra(getString(R.string.difficultyLevel), difficultyLevel);
                 startActivity(intent);
                 break;
+            case R.id.continueGame:
+                intent = new Intent(MainActivity.this, ContinueGame.class);
+                startActivity(intent);
+                break;
             case R.id.sudokuSolver:
-                intent = new Intent(this, Calculator.class);
+                intent = new Intent(MainActivity.this, Calculator.class);
                 startActivity(intent);
                 break;
             case R.id.difficulty:
@@ -76,6 +86,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showMenu() {
         menuAnimation.hide(R.id.menuDifficulty, false, this);
+        menuAnimation.show(R.id.mainMenuButtons, this);
+        isSavedSudoku = true;
+    }
+
+    private void showContinue() {
+        continueBtn = findViewById(R.id.continueGame);
+        continueBtn.setVisibility(View.VISIBLE);
+    }
+
+    private void hideContinue() {
+        continueBtn = findViewById(R.id.continueGame);
+        continueBtn.setVisibility(View.GONE);
+    }
+
+    private void setMenuAnimation(){
+        menuAnimation = new MenuAnimation(this);
+        menuAnimation.hide(R.id.menuDifficulty, true, this);
+        menuAnimation.hide(R.id.mainMenuButtons, true, this);
         menuAnimation.show(R.id.mainMenuButtons, this);
     }
 

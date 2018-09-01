@@ -16,7 +16,7 @@
   <string name="difficulty">Choose difficulty</string>
   <string name="sudokuSolver">Sudoku calculator</string>
   <string name="statistics">Statistics</string>
-  <string name="exit">Quit</string>
+  <string name="continueGame">Continue</string>
   <string name="invalidInput">Incorrect values</string>
   <string name="invalidSudoku">Invalid sudoku</string>
   <string name="congratulations">Solved!</string>

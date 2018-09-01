@@ -38,7 +38,7 @@
     <item name="android:layout_marginBottom">@dimen/default_layout_margin</item>
     <item name="android:gravity">center</item>
   </style>
-  <style name="mainMenu">
+  <style name="menu">
     <item name="android:background">@drawable/calculate_button</item>
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">wrap_content</item>

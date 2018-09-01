@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
 import maksim_huretski.sudoku.calculation.Calc;
@@ -19,8 +20,7 @@ public class Calculator extends Screen {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         setContentView(R.layout.activity_calculator);
         setBlockIDs();
-        super.possibleValues = findViewById(R.id.possibleValuesMain);
-        super.possibleValues.setVisibility(View.INVISIBLE);
+        hidePossibleValues();
     }
 
     @Override
@@ -81,6 +81,23 @@ public class Calculator extends Screen {
             if (isCorrectSudoku) findSolution(solver, iv);
             else highlightIncorrectBlocks(iv);
         } else resetSudoku();
+    }
+
+    private void resetSudoku() {
+        isSolved = false;
+        isClickable = true;
+        highlighted = false;
+        TextView messages = findViewById(R.id.messageAtTop);
+        messages.setText(R.string.vDefault);
+        Button calc = findViewById(R.id.calculate);
+        calc.setText(R.string.calculate);
+        for (int[] cells : CELLS) {
+            for (int cell : cells) {
+                this.cell = findViewById(cell);
+                this.cell.setTypeface(null, Typeface.NORMAL);
+                this.cell.setText(R.string.vDefault);
+            }
+        }
     }
 
     @Override

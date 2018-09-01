@@ -1,6 +1,5 @@
 package maksim_huretski.sudoku.parts;
 
-import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +23,7 @@ public abstract class Screen extends AppCompatActivity {
     protected boolean isClickable = true;
     protected boolean isCorrectSudoku = true;
     protected boolean highlighted = false;
-    protected boolean isFirstTime = true;
+    boolean isFirstTime = true;
     protected final int[][] CELLS = new int[][]{
             {R.id.b00, R.id.b01, R.id.b02, R.id.b03, R.id.b04, R.id.b05, R.id.b06, R.id.b07, R.id.b08},
             {R.id.b10, R.id.b11, R.id.b12, R.id.b13, R.id.b14, R.id.b15, R.id.b16, R.id.b17, R.id.b18},
@@ -121,23 +120,6 @@ public abstract class Screen extends AppCompatActivity {
         }
     }
 
-    protected void resetSudoku() {
-        isSolved = false;
-        isClickable = true;
-        highlighted = false;
-        TextView messages = findViewById(R.id.messageAtTop);
-        messages.setText(R.string.vDefault);
-        Button calc = findViewById(R.id.calculate);
-        calc.setText(R.string.calculate);
-        for (int[] cells : CELLS) {
-            for (int cell : cells) {
-                this.cell = findViewById(cell);
-                this.cell.setTypeface(null, Typeface.NORMAL);
-                this.cell.setText(R.string.vDefault);
-            }
-        }
-    }
-
     protected void highlightedStyle(int id) {
         this.cell = findViewById(id);
         if (cell.getTag().equals(getResources().getString(R.string.light)))
@@ -162,6 +144,11 @@ public abstract class Screen extends AppCompatActivity {
 
     private void showSolution() {
         new BoardAnimationCalc().setCellsShown(this, CELLS, sudoku);
+    }
+
+    protected void hidePossibleValues(){
+        possibleValues = findViewById(R.id.possibleValuesMain);
+        possibleValues.setVisibility(View.INVISIBLE);
     }
 
 }
