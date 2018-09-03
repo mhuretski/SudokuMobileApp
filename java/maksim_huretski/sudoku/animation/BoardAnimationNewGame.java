@@ -6,11 +6,10 @@ import maksim_huretski.sudoku.R;
 public class BoardAnimationNewGame extends BoardAnimationCalc {
 
     @Override
-    public boolean setCellsShown(final Activity game, final int[][] CELLS, final int[][] sudoku) {
+    public void setCellsShown(final Activity game, final int[][] CELLS, final int[][] sudoku) {
         super.delayBeforeStart = 1100;
         sudokuToString(sudoku);
         firstAnimationFromLeftToRight(game, CELLS, sudoku);
-        return false;
     }
 
     @Override

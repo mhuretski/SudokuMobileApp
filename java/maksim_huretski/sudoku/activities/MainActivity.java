@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private MenuAnimation menuAnimation;
     private int difficultyLevel;
-    private boolean isSavedSudoku = false;
     private View continueBtn;
 
     @Override
@@ -22,7 +21,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         setContentView(R.layout.activity_main);
-        hideContinue();
         setMenuAnimation();
         getDifficulty();
     }
@@ -30,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        if (isSavedSudoku) showContinue();
+        isSavedProgress();
     }
 
     @Override
@@ -87,7 +85,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void showMenu() {
         menuAnimation.hide(R.id.menuDifficulty, false, this);
         menuAnimation.show(R.id.mainMenuButtons, this);
-        isSavedSudoku = true;
+    }
+
+    private void isSavedProgress() {
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.savedGame), Context.MODE_PRIVATE);
+        boolean isSolved = sharedPref.getBoolean(getString(R.string.savedGame), true);
+        if (!isSolved) showContinue();
+        else hideContinue();
     }
 
     private void showContinue() {
@@ -100,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         continueBtn.setVisibility(View.GONE);
     }
 
-    private void setMenuAnimation(){
+    private void setMenuAnimation() {
         menuAnimation = new MenuAnimation(this);
         menuAnimation.hide(R.id.menuDifficulty, true, this);
         menuAnimation.hide(R.id.mainMenuButtons, true, this);

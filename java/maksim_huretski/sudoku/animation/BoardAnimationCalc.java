@@ -16,11 +16,10 @@ public class BoardAnimationCalc {
     private final Handler handler = new Handler();
 
     @SuppressWarnings("SameReturnValue")
-    public boolean setCellsShown(final Activity game, final int[][] CELLS, final int[][] sudoku) {
+    public void setCellsShown(final Activity game, final int[][] CELLS, final int[][] sudoku) {
         sudokuToString(sudoku);
         firstAnimationFromLeftToRight(game, CELLS, sudoku);
         congratulationsMessage(game);
-        return false;
     }
 
     void firstAnimationFromLeftToRight(final Activity game, final int[][] CELLS, final int[][] sudoku) {

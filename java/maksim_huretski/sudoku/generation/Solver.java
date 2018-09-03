@@ -3,20 +3,21 @@ package maksim_huretski.sudoku.generation;
 
 import maksim_huretski.sudoku.calculation.Calc;
 
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 
 public class Solver extends Calc {
 
     private final int LENGTH = 9;
-    private int sudoku[][];
+    private final int sudoku[][] = new int[9][9];
     private boolean[][] rows;
     private boolean[][] columns;
     private boolean[][] blocks;
-    private long startTime;
 
     @Override
     public void init(int[][] sudoku, int[][] blockIDs) {
-        this.sudoku = sudoku;
+        for (int i = 0; i < 9; i++) {
+            this.sudoku[i] = sudoku[i].clone();
+        }
         rows = new boolean[LENGTH][LENGTH];
         columns = new boolean[LENGTH][LENGTH];
         blocks = new boolean[LENGTH][LENGTH];
@@ -32,10 +33,16 @@ public class Solver extends Calc {
 
     @Override
     public boolean calculateSudoku() {
-        startTime = System.nanoTime();
+        FutureTask<Boolean> calculation = new FutureTask<>(new Callable<Boolean>() {
+            @Override
+            public Boolean call() {
+                return solve(0, 0);
+            }
+        });
+        new Thread(calculation).start();
         try {
-            return solve(0, 0);
-        } catch (TimeoutException e) {
+            return calculation.get(300, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
             return false;
         }
     }
@@ -53,9 +60,7 @@ public class Solver extends Calc {
         return blockRow * block + blockColumn;
     }
 
-    private boolean solve(int i, int j) throws TimeoutException {
-        if (System.nanoTime() - startTime > 300000000)
-            throw new TimeoutException();
+    private boolean solve(int i, int j) {
         if (i == LENGTH) {
             i = 0;
             if (++j == LENGTH) {

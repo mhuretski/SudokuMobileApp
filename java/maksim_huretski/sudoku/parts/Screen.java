@@ -23,7 +23,6 @@ public abstract class Screen extends AppCompatActivity {
     protected boolean isClickable = true;
     protected boolean isCorrectSudoku = true;
     protected boolean highlighted = false;
-    boolean isFirstTime = true;
     protected final int[][] CELLS = new int[][]{
             {R.id.b00, R.id.b01, R.id.b02, R.id.b03, R.id.b04, R.id.b05, R.id.b06, R.id.b07, R.id.b08},
             {R.id.b10, R.id.b11, R.id.b12, R.id.b13, R.id.b14, R.id.b15, R.id.b16, R.id.b17, R.id.b18},

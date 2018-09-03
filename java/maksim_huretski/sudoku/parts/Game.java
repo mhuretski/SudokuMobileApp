@@ -1,6 +1,8 @@
 package maksim_huretski.sudoku.parts;
 
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -37,19 +39,20 @@ public abstract class Game extends Screen {
         setInitialSudoku();
         hidePossibleValues();
         setBlockIDs();
+        new BoardAnimationNewGame().setCellsShown(this, CELLS, sudoku);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveProgress();
     }
 
     @Override
     protected void onDestroy() {
-        updateDataInDB();
         super.onDestroy();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (isFirstTime)
-            isFirstTime = new BoardAnimationNewGame().setCellsShown(this, CELLS, sudoku);
+        if (!isSolved)
+            updateDataInDB();
     }
 
     @Override
@@ -181,6 +184,13 @@ public abstract class Game extends Screen {
         }
         database.close();
         sudokuSaver.close();
+    }
+
+    private void saveProgress() {
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.savedGame), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(getString(R.string.savedGame), isSolved);
+        editor.apply();
     }
 
 }
