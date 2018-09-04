@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private MenuAnimation menuAnimation;
     private int difficultyLevel;
-    private View continueBtn;
+    private View button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.hard:
             case R.id.normal:
             case R.id.easy:
+                hideContinue();
                 setDifficulty(view);
                 showMenu();
                 break;
@@ -95,13 +96,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showContinue() {
-        continueBtn = findViewById(R.id.continueGame);
-        continueBtn.setVisibility(View.VISIBLE);
+        button = findViewById(R.id.continueGame);
+        button.setVisibility(View.VISIBLE);
+        button = findViewById(R.id.tempoBlock);
+        button.setVisibility(View.GONE);
     }
 
     private void hideContinue() {
-        continueBtn = findViewById(R.id.continueGame);
-        continueBtn.setVisibility(View.GONE);
+        button = findViewById(R.id.continueGame);
+        button.setVisibility(View.GONE);
+        button = findViewById(R.id.tempoBlock);
+        button.setVisibility(View.INVISIBLE);
     }
 
     private void setMenuAnimation() {

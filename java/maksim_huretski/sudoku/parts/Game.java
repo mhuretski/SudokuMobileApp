@@ -3,6 +3,7 @@ package maksim_huretski.sudoku.parts;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -49,8 +50,8 @@ public abstract class Game extends Screen {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
         if (!isSolved) updateDataInDB();
     }
 
@@ -160,6 +161,7 @@ public abstract class Game extends Screen {
                 showGameButton();
                 isSolved = true;
                 isClickable = false;
+                updateStatistics();
             }
         }
     }
@@ -196,6 +198,30 @@ public abstract class Game extends Screen {
     protected void hideGameButton() {
         Button newGame = findViewById(R.id.gameButton);
         newGame.setVisibility(View.GONE);
+    }
+
+    private void updateStatistics() {
+        SudokuSaver statistics = new SudokuSaver(this);
+        SQLiteDatabase database = statistics.getWritableDatabase();
+
+        Cursor cursor = database.query(
+                SudokuSaver.TABLE_STATS,
+                new String[]{SudokuSaver.KEY_SOLVED},
+                SudokuSaver.KEY_ID + " = ?",
+                new String[]{String.valueOf(difficulty)},
+                null,
+                null,
+                null);
+
+        if (cursor.moveToFirst()) {
+            int result = cursor.getInt(cursor.getColumnIndex(SudokuSaver.KEY_SOLVED)) + 1;
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(SudokuSaver.KEY_SOLVED, result);
+            database.update(SudokuSaver.TABLE_STATS, contentValues, "_id=" + difficulty, null);
+        }
+        cursor.close();
+        database.close();
+        statistics.close();
     }
 
 }

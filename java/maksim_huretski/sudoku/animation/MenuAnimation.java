@@ -9,7 +9,7 @@ public class MenuAnimation {
 
     private final int heightPixels;
     private final Handler handler = new Handler();
-    private final int SLOW = 700;
+    private final int SLOW = 500;
 
     public MenuAnimation(Activity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
