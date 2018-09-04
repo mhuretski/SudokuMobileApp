@@ -36,16 +36,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (view.getId()) {
             case R.id.newGame:
-                intent = new Intent(MainActivity.this, NewGame.class);
+                intent = new Intent(this, NewGame.class);
                 intent.putExtra(getString(R.string.difficultyLevel), difficultyLevel);
                 startActivity(intent);
                 break;
             case R.id.continueGame:
-                intent = new Intent(MainActivity.this, ContinueGame.class);
+                intent = new Intent(this, ContinueGame.class);
                 startActivity(intent);
                 break;
             case R.id.sudokuSolver:
-                intent = new Intent(MainActivity.this, Calculator.class);
+                intent = new Intent(this, Calculator.class);
                 startActivity(intent);
                 break;
             case R.id.difficulty:

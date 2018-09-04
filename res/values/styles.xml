@@ -28,9 +28,9 @@
     <item name="android:layout_marginStart">@dimen/default_block_margin</item>
     <item name="android:layout_marginEnd">@dimen/default_block_margin</item>
   </style>
-  <style name="calculate">
+  <style name="gameButton">
     <item name="android:background">@drawable/calculate_button</item>
-    <item name="android:onClick">onClickCalculate</item>
+    <item name="android:onClick">onClickGameButton</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
     <item name="android:paddingStart">@dimen/calc_padding</item>

@@ -1,14 +1,13 @@
 package maksim_huretski.sudoku.parts;
 
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
-import maksim_huretski.sudoku.animation.BoardAnimationCalc;
 import maksim_huretski.sudoku.calculation.Calc;
 import maksim_huretski.sudoku.calculation.BlockIDs;
-import maksim_huretski.sudoku.validation.Checker;
 import maksim_huretski.sudoku.validation.InputValidator;
 
 import java.util.Set;
@@ -35,6 +34,15 @@ public abstract class Screen extends AppCompatActivity {
             {R.id.b80, R.id.b81, R.id.b82, R.id.b83, R.id.b84, R.id.b85, R.id.b86, R.id.b87, R.id.b88}
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+        setContentView(R.layout.activity_game);
+        hidePossibleValues();
+        setBlockIDs();
+    }
+
     @SuppressWarnings("unused")
     protected abstract void onClickCell(View view);
 
@@ -42,7 +50,12 @@ public abstract class Screen extends AppCompatActivity {
     protected abstract void onClickValue(View view);
 
     @SuppressWarnings("unused")
+    protected abstract void onClickGameButton(View view);
+
+    @SuppressWarnings("unused")
     protected abstract void findSolution(Calc calc, InputValidator iv);
+
+    protected abstract void showAnimatedValues(int[][] sudoku);
 
     protected void getUserValues() {
         TextView cell;
@@ -107,18 +120,6 @@ public abstract class Screen extends AppCompatActivity {
         }
     }
 
-    protected void isDone() {
-        Checker checker = new Checker();
-        checker.checkSudoku(sudoku, blockIDs);
-        if (checker.isDone()) {
-            Button calc = findViewById(R.id.calculate);
-            calc.setText(R.string.reset);
-            isSolved = true;
-            isClickable = false;
-            showSolution();
-        }
-    }
-
     protected void highlightedStyle(int id) {
         this.cell = findViewById(id);
         if (cell.getTag().equals(getResources().getString(R.string.light)))
@@ -135,17 +136,13 @@ public abstract class Screen extends AppCompatActivity {
             cell.setBackgroundResource(R.drawable.dark_block);
     }
 
-    protected void setBlockIDs() {
+    private void setBlockIDs() {
         BlockIDs blockIDs = new BlockIDs();
         blockIDs.init();
         this.blockIDs = blockIDs.getBlockIDs();
     }
 
-    private void showSolution() {
-        new BoardAnimationCalc().setCellsShown(this, CELLS, sudoku);
-    }
-
-    protected void hidePossibleValues(){
+    private void hidePossibleValues(){
         possibleValues = findViewById(R.id.possibleValuesMain);
         possibleValues.setVisibility(View.INVISIBLE);
     }

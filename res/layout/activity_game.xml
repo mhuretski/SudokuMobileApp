@@ -80,7 +80,16 @@
     app:layout_constraintTop_toBottomOf="@+id/table"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/gameButton"
     android:name="maksim_huretski.sudoku.parts.PossibleValues"
     android:id="@+id/possibleValuesMain"/>
+
+  <Button
+    style="@style/gameButton"
+    android:id="@+id/gameButton"
+    android:text="@string/vDefault"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

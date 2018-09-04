@@ -1,15 +1,16 @@
 package maksim_huretski.sudoku.activities;
 
-import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
+import maksim_huretski.sudoku.animation.board.AnimCalc;
 import maksim_huretski.sudoku.calculation.Calc;
 import maksim_huretski.sudoku.generation.Solver;
 import maksim_huretski.sudoku.parts.Screen;
+import maksim_huretski.sudoku.validation.Checker;
 import maksim_huretski.sudoku.validation.InputValidator;
 
 public class Calculator extends Screen {
@@ -17,10 +18,9 @@ public class Calculator extends Screen {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-        setContentView(R.layout.activity_calculator);
-        setBlockIDs();
-        hidePossibleValues();
+        Button calc = findViewById(R.id.gameButton);
+        calc.setText(R.string.calculate);
+        calc.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Calculator extends Screen {
     }
 
     @SuppressWarnings("unused") /*It's used. The value is set in styles.*/
-    public void onClickCalculate(View view) {
+    public void onClickGameButton(View view) {
         if (!isSolved) {
             if (highlighted) {
                 highlighted = false;
@@ -89,7 +89,7 @@ public class Calculator extends Screen {
         highlighted = false;
         TextView messages = findViewById(R.id.messageAtTop);
         messages.setText(R.string.vDefault);
-        Button calc = findViewById(R.id.calculate);
+        Button calc = findViewById(R.id.gameButton);
         calc.setText(R.string.calculate);
         for (int[] cells : CELLS) {
             for (int cell : cells) {
@@ -113,6 +113,22 @@ public class Calculator extends Screen {
             highlighted = true;
             ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.invalidSudoku);
         }
+    }
+
+    private void isDone() {
+        Checker checker = new Checker();
+        checker.checkSudoku(sudoku, blockIDs);
+        if (checker.isDone()) {
+            Button calc = findViewById(R.id.gameButton);
+            calc.setText(R.string.reset);
+            isSolved = true;
+            isClickable = false;
+            showAnimatedValues(sudoku);
+        }
+    }
+
+    protected void showAnimatedValues(int[][] sudoku) {
+        new AnimCalc().setCellsShown(this, CELLS, sudoku);
     }
 
 }

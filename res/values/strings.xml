@@ -30,4 +30,5 @@
   <string name="difficultyLevel">dif</string>
   <string name="savedGame">saved</string>
   <string name="savedProgressDifficulty">savedDif</string>
+  <string name="mainMenu">Main menu</string>
 </resources>

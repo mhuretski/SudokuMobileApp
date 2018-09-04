@@ -3,21 +3,22 @@ package maksim_huretski.sudoku.parts;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
-import maksim_huretski.sudoku.animation.BoardAnimationNewGame;
 import maksim_huretski.sudoku.calculation.Calc;
 import maksim_huretski.sudoku.calculation.HintHelper;
 import maksim_huretski.sudoku.database.SudokuSaver;
 import maksim_huretski.sudoku.validation.Checker;
 import maksim_huretski.sudoku.validation.InputValidator;
 
+@SuppressWarnings("unused")
 public abstract class Game extends Screen {
 
+    protected int difficulty;
     private final HintHelper hintHelper = new HintHelper();
     protected final boolean[][] isInitialSudoku = new boolean[9][9];
 /* TODO uncomment when hints are refactored
@@ -31,15 +32,14 @@ public abstract class Game extends Screen {
     @SuppressWarnings("unused")
     protected abstract void setInitialStyle();
 
+    protected abstract void showGameButton();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-        setContentView(R.layout.activity_game);
+        hideGameButton();
         setInitialSudoku();
-        hidePossibleValues();
-        setBlockIDs();
-        new BoardAnimationNewGame().setCellsShown(this, CELLS, sudoku);
+        showAnimatedValues(sudoku);
     }
 
     @Override
@@ -51,8 +51,7 @@ public abstract class Game extends Screen {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (!isSolved)
-            updateDataInDB();
+        if (!isSolved) updateDataInDB();
     }
 
     @Override
@@ -106,7 +105,6 @@ public abstract class Game extends Screen {
             }
         }
         for (int k = 0; k < 9; k++) {
-            System.out.println(sudokuPossibleValues[row][column][1][k]);
             if (sudokuPossibleValues[row][column][1][k] % 2 != 0) {
                 possibleValue = findViewById(possibleValuesNumbers[k + 1]);
                 possibleValue.setVisibility(View.INVISIBLE);
@@ -159,6 +157,7 @@ public abstract class Game extends Screen {
             checker.checkSudoku(sudoku, blockIDs);
             if (checker.isDone()) {
                 ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.congratulations);
+                showGameButton();
                 isSolved = true;
                 isClickable = false;
             }
@@ -190,7 +189,13 @@ public abstract class Game extends Screen {
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.savedGame), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(getString(R.string.savedGame), isSolved);
+        editor.putInt(getString(R.string.savedProgressDifficulty), difficulty);
         editor.apply();
+    }
+
+    protected void hideGameButton() {
+        Button newGame = findViewById(R.id.gameButton);
+        newGame.setVisibility(View.GONE);
     }
 
 }

@@ -1,11 +1,11 @@
-package maksim_huretski.sudoku.animation;
+package maksim_huretski.sudoku.animation.board;
 
 import android.app.Activity;
 import android.os.Handler;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
 
-public class BoardAnimationCalc {
+public class AnimCalc {
 
     TextView sudokuCell;
     int delayBeforeStart = 100;
