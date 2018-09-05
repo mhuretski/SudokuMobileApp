@@ -1,2 +1,2 @@
 # Mobile application to solve sudoku
-Android 7+
+Android 4+ support

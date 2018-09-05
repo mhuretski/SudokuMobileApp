@@ -5,16 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import maksim_huretski.sudoku.R;
-import maksim_huretski.sudoku.animation.MenuAnimation;
+import maksim_huretski.sudoku.animation.menu.MenuActions;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends MenuActions implements View.OnClickListener {
 
-    private MenuAnimation menuAnimation;
     private int difficultyLevel;
-    private View button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +46,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.difficulty:
+                hideMenu();
                 showDifficulty();
                 break;
             case R.id.insane:
             case R.id.hard:
             case R.id.normal:
             case R.id.easy:
-                hideContinue();
                 setDifficulty(view);
+                isSavedProgress();
+                hideDifficulty();
                 showMenu();
+                break;
+            case R.id.statistics:
+                System.out.println("a");
                 break;
             default:
                 break;
@@ -78,42 +80,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         difficultyLevel = sharedPref.getInt(getString(R.string.difficultyLevel), R.id.normal);
     }
 
-    private void showDifficulty() {
-        menuAnimation.hide(R.id.mainMenuButtons, false, this);
-        menuAnimation.show(R.id.menuDifficulty, this);
-    }
-
-    private void showMenu() {
-        menuAnimation.hide(R.id.menuDifficulty, false, this);
-        menuAnimation.show(R.id.mainMenuButtons, this);
-    }
-
     private void isSavedProgress() {
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.savedGame), Context.MODE_PRIVATE);
         boolean isSolved = sharedPref.getBoolean(getString(R.string.savedGame), true);
-        if (!isSolved) showContinue();
+        int savedDifficulty = sharedPref.getInt(getString(R.string.savedProgressDifficulty), R.id.normal);
+        if (!isSolved && savedDifficulty == difficultyLevel) showContinue();
         else hideContinue();
-    }
-
-    private void showContinue() {
-        button = findViewById(R.id.continueGame);
-        button.setVisibility(View.VISIBLE);
-        button = findViewById(R.id.tempoBlock);
-        button.setVisibility(View.GONE);
-    }
-
-    private void hideContinue() {
-        button = findViewById(R.id.continueGame);
-        button.setVisibility(View.GONE);
-        button = findViewById(R.id.tempoBlock);
-        button.setVisibility(View.INVISIBLE);
-    }
-
-    private void setMenuAnimation() {
-        menuAnimation = new MenuAnimation(this);
-        menuAnimation.hide(R.id.menuDifficulty, true, this);
-        menuAnimation.hide(R.id.mainMenuButtons, true, this);
-        menuAnimation.show(R.id.mainMenuButtons, this);
     }
 
 }

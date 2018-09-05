@@ -1,17 +1,17 @@
-package maksim_huretski.sudoku.animation;
+package maksim_huretski.sudoku.animation.menu;
 
 import android.app.Activity;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
 
-public class MenuAnimation {
+class MenuAnimation {
 
     private final int heightPixels;
     private final Handler handler = new Handler();
     private final int SLOW = 500;
 
-    public MenuAnimation(Activity activity) {
+    MenuAnimation(Activity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         heightPixels = (int) (displayMetrics.heightPixels * .7);

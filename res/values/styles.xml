@@ -2,7 +2,6 @@
   <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
     <item name="windowActionBar">false</item>
     <item name="android:windowNoTitle">true</item>
-    <item name="android:colorPrimaryDark">@color/black</item>
   </style>
   <style name="possibleValuesStyle" parent="blocks">
     <item name="android:background">@drawable/possible_values_drawable</item>
@@ -25,16 +24,16 @@
     <item name="android:gravity">center</item>
     <item name="android:layout_width">@dimen/layout_width</item>
     <item name="android:layout_height">@dimen/layout_height</item>
-    <item name="android:layout_marginStart">@dimen/default_block_margin</item>
-    <item name="android:layout_marginEnd">@dimen/default_block_margin</item>
+    <item name="android:layout_marginLeft">@dimen/default_block_margin</item>
+    <item name="android:layout_marginRight">@dimen/default_block_margin</item>
   </style>
   <style name="gameButton">
     <item name="android:background">@drawable/calculate_button</item>
     <item name="android:onClick">onClickGameButton</item>
-    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:paddingStart">@dimen/calc_padding</item>
-    <item name="android:paddingEnd">@dimen/calc_padding</item>
+    <item name="android:layout_marginLeft">@dimen/main_menu_margin</item>
+    <item name="android:layout_marginRight">@dimen/main_menu_margin</item>
     <item name="android:layout_marginBottom">@dimen/default_layout_margin</item>
     <item name="android:gravity">center</item>
   </style>
@@ -42,8 +41,8 @@
     <item name="android:background">@drawable/calculate_button</item>
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_marginStart">@dimen/main_menu_margin</item>
-    <item name="android:layout_marginEnd">@dimen/main_menu_margin</item>
+    <item name="android:layout_marginLeft">@dimen/main_menu_margin</item>
+    <item name="android:layout_marginRight">@dimen/main_menu_margin</item>
     <item name="android:layout_marginBottom">@dimen/main_menu_bottom_margin
     </item>
     <item name="android:gravity">center</item>

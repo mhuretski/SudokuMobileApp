@@ -7,4 +7,6 @@
   <color name="other_dark">#9eadb9</color>
   <color name="other_light">#a7c1d4</color>
   <color name="other_highlighted">#bfd0de</color>
+  <color name="background_top">#537895</color>
+  <color name="background_bottom">#09203f</color>
 </resources>

@@ -2,6 +2,7 @@ package maksim_huretski.sudoku.animation.board;
 
 import android.app.Activity;
 import android.os.Handler;
+import android.widget.Button;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
 
@@ -9,9 +10,10 @@ public class AnimCalc {
 
     TextView sudokuCell;
     int delayBeforeStart = 100;
+    boolean isCalculation = true;
     private final int delay = 50;
     private final int LENGTH = 9;
-    private final int delayUntilFirstFinished = (LENGTH - 1) * delay;
+    private final int delayUntilPreviousFinished = (LENGTH - 1) * delay;
     final String[][] sudokuValues = new String[9][9];
     private final Handler handler = new Handler();
 
@@ -19,10 +21,9 @@ public class AnimCalc {
     public void setCellsShown(final Activity game, final int[][] CELLS, final int[][] sudoku) {
         sudokuToString(sudoku);
         firstAnimationFromLeftToRight(game, CELLS, sudoku);
-        congratulationsMessage(game);
     }
 
-    void firstAnimationFromLeftToRight(final Activity game, final int[][] CELLS, final int[][] sudoku) {
+    private void firstAnimationFromLeftToRight(final Activity game, final int[][] CELLS, final int[][] sudoku) {
         for (int i = 0; i < LENGTH; i++) {
             final int a = i;
             handler.postDelayed(new Runnable() {
@@ -59,8 +60,9 @@ public class AnimCalc {
                             }
                         }, delay * partialDelay);
                     }
+                    if (isCalculation) congratulationsMessage(game);
                 }
-            }, delayUntilFirstFinished);
+            }, delayUntilPreviousFinished);
         }
     }
 
@@ -82,16 +84,16 @@ public class AnimCalc {
     }
 
     private void congratulationsMessage(final Activity game) {
-        int delayAfterAll = delayBeforeStart + delayUntilFirstFinished + (LENGTH + 2) * delay;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 ((TextView) game.findViewById(R.id.messageAtTop)).setText(R.string.congratulations);
+                ((Button) game.findViewById(R.id.gameButton)).setText(R.string.reset);
             }
-        }, delayAfterAll);
+        }, delayUntilPreviousFinished + delay);
     }
 
-    void sudokuToString(final int[][] sudoku) {
+    private void sudokuToString(final int[][] sudoku) {
         for (int i = 0; i < sudoku.length; i++) {
             for (int j = 0; j < sudoku[i].length; j++) {
                 sudokuValues[i][j] = String.valueOf(sudoku[i][j]);

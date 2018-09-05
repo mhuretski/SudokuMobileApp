@@ -119,8 +119,6 @@ public class Calculator extends Screen {
         Checker checker = new Checker();
         checker.checkSudoku(sudoku, blockIDs);
         if (checker.isDone()) {
-            Button calc = findViewById(R.id.gameButton);
-            calc.setText(R.string.reset);
             isSolved = true;
             isClickable = false;
             showAnimatedValues(sudoku);

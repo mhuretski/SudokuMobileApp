@@ -8,9 +8,9 @@ public class AnimNewGame extends AnimCalc {
 
     @Override
     public void setCellsShown(final Activity game, final int[][] CELLS, final int[][] sudoku) {
-        super.delayBeforeStart = 1100;
-        sudokuToString(sudoku);
-        firstAnimationFromLeftToRight(game, CELLS, sudoku);
+        super.delayBeforeStart = 1000;
+        super.isCalculation = false;
+        super.setCellsShown(game, CELLS, sudoku);
     }
 
     @Override
