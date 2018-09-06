@@ -9,7 +9,7 @@ import maksim_huretski.sudoku.R;
 public class SudokuSaver extends SQLiteOpenHelper {
 
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "sudokuDb";
     public static final String KEY_ID = "_id";
 

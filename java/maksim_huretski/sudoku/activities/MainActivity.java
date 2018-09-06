@@ -41,6 +41,8 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
         Intent intent;
         switch (view.getId()) {
             case R.id.newGame:
+                if (difficultyLevel == 0)
+                    setDifficulty(findViewById(R.id.normal));
                 intent = new Intent(this, NewGame.class);
                 intent.putExtra(getString(R.string.difficultyLevel), difficultyLevel);
                 startActivity(intent);
@@ -92,7 +94,17 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
 
     private void getDifficulty() {
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        difficultyLevel = sharedPref.getInt(getString(R.string.difficultyLevel), R.id.normal);
+        if (sharedPref.contains(getString(R.string.difficultyLevel))) {
+            difficultyLevel = sharedPref.getInt(getString(R.string.difficultyLevel), R.id.normal);
+            boolean isValid = false;
+            for (int difficulty[] : difficulties) {
+                if (difficultyLevel == difficulty[0]) {
+                    isValid = true;
+                    break;
+                }
+            }
+            if (!isValid) difficultyLevel = 0;
+        } else difficultyLevel = 0;
     }
 
     private void isSavedProgress() {
@@ -134,7 +146,7 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
             int timesSolved = cursor.getColumnIndex(SudokuSaver.KEY_SOLVED);
             do {
                 for (int difficulty[] : difficulties) {
-                    if (difficulty[0] == cursor.getInt(id)){
+                    if (difficulty[0] == cursor.getInt(id)) {
                         stats = findViewById(difficulty[1]);
                         stats.setText(String.valueOf(cursor.getInt(timesSolved)));
                         break;

@@ -10,15 +10,19 @@ public class AnimCalc {
 
     TextView sudokuCell;
     int delayBeforeStart = 100;
-    boolean isCalculation = true;
     private final int delay = 50;
     private final int LENGTH = 9;
     private final int delayUntilPreviousFinished = (LENGTH - 1) * delay;
     final String[][] sudokuValues = new String[9][9];
     private final Handler handler = new Handler();
 
-    @SuppressWarnings("SameReturnValue")
     public void setCellsShown(final Activity game, final int[][] CELLS, final int[][] sudoku) {
+        sudokuToString(sudoku);
+        animate(game, CELLS, sudoku);
+        congratulationsMessage(game);
+    }
+
+    void animate(final Activity game, final int[][] CELLS, final int[][] sudoku){
         sudokuToString(sudoku);
         firstAnimationFromLeftToRight(game, CELLS, sudoku);
     }
@@ -60,7 +64,6 @@ public class AnimCalc {
                             }
                         }, delay * partialDelay);
                     }
-                    if (isCalculation) congratulationsMessage(game);
                 }
             }, delayUntilPreviousFinished);
         }
@@ -90,7 +93,7 @@ public class AnimCalc {
                 ((TextView) game.findViewById(R.id.messageAtTop)).setText(R.string.congratulations);
                 ((Button) game.findViewById(R.id.gameButton)).setText(R.string.reset);
             }
-        }, delayUntilPreviousFinished + delay);
+        }, delayUntilPreviousFinished + delay * 10 + delayBeforeStart);
     }
 
     private void sudokuToString(final int[][] sudoku) {
