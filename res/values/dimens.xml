@@ -7,11 +7,15 @@
   <dimen name="layout_width">0dp</dimen>
   <dimen name="layout_height">0dp</dimen>
   <dimen name="highlighted_radius">11dp</dimen>
+  <dimen name="stats_header">30sp</dimen>
+  <dimen name="stats_rows">24sp</dimen>
+  <dimen name="stats_radius">20dp</dimen>
   <dimen name="radius">10dp</dimen>
   <dimen name="gradient_radius">23dp</dimen>
   <dimen name="message_text">20sp</dimen>
   <dimen name="cell_text">22sp</dimen>
-  <dimen name="calc_padding">20dp</dimen>
   <dimen name="main_menu_margin">70dp</dimen>
+  <dimen name="stats_margin">30dp</dimen>
   <dimen name="main_menu_bottom_margin">20dp</dimen>
+  <dimen name="stats_percent_padding">0.22</dimen>
 </resources>

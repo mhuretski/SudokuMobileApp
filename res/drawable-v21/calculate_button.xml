@@ -9,7 +9,7 @@
 <item android:id="@android:id/background">
   <shape android:shape="rectangle">
     <gradient
-      android:angle="90"
+      android:angle="@integer/straight_angle"
       android:endColor="@color/other_light"
       android:startColor="@color/other_dark"
       android:type="linear" />

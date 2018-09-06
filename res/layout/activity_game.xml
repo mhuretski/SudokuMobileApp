@@ -33,7 +33,7 @@
     <fragment
       android:layout_height="wrap_content"
       android:layout_width="match_parent"
-      android:name="maksim_huretski.sudoku.parts.Container1of3"
+      android:name="maksim_huretski.sudoku.parts.game.Container1of3"
       android:id="@+id/sudoku1of3Main"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintRight_toRightOf="parent"
@@ -43,7 +43,7 @@
     <fragment
       android:layout_height="wrap_content"
       android:layout_width="match_parent"
-      android:name="maksim_huretski.sudoku.parts.Container2of3"
+      android:name="maksim_huretski.sudoku.parts.game.Container2of3"
       android:id="@+id/sudoku2of3Main"
       app:layout_constraintTop_toBottomOf="@+id/sudoku1of3Main"
       app:layout_constraintRight_toRightOf="parent"
@@ -53,7 +53,7 @@
     <fragment
       android:layout_height="wrap_content"
       android:layout_width="match_parent"
-      android:name="maksim_huretski.sudoku.parts.Container3of3"
+      android:name="maksim_huretski.sudoku.parts.game.Container3of3"
       android:id="@+id/sudoku3of3Main"
       app:layout_constraintTop_toBottomOf="@+id/sudoku2of3Main"
       app:layout_constraintRight_toRightOf="parent"
@@ -70,7 +70,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintBottom_toTopOf="@+id/gameButton"
-    android:name="maksim_huretski.sudoku.parts.PossibleValues"
+    android:name="maksim_huretski.sudoku.parts.game.PossibleValues"
     android:id="@+id/possibleValuesMain"/>
 
   <Button

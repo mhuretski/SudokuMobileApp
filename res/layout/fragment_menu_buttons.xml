@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/mainMenuButtonsLayout"
+              tools:context=".parts.menu.MenuButtons">
+
+  <Button
+    style="@style/menu"
+    android:id="@+id/continueGame"
+    android:text="@string/continueGame"/>
+  <Button
+    style="@style/menu"
+    android:id="@+id/newGame"
+    android:text="@string/newGame"/>
+  <Button
+    style="@style/menu"
+    android:id="@+id/difficulty"
+    android:text="@string/difficulty"/>
+  <Button
+    style="@style/menu"
+    android:id="@+id/sudokuSolver"
+    android:text="@string/sudokuSolver"/>
+  <Button
+    style="@style/menu"
+    android:id="@+id/statistics"
+    android:text="@string/statistics"/>
+  <Button
+    android:id="@+id/tempoBlock"
+    android:layout_width="@dimen/zero"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/main_menu_bottom_margin"/>
+
+</LinearLayout>

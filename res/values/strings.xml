@@ -28,7 +28,10 @@
   <string name="normal">Normal</string>
   <string name="easy">Easy</string>
   <string name="difficultyLevel">dif</string>
+  <string name="difficultyStats">Difficulty</string>
+  <string name="solvedStats">Solved</string>
   <string name="savedGame">saved</string>
   <string name="savedProgressDifficulty">savedDif</string>
   <string name="mainMenu">Main menu</string>
+  <string name="back">Back</string>
 </resources>

@@ -22,16 +22,16 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintBottom_toTopOf="@id/mainMenuButtonsFrame"
+      app:layout_constraintBottom_toTopOf="@id/mainMenuFrame"
     />
 
   <fragment
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/mainMenuButtonsFrame"
-    android:name="maksim_huretski.sudoku.parts.MainMenu"
-    android:layout_marginBottom="8dp"
+    android:id="@+id/mainMenuFrame"
+    android:name="maksim_huretski.sudoku.parts.menu.MainMenu"
+    android:layout_marginBottom="@dimen/layout_margin_small"
     app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -50,4 +50,28 @@
     <item name="layout_constraintStart_toStartOf">parent</item>
     <item name="android:onClick">onClick</item>
   </style>
+  <style name="statsRow">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">fill_parent</item>
+  </style>
+  <style name="statsCellDescription" parent="statsRow">
+    <item name="android:textSize">@dimen/stats_rows</item>
+    <item name="android:textColor">@color/background_bottom</item>
+  </style>
+  <style name="statsCellValue" parent="statsRow">
+    <item name="android:gravity">center_horizontal</item>
+    <item name="android:textSize">@dimen/stats_rows</item>
+    <item name="android:textColor">@color/background_bottom</item>
+  </style>
+  <style name="statsPercent">
+    <item name="layout_constraintGuide_percent">@dimen/stats_percent_padding
+    </item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:orientation">vertical</item>
+  </style>
+  <style name="defaultConstraintLayout">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+  </style>
 </resources>

@@ -4,14 +4,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import maksim_huretski.sudoku.R;
 import maksim_huretski.sudoku.animation.menu.MenuActions;
+import maksim_huretski.sudoku.database.SudokuSaver;
 
 public class MainActivity extends MenuActions implements View.OnClickListener {
 
     private int difficultyLevel;
+    private final int[][] difficulties = new int[][]{{R.id.insane, R.id.insaneStat},
+            {R.id.hard, R.id.hardStat},
+            {R.id.normal, R.id.normalStat},
+            {R.id.easy, R.id.easyStat}};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,7 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.difficulty:
+                highlightCurrentDifficulty();
                 hideMenu();
                 showDifficulty();
                 break;
@@ -59,7 +68,13 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
                 showMenu();
                 break;
             case R.id.statistics:
-                System.out.println("a");
+                getStatsFromDB();
+                hideMenu();
+                showStats();
+                break;
+            case R.id.back:
+                showMenu();
+                hideStats();
                 break;
             default:
                 break;
@@ -86,6 +101,50 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
         int savedDifficulty = sharedPref.getInt(getString(R.string.savedProgressDifficulty), R.id.normal);
         if (!isSolved && savedDifficulty == difficultyLevel) showContinue();
         else hideContinue();
+    }
+
+    private void highlightCurrentDifficulty() {
+        TextView difText;
+        for (int difficulty[] : difficulties) {
+            difText = findViewById(difficulty[0]);
+            if (this.difficultyLevel == difficulty[0]) {
+                difText.setTextColor(getResources().getColor(R.color.difficulty));
+            } else
+                difText.setTextColor(getResources().getColor(R.color.black));
+        }
+    }
+
+    private void getStatsFromDB() {
+        SudokuSaver sudokuSaver = new SudokuSaver(this);
+        SQLiteDatabase database = sudokuSaver.getReadableDatabase();
+        Cursor cursor = database.query(SudokuSaver.TABLE_STATS,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+        getData(sudokuSaver, database, cursor);
+    }
+
+    private void getData(SudokuSaver sudokuSaver, SQLiteDatabase database, Cursor cursor) {
+        TextView stats;
+        if (cursor.moveToFirst()) {
+            int id = cursor.getColumnIndex(SudokuSaver.KEY_ID);
+            int timesSolved = cursor.getColumnIndex(SudokuSaver.KEY_SOLVED);
+            do {
+                for (int difficulty[] : difficulties) {
+                    if (difficulty[0] == cursor.getInt(id)){
+                        stats = findViewById(difficulty[1]);
+                        stats.setText(String.valueOf(cursor.getInt(timesSolved)));
+                        break;
+                    }
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        database.close();
+        sudokuSaver.close();
     }
 
 }

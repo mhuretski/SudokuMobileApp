@@ -1,4 +1,4 @@
-package maksim_huretski.sudoku.parts;
+package maksim_huretski.sudoku.parts.game;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 import maksim_huretski.sudoku.R;
 import maksim_huretski.sudoku.calculation.Calc;
 import maksim_huretski.sudoku.calculation.BlockIDs;
-import maksim_huretski.sudoku.validation.InputValidator;
+import maksim_huretski.sudoku.calculation.validation.InputValidator;
 
 import java.util.Set;
 

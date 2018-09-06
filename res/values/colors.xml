@@ -9,4 +9,6 @@
   <color name="other_highlighted">#bfd0de</color>
   <color name="background_top">#537895</color>
   <color name="background_bottom">#09203f</color>
+  <color name="stats">#c6d4dc</color>
+  <color name="difficulty">#44637b</color>
 </resources>

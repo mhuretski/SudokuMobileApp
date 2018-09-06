@@ -4,67 +4,30 @@
              xmlns:app="http://schemas.android.com/apk/res-auto"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".parts.MainMenu">
+             tools:context=".parts.menu.MainMenu">
 
-  <LinearLayout
+  <fragment
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/mainMenuButtons"
-    android:layout_marginBottom="8dp"
-    app:layout_constraintBottom_toBottomOf="parent">
-    <Button
-      style="@style/menu"
-      android:id="@+id/continueGame"
-      android:text="@string/continueGame"/>
-    <Button
-      style="@style/menu"
-      android:id="@+id/newGame"
-      android:text="@string/newGame"/>
-    <Button
-      style="@style/menu"
-      android:id="@+id/difficulty"
-      android:text="@string/difficulty"/>
-    <Button
-      style="@style/menu"
-      android:id="@+id/sudokuSolver"
-      android:text="@string/sudokuSolver"/>
-    <Button
-      style="@style/menu"
-      android:id="@+id/statistics"
-      android:text="@string/statistics"/>
-    <Button
-      android:id="@+id/tempoBlock"
-      android:layout_width="@dimen/zero"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/main_menu_bottom_margin"/>
-  </LinearLayout>
+    android:id="@+id/mainMenuButtonsFrame"
+    android:name="maksim_huretski.sudoku.parts.menu.MenuButtons"
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
-  <LinearLayout
+  <fragment
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/menuDifficulty"
-    android:layout_marginBottom="8dp"
-    app:layout_constraintBottom_toBottomOf="parent">
-    <Button
-      style="@style/menu"
-      android:id="@+id/insane"
-      android:text="@string/insane"/>
-    <Button
-      style="@style/menu"
-      android:id="@+id/hard"
-      android:text="@string/hard"/>
-    <Button
-      style="@style/menu"
-      android:id="@+id/normal"
-      android:text="@string/normal"/>
-    <Button
-      style="@style/menu"
-      android:id="@+id/easy"
-      android:text="@string/easy"/>
-  </LinearLayout>
+    android:id="@+id/menuDifficultyFrame"
+    android:name="maksim_huretski.sudoku.parts.menu.MenuDifficulty"
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
-
+  <fragment
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/menuStatsFrame"
+    android:name="maksim_huretski.sudoku.parts.menu.Statistics"
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
 </FrameLayout>

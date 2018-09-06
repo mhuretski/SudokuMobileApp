@@ -1,4 +1,4 @@
-package maksim_huretski.sudoku.validation;
+package maksim_huretski.sudoku.calculation.validation;
 
 public class Checker {
 

@@ -6,7 +6,7 @@ import android.widget.TextView;
 import maksim_huretski.sudoku.R;
 import maksim_huretski.sudoku.animation.board.AnimNewGame;
 import maksim_huretski.sudoku.generation.InitialSudoku;
-import maksim_huretski.sudoku.parts.Game;
+import maksim_huretski.sudoku.parts.game.Game;
 
 public class NewGame extends Game {
 

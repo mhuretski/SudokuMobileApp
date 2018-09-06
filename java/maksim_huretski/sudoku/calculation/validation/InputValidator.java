@@ -1,4 +1,4 @@
-package maksim_huretski.sudoku.validation;
+package maksim_huretski.sudoku.calculation.validation;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -83,7 +83,6 @@ public class InputValidator {
                 incorrectColumns.size() +
                 incorrectBlocks.size()) == 0;
     }
-
 
     public Set<Integer> getIncorrectRows() {
         return incorrectRows;

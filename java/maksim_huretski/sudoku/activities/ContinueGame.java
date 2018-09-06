@@ -10,7 +10,7 @@ import android.widget.Button;
 import maksim_huretski.sudoku.R;
 import maksim_huretski.sudoku.animation.board.AnimContinue;
 import maksim_huretski.sudoku.database.SudokuSaver;
-import maksim_huretski.sudoku.parts.Game;
+import maksim_huretski.sudoku.parts.game.Game;
 
 public class ContinueGame extends Game {
 

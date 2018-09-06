@@ -6,23 +6,31 @@ import maksim_huretski.sudoku.R;
 
 public abstract class MenuActions extends AppCompatActivity {
 
-    protected MenuAnimation menuAnimation;
-    protected View button;
+    private MenuAnimation menuAnimation;
+    private View button;
 
     protected void showDifficulty() {
-        menuAnimation.show(R.id.menuDifficulty, this);
+        menuAnimation.show(R.id.menuDifficultyFrame, this);
     }
 
     protected void hideDifficulty() {
-        menuAnimation.hide(R.id.menuDifficulty, false, this);
+        menuAnimation.hide(R.id.menuDifficultyFrame, false, this);
     }
 
     protected void showMenu() {
-        menuAnimation.show(R.id.mainMenuButtons, this);
+        menuAnimation.show(R.id.mainMenuButtonsFrame, this);
     }
 
     protected void hideMenu() {
-        menuAnimation.hide(R.id.mainMenuButtons, false, this);
+        menuAnimation.hide(R.id.mainMenuButtonsFrame, false, this);
+    }
+
+    protected void showStats() {
+        menuAnimation.show(R.id.menuStatsFrame, this);
+    }
+
+    protected void hideStats() {
+        menuAnimation.hide(R.id.menuStatsFrame, false, this);
     }
 
     protected void showContinue() {
@@ -41,9 +49,10 @@ public abstract class MenuActions extends AppCompatActivity {
 
     protected void setMenuAnimation() {
         menuAnimation = new MenuAnimation(this);
-        menuAnimation.hide(R.id.menuDifficulty, true, this);
-        menuAnimation.hide(R.id.mainMenuButtons, true, this);
-        menuAnimation.show(R.id.mainMenuButtons, this);
+        menuAnimation.hide(R.id.menuDifficultyFrame, true, this);
+        menuAnimation.hide(R.id.mainMenuButtonsFrame, true, this);
+        menuAnimation.hide(R.id.menuStatsFrame, true, this);
+        menuAnimation.show(R.id.mainMenuButtonsFrame, this);
     }
 
 }

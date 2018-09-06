@@ -1,4 +1,4 @@
-package maksim_huretski.sudoku.parts;
+package maksim_huretski.sudoku.parts.game;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,8 +13,8 @@ import maksim_huretski.sudoku.R;
 import maksim_huretski.sudoku.calculation.Calc;
 import maksim_huretski.sudoku.calculation.HintHelper;
 import maksim_huretski.sudoku.database.SudokuSaver;
-import maksim_huretski.sudoku.validation.Checker;
-import maksim_huretski.sudoku.validation.InputValidator;
+import maksim_huretski.sudoku.calculation.validation.Checker;
+import maksim_huretski.sudoku.calculation.validation.InputValidator;
 
 @SuppressWarnings("unused")
 public abstract class Game extends Screen {

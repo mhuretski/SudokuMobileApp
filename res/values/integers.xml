@@ -1,4 +1,5 @@
 <resources>
   <integer name="one">1</integer>
   <integer name="angle">45</integer>
+  <integer name="straight_angle">90</integer>
 </resources>
