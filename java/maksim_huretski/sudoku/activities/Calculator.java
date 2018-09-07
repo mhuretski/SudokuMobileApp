@@ -52,7 +52,7 @@ public class Calculator extends Screen {
         normalStyle(cell.getId());
         TextView value = findViewById(view.getId());
         String cellText = value.getText().toString();
-        if (!cellText.equals("0")) {
+        if (!cellText.equals(zero)) {
             cell.setTypeface(null, Typeface.BOLD);
             cell.setText(cellText);
         } else {
@@ -87,8 +87,7 @@ public class Calculator extends Screen {
         isSolved = false;
         isClickable = true;
         highlighted = false;
-        TextView messages = findViewById(R.id.messageAtTop);
-        messages.setText(R.string.vDefault);
+        hideMessageAtTop();
         Button calc = findViewById(R.id.gameButton);
         calc.setText(R.string.calculate);
         for (int[] cells : CELLS) {
@@ -111,7 +110,7 @@ public class Calculator extends Screen {
             isSolved = false;
             isCorrectSudoku = false;
             highlighted = true;
-            ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.invalidSudoku);
+            invalidInputMessage();
         }
     }
 

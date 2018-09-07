@@ -16,6 +16,7 @@ public abstract class Screen extends AppCompatActivity {
 
     protected TextView cell;
     protected View possibleValues;
+    protected final String zero = "0";
     protected int[][] sudoku = new int[9][9];
     protected int[][] blockIDs;
     protected boolean isSolved = false;
@@ -71,7 +72,7 @@ public abstract class Screen extends AppCompatActivity {
 
     protected void highlightIncorrectBlocks(InputValidator iv) {
         highlighted = true;
-        ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.invalidInput);
+        invalidInputMessage();
         if (iv.getIncorrectRows().size() != 0)
             highLightIncorrectRow(iv);
         if (iv.getIncorrectColumns().size() != 0)
@@ -112,7 +113,7 @@ public abstract class Screen extends AppCompatActivity {
     }
 
     protected void getDefaultBorderState() {
-        ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.vDefault);
+        hideMessageAtTop();
         for (int[] cellRow : CELLS) {
             for (int cell : cellRow) {
                 normalStyle(cell);
@@ -145,6 +146,29 @@ public abstract class Screen extends AppCompatActivity {
     private void hidePossibleValues(){
         possibleValues = findViewById(R.id.possibleValuesMain);
         possibleValues.setVisibility(View.INVISIBLE);
+    }
+
+    protected void invalidInputMessage(){
+        TextView messageAtTop = findViewById(R.id.messageAtTop);
+        messageAtTop.setText(R.string.invalidInput);
+        messageAtTop.setVisibility(View.VISIBLE);
+    }
+
+    void invalidSudokuMessage(){
+        TextView messageAtTop = findViewById(R.id.messageAtTop);
+        messageAtTop.setText(R.string.invalidSudoku);
+        messageAtTop.setVisibility(View.VISIBLE);
+    }
+
+    void congratulationsMessage(){
+        TextView messageAtTop = findViewById(R.id.messageAtTop);
+        messageAtTop.setText(R.string.congratulations);
+        messageAtTop.setVisibility(View.VISIBLE);
+    }
+
+    protected void hideMessageAtTop(){
+        TextView messageAtTop = findViewById(R.id.messageAtTop);
+        messageAtTop.setVisibility(View.INVISIBLE);
     }
 
 }

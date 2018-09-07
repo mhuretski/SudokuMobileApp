@@ -3,7 +3,6 @@ package maksim_huretski.sudoku.activities;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import maksim_huretski.sudoku.R;
 import maksim_huretski.sudoku.animation.board.AnimGame;
 import maksim_huretski.sudoku.generation.InitialSudoku;
@@ -61,7 +60,7 @@ public class NewGame extends Game {
         super.sudoku = tempSudoku;
         isSolved = false;
         isClickable = true;
-        ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.vDefault);
+        hideMessageAtTop();
     }
 
     protected void showGameButton() {

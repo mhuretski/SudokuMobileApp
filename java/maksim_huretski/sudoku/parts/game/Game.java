@@ -118,7 +118,7 @@ public abstract class Game extends Screen {
         normalStyle(cell.getId());
         TextView value = findViewById(view.getId());
         String cellText = value.getText().toString();
-        if (!cellText.equals("0")) {
+        if (!cellText.equals(zero)) {
             cell.setText(cellText);
         } else {
             cell.setText(R.string.vDefault);
@@ -152,12 +152,12 @@ public abstract class Game extends Screen {
             isSolved = false;
             isCorrectSudoku = false;
             highlighted = true;
-            ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.invalidSudoku);
+            invalidSudokuMessage();
         } else {
             Checker checker = new Checker();
             checker.checkSudoku(sudoku, blockIDs);
             if (checker.isDone()) {
-                ((TextView) findViewById(R.id.messageAtTop)).setText(R.string.congratulations);
+                congratulationsMessage();
                 showGameButton();
                 isSolved = true;
                 isClickable = false;

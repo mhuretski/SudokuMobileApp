@@ -2,6 +2,7 @@ package maksim_huretski.sudoku.animation.board;
 
 import android.app.Activity;
 import android.os.Handler;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
@@ -90,7 +91,9 @@ public class AnimCalc {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ((TextView) game.findViewById(R.id.messageAtTop)).setText(R.string.congratulations);
+                TextView messageAtTop = game.findViewById(R.id.messageAtTop);
+                messageAtTop.setText(R.string.congratulations);
+                messageAtTop.setVisibility(View.VISIBLE);
                 ((Button) game.findViewById(R.id.gameButton)).setText(R.string.reset);
             }
         }, delayUntilPreviousFinished + delay * 10 + delayBeforeStart);

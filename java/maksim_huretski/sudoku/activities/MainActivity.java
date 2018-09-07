@@ -136,9 +136,12 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
         for (int difficulty[] : difficulties) {
             difText = findViewById(difficulty[0]);
             if (this.difficultyLevel == difficulty[0]) {
-                difText.setTextColor(getResources().getColor(R.color.difficulty));
-            } else
+                difText.setTextColor(getResources().getColor(R.color.white));
+                difText.setBackgroundResource(R.drawable.chosen_dif_button);
+            } else {
                 difText.setTextColor(getResources().getColor(R.color.black));
+                difText.setBackgroundResource(R.drawable.calculate_button);
+            }
         }
     }
 
