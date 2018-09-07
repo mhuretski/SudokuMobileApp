@@ -16,6 +16,7 @@ import maksim_huretski.sudoku.database.SudokuSaver;
 public class MainActivity extends MenuActions implements View.OnClickListener {
 
     private int difficultyLevel;
+    private boolean isMainMenu = true;
     private final int[][] difficulties = new int[][]{{R.id.insane, R.id.insaneStat},
             {R.id.hard, R.id.hardStat},
             {R.id.normal, R.id.normalStat},
@@ -34,6 +35,17 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
     protected void onResume() {
         super.onResume();
         isSavedProgress();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isMainMenu) super.onBackPressed();
+        else {
+            hideStats();
+            hideDifficulty();
+            showMenu();
+            isMainMenu = true;
+        }
     }
 
     @Override
@@ -59,6 +71,7 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
                 highlightCurrentDifficulty();
                 hideMenu();
                 showDifficulty();
+                isMainMenu = false;
                 break;
             case R.id.insane:
             case R.id.hard:
@@ -68,15 +81,18 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
                 isSavedProgress();
                 hideDifficulty();
                 showMenu();
+                isMainMenu = true;
                 break;
             case R.id.statistics:
                 getStatsFromDB();
                 hideMenu();
                 showStats();
+                isMainMenu = false;
                 break;
             case R.id.back:
                 showMenu();
                 hideStats();
+                isMainMenu = true;
                 break;
             default:
                 break;
