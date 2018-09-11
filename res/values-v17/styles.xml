@@ -31,4 +31,8 @@
     <item name="layout_constraintStart_toStartOf">parent</item>
     <item name="android:onClick">onClick</item>
   </style>
+  <style name="styleHintMenuSwitcher">
+    <item name="android:paddingStart">@dimen/radius</item>
+    <item name="android:layout_gravity">center</item>
+  </style>
 </resources>

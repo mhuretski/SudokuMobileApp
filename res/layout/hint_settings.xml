@@ -52,7 +52,8 @@
         android:text="@string/highlightRows"
         app:layout_constraintLeft_toLeftOf="@+id/switcherRows"/>
       <android.support.v7.widget.SwitchCompat
-        android:theme="@style/hintMenuSwitcher"
+        android:theme="@style/ThemeHintMenuSwitcher"
+        style="@style/styleHintMenuSwitcher"
         android:id="@+id/switcherRows"/>
     </TableRow>
 
@@ -62,7 +63,8 @@
         android:text="@string/highlightColumns"
         app:layout_constraintLeft_toLeftOf="@+id/switcherColumns"/>
       <android.support.v7.widget.SwitchCompat
-        android:theme="@style/hintMenuSwitcher"
+        android:theme="@style/ThemeHintMenuSwitcher"
+        style="@style/styleHintMenuSwitcher"
         android:id="@+id/switcherColumns"/>
     </TableRow>
 
@@ -72,7 +74,8 @@
         android:text="@string/highlightBlocks"
         app:layout_constraintLeft_toLeftOf="@+id/switcherBlocks"/>
       <android.support.v7.widget.SwitchCompat
-        android:theme="@style/hintMenuSwitcher"
+        android:theme="@style/ThemeHintMenuSwitcher"
+        style="@style/styleHintMenuSwitcher"
         android:id="@+id/switcherBlocks"/>
     </TableRow>
 
@@ -82,7 +85,8 @@
         android:text="@string/hintPossibleValues"
         app:layout_constraintLeft_toLeftOf="@+id/hintPossibleValues"/>
       <android.support.v7.widget.SwitchCompat
-        android:theme="@style/hintMenuSwitcher"
+        android:theme="@style/ThemeHintMenuSwitcher"
+        style="@style/styleHintMenuSwitcher"
         android:id="@+id/hintPossibleValues"/>
     </TableRow>
 
@@ -92,7 +96,8 @@
         android:text="@string/hintCalculations"
         app:layout_constraintLeft_toLeftOf="@+id/hintCalculations"/>
       <android.support.v7.widget.SwitchCompat
-        android:theme="@style/hintMenuSwitcher"
+        android:theme="@style/ThemeHintMenuSwitcher"
+        style="@style/styleHintMenuSwitcher"
         android:id="@+id/hintCalculations"/>
     </TableRow>
 

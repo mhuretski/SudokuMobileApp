@@ -58,11 +58,15 @@
     <item name="android:textSize">@dimen/stats_rows</item>
     <item name="android:textColor">@color/background_bottom</item>
   </style>
-  <style name="hintMenuSwitcher" parent="AppTheme">
+  <style name="ThemeHintMenuSwitcher">
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_gravity">center</item>
     <item name="colorControlActivated">@color/background_top</item>
+    <item name="android:colorForeground">@color/black</item>
+  </style>
+  <style name="styleHintMenuSwitcher">
+    <item name="android:paddingLeft">@dimen/radius</item>
+    <item name="android:layout_gravity">center</item>
   </style>
   <style name="statsRow">
     <item name="android:layout_width">wrap_content</item>
@@ -87,5 +91,11 @@
   <style name="defaultConstraintLayout">
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">match_parent</item>
+  </style>
+  <style name="NoBarsDialog" parent="android:Theme.Holo.Dialog.NoActionBar">
+    <item name="android:actionBarDivider">@android:color/transparent</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:background">@android:color/transparent</item>
+    <item name="background">@android:color/transparent</item>
   </style>
 </resources>
