@@ -35,4 +35,31 @@
     <item name="android:paddingStart">@dimen/radius</item>
     <item name="android:layout_gravity">center</item>
   </style>
+  <style name="statsAndHintsLayout">
+    <item name="android:layout_marginStart">@dimen/stats_margin</item>
+    <item name="android:layout_marginEnd">@dimen/stats_margin</item>
+    <item name="android:paddingStart">@dimen/stats_radius</item>
+    <item name="android:paddingEnd">@dimen/stats_radius</item>
+  </style>
+  <style name="possibleValuesStyleStart" parent="possibleValuesStyle">
+    <item name="android:layout_marginStart">@dimen/zero</item>
+  </style>
+  <style name="possibleValuesStyleEnd" parent="possibleValuesStyle">
+    <item name="android:layout_marginEnd">@dimen/zero</item>
+  </style>
+  <style name="activityGameTextView">
+    <item name="android:paddingStart">@dimen/message_text</item>
+    <item name="android:paddingEnd">@dimen/message_text</item>
+  </style>
+  <style name="activityGameImageView">
+    <item name="android:layout_marginEnd">@dimen/default_layout_margin</item>
+  </style>
+  <style name="activityGameConstraintLayout">
+    <item name="android:layout_marginStart">@dimen/layout_margin_small</item>
+    <item name="android:layout_marginEnd">@dimen/layout_margin_small</item>
+  </style>
+  <style name="possibleValuesFrame">
+    <item name="android:layout_marginStart">@dimen/default_layout_margin</item>
+    <item name="android:layout_marginEnd">@dimen/default_layout_margin</item>
+  </style>
 </resources>

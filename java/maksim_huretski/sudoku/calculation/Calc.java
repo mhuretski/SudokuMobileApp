@@ -1,12 +1,11 @@
 package maksim_huretski.sudoku.calculation;
 
-public abstract class Calc {
+public interface Calc {
 
-    public abstract int[][] getSudoku();
+    int[][] getSudoku();
 
-    @SuppressWarnings("unused")
-    public abstract void init(int[][] sudoku, int[][] blockIDs);
+    void init(int[][] sudoku, int[][] blockIDs);
 
-    public abstract boolean calculateSudoku();
+    boolean calculateSudoku();
 
 }

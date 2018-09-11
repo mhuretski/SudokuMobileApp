@@ -18,10 +18,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/radius"
     android:paddingBottom="@dimen/radius"
-    android:paddingStart="@dimen/message_text"
-    android:paddingLeft="@dimen/message_text"
-    android:paddingEnd="@dimen/message_text"
-    android:paddingRight="@dimen/message_text"
+    style="@style/activityGameTextView"
     android:id="@+id/messageAtTop"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -46,10 +43,7 @@
     android:layout_height="wrap_content"
     app:layout_constraintHorizontal_weight="@integer/one"
     android:layout_marginTop="@dimen/default_layout_margin"
-    android:layout_marginStart="@dimen/layout_margin_small"
-    android:layout_marginLeft="@dimen/layout_margin_small"
-    android:layout_marginEnd="@dimen/layout_margin_small"
-    android:layout_marginRight="@dimen/layout_margin_small"
+    style="@style/activityGameConstraintLayout"
     app:layout_constraintTop_toBottomOf="@+id/messageAtTop">
 
     <fragment
@@ -86,10 +80,6 @@
   <fragment
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_marginStart="@dimen/default_layout_margin"
-    android:layout_marginLeft="@dimen/default_layout_margin"
-    android:layout_marginEnd="@dimen/default_layout_margin"
-    android:layout_marginRight="@dimen/default_layout_margin"
     app:layout_constraintTop_toBottomOf="@+id/table"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"

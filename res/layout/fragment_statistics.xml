@@ -17,14 +17,7 @@
     android:background="@drawable/statistics"
     android:paddingTop="@dimen/stats_radius"
     android:paddingBottom="@dimen/stats_radius"
-    android:layout_marginStart="@dimen/stats_margin"
-    android:layout_marginLeft="@dimen/stats_margin"
-    android:layout_marginEnd="@dimen/stats_margin"
-    android:layout_marginRight="@dimen/stats_margin"
-    android:paddingStart="@dimen/stats_radius"
-    android:paddingLeft="@dimen/stats_radius"
-    android:paddingEnd="@dimen/stats_radius"
-    android:paddingRight="@dimen/stats_radius"
+    style="@style/statsAndHintsLayout"
     app:layout_constraintTop_toTopOf="parent">
 
     <TableRow style="@style/statsRow">

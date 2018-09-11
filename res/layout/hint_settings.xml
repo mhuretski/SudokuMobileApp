@@ -9,14 +9,7 @@
   android:background="@drawable/statistics"
   android:paddingTop="@dimen/stats_radius"
   android:paddingBottom="@dimen/stats_radius"
-  android:layout_marginStart="@dimen/stats_margin"
-  android:layout_marginLeft="@dimen/stats_margin"
-  android:layout_marginEnd="@dimen/stats_margin"
-  android:layout_marginRight="@dimen/stats_margin"
-  android:paddingStart="@dimen/stats_radius"
-  android:paddingLeft="@dimen/stats_radius"
-  android:paddingEnd="@dimen/stats_radius"
-  android:paddingRight="@dimen/stats_radius"
+  style="@style/statsAndHintsLayout"
   app:layout_constraintTop_toBottomOf="@id/statsTable">
 
   <TextView
@@ -54,6 +47,7 @@
       <android.support.v7.widget.SwitchCompat
         android:theme="@style/ThemeHintMenuSwitcher"
         style="@style/styleHintMenuSwitcher"
+        android:checked="true"
         android:id="@+id/switcherRows"/>
     </TableRow>
 
@@ -65,6 +59,7 @@
       <android.support.v7.widget.SwitchCompat
         android:theme="@style/ThemeHintMenuSwitcher"
         style="@style/styleHintMenuSwitcher"
+        android:checked="true"
         android:id="@+id/switcherColumns"/>
     </TableRow>
 
@@ -76,6 +71,7 @@
       <android.support.v7.widget.SwitchCompat
         android:theme="@style/ThemeHintMenuSwitcher"
         style="@style/styleHintMenuSwitcher"
+        android:checked="true"
         android:id="@+id/switcherBlocks"/>
     </TableRow>
 

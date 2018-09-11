@@ -7,6 +7,12 @@
     <item name="android:background">@drawable/possible_values_drawable</item>
     <item name="android:onClick">onClickValue</item>
   </style>
+  <style name="possibleValuesStyleStart" parent="possibleValuesStyle">
+    <item name="android:layout_marginLeft">@dimen/zero</item>
+  </style>
+  <style name="possibleValuesStyleEnd" parent="possibleValuesStyle">
+    <item name="android:layout_marginRight">@dimen/zero</item>
+  </style>
   <style name="lightBlocks" parent="cell">
     <item name="android:tag">@string/light</item>
     <item name="android:background">@drawable/light_block</item>
@@ -97,5 +103,26 @@
     <item name="android:windowBackground">@android:color/transparent</item>
     <item name="android:background">@android:color/transparent</item>
     <item name="background">@android:color/transparent</item>
+  </style>
+  <style name="statsAndHintsLayout">
+    <item name="android:layout_marginLeft">@dimen/stats_margin</item>
+    <item name="android:layout_marginRight">@dimen/stats_margin</item>
+    <item name="android:paddingLeft">@dimen/stats_radius</item>
+    <item name="android:paddingRight">@dimen/stats_radius</item>
+  </style>
+  <style name="activityGameTextView">
+    <item name="android:paddingLeft">@dimen/message_text</item>
+    <item name="android:paddingRight">@dimen/message_text</item>
+  </style>
+  <style name="activityGameImageView">
+    <item name="android:layout_marginRight">@dimen/default_layout_margin</item>
+  </style>
+  <style name="activityGameConstraintLayout">
+    <item name="android:layout_marginLeft">@dimen/layout_margin_small</item>
+    <item name="android:layout_marginRight">@dimen/layout_margin_small</item>
+  </style>
+  <style name="possibleValuesFrame">
+    <item name="android:layout_marginLeft">@dimen/default_layout_margin</item>
+    <item name="android:layout_marginRight">@dimen/default_layout_margin</item>
   </style>
 </resources>

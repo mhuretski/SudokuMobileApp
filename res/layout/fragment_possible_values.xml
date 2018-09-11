@@ -11,15 +11,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/possibleValuesFrame"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
     <TextView
-      style="@style/possibleValuesStyle"
+      style="@style/possibleValuesStyleStart"
       android:id="@+id/vZero"
       android:text="@string/vZero"
-      android:layout_marginStart="@dimen/zero"
-      android:layout_marginLeft="@dimen/zero"
       app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintRight_toLeftOf="@+id/v0"
@@ -98,11 +97,9 @@
       app:layout_constraintLeft_toRightOf="@+id/v6"
       app:layout_constraintDimensionRatio="1:1"/>
     <TextView
-      style="@style/possibleValuesStyle"
+      style="@style/possibleValuesStyleEnd"
       android:id="@+id/v8"
       android:text="@string/v8"
-      android:layout_marginEnd="@dimen/zero"
-      android:layout_marginRight="@dimen/zero"
       app:layout_constraintHorizontal_weight="@integer/one"
       app:layout_constraintTop_toTopOf="@+id/vZero"
       app:layout_constraintRight_toRightOf="parent"

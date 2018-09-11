@@ -4,7 +4,7 @@ import maksim_huretski.sudoku.calculation.hint_types.Irreducible;
 
 import java.util.Arrays;
 
-public class HintHelper extends Calc {
+public class HintHelper implements Calc {
 
     private final int SUDOKU_VALUE = 45;
     private final int[] tempNumbers = new int[9];

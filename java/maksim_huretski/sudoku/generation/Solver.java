@@ -1,11 +1,10 @@
 package maksim_huretski.sudoku.generation;
 
-
 import maksim_huretski.sudoku.calculation.Calc;
 
 import java.util.concurrent.*;
 
-public class Solver extends Calc {
+public class Solver implements Calc {
 
     private final int LENGTH = 9;
     private final int sudoku[][] = new int[9][9];
