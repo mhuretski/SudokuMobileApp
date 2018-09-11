@@ -9,7 +9,7 @@ import maksim_huretski.sudoku.R;
 import maksim_huretski.sudoku.animation.board.AnimCalc;
 import maksim_huretski.sudoku.calculation.Calc;
 import maksim_huretski.sudoku.generation.Solver;
-import maksim_huretski.sudoku.parts.game.Screen;
+import maksim_huretski.sudoku.containers.game.Screen;
 import maksim_huretski.sudoku.calculation.validation.Checker;
 import maksim_huretski.sudoku.calculation.validation.InputValidator;
 

@@ -1,4 +1,4 @@
-package maksim_huretski.sudoku.parts.game;
+package maksim_huretski.sudoku.containers.game;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -23,6 +23,7 @@ public abstract class Screen extends AppCompatActivity {
     protected boolean isClickable = true;
     protected boolean isCorrectSudoku = true;
     protected boolean highlighted = false;
+    private TextView messageAtTop;
     protected final int[][] CELLS = new int[][]{
             {R.id.b00, R.id.b01, R.id.b02, R.id.b03, R.id.b04, R.id.b05, R.id.b06, R.id.b07, R.id.b08},
             {R.id.b10, R.id.b11, R.id.b12, R.id.b13, R.id.b14, R.id.b15, R.id.b16, R.id.b17, R.id.b18},
@@ -40,6 +41,7 @@ public abstract class Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         setContentView(R.layout.activity_game);
+        messageAtTop = findViewById(R.id.messageAtTop);
         hidePossibleValues();
         setBlockIDs();
     }
@@ -56,6 +58,7 @@ public abstract class Screen extends AppCompatActivity {
     @SuppressWarnings("unused")
     protected abstract void findSolution(Calc calc, InputValidator iv);
 
+    @SuppressWarnings("unused")
     protected abstract void showAnimatedValues(int[][] sudoku);
 
     protected void getUserValues() {
@@ -112,7 +115,7 @@ public abstract class Screen extends AppCompatActivity {
         }
     }
 
-    protected void getDefaultBorderState() {
+    public void getDefaultBorderState() {
         hideMessageAtTop();
         for (int[] cellRow : CELLS) {
             for (int cell : cellRow) {
@@ -143,31 +146,27 @@ public abstract class Screen extends AppCompatActivity {
         this.blockIDs = blockIDs.getBlockIDs();
     }
 
-    private void hidePossibleValues(){
+    public void hidePossibleValues(){
         possibleValues = findViewById(R.id.possibleValuesMain);
         possibleValues.setVisibility(View.INVISIBLE);
     }
 
     protected void invalidInputMessage(){
-        TextView messageAtTop = findViewById(R.id.messageAtTop);
         messageAtTop.setText(R.string.invalidInput);
         messageAtTop.setVisibility(View.VISIBLE);
     }
 
     void invalidSudokuMessage(){
-        TextView messageAtTop = findViewById(R.id.messageAtTop);
         messageAtTop.setText(R.string.invalidSudoku);
         messageAtTop.setVisibility(View.VISIBLE);
     }
 
     void congratulationsMessage(){
-        TextView messageAtTop = findViewById(R.id.messageAtTop);
         messageAtTop.setText(R.string.congratulations);
         messageAtTop.setVisibility(View.VISIBLE);
     }
 
     protected void hideMessageAtTop(){
-        TextView messageAtTop = findViewById(R.id.messageAtTop);
         messageAtTop.setVisibility(View.INVISIBLE);
     }
 

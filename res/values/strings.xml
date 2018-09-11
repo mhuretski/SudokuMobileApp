@@ -34,4 +34,10 @@
   <string name="savedProgressDifficulty">savedDif</string>
   <string name="mainMenu">Main menu</string>
   <string name="back">Back</string>
+  <string name="hintSettings">Hint settings</string>
+  <string name="highlightRows">Incorrect rows</string>
+  <string name="highlightColumns">Incorrect columns</string>
+  <string name="highlightBlocks">Incorrect blocks</string>
+  <string name="hintPossibleValues">Possible values</string>
+  <string name="hintCalculations">Calculation helper</string>
 </resources>

@@ -30,7 +30,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/mainMenuFrame"
-    android:name="maksim_huretski.sudoku.parts.menu.MainMenu"
+    android:name="maksim_huretski.sudoku.containers.menu.MainMenu"
     android:layout_marginBottom="@dimen/layout_margin_small"
     app:layout_constraintBottom_toBottomOf="parent"/>
 

@@ -8,9 +8,8 @@ import android.graphics.Typeface;
 import android.view.View;
 import android.widget.Button;
 import maksim_huretski.sudoku.R;
-import maksim_huretski.sudoku.animation.board.AnimGame;
 import maksim_huretski.sudoku.database.SudokuSaver;
-import maksim_huretski.sudoku.parts.game.Game;
+import maksim_huretski.sudoku.containers.game.Game;
 
 public class ContinueGame extends Game {
 
@@ -76,10 +75,6 @@ public class ContinueGame extends Game {
         Button mainMenu = findViewById(R.id.gameButton);
         mainMenu.setText(R.string.mainMenu);
         mainMenu.setVisibility(View.VISIBLE);
-    }
-
-    protected void showAnimatedValues(int[][] sudoku) {
-        new AnimGame().setCellsShown(this, CELLS, sudoku);
     }
 
     private void getCurrentDifficulty(){

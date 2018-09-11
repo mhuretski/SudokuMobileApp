@@ -1,19 +1,24 @@
 package maksim_huretski.sudoku.animation.board;
 
 import android.app.Activity;
+import android.view.View;
+import android.widget.ImageView;
 import maksim_huretski.sudoku.R;
 
 public class AnimGame extends AnimCalc {
 
     public void setCellsShown(final Activity game, final int[][] CELLS, final int[][] sudoku, int timing) {
         super.delayBeforeStart = timing;
+        setHintMenuUnClickable(game);
         animate(game, CELLS, sudoku);
+        setHintMenuVisible(game);
     }
 
     @Override
     public void setCellsShown(final Activity game, final int[][] CELLS, final int[][] sudoku) {
         super.delayBeforeStart = 1000;
         animate(game, CELLS, sudoku);
+        setHintMenuVisible(game);
     }
 
     @Override
@@ -34,6 +39,25 @@ public class AnimGame extends AnimCalc {
             sudokuCell.setBackgroundResource(R.drawable.dark_block);
         else
             sudokuCell.setBackgroundResource(R.drawable.light_block);
+    }
+
+    public void setHintMenuUnClickable(Activity game){
+        ImageView hintsMenu = game.findViewById(R.id.hintMenuBtn);
+        hintsMenu.setFocusable(false);
+        hintsMenu.setClickable(false);
+        hintsMenu.setVisibility(View.VISIBLE);
+    }
+
+    private void setHintMenuVisible(final Activity game) {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ImageView hintsMenu = game.findViewById(R.id.hintMenuBtn);
+                hintsMenu.setFocusable(true);
+                hintsMenu.setClickable(true);
+                hintsMenu.setVisibility(View.VISIBLE);
+            }
+        }, delayUntilPreviousFinished + delay * 10 + delayBeforeStart);
     }
 
 }

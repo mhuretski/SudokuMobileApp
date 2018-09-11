@@ -50,6 +50,20 @@
     <item name="layout_constraintStart_toStartOf">parent</item>
     <item name="android:onClick">onClick</item>
   </style>
+  <style name="hintMenuRows">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
+  <style name="hintMenuDescription" parent="hintMenuRows">
+    <item name="android:textSize">@dimen/stats_rows</item>
+    <item name="android:textColor">@color/background_bottom</item>
+  </style>
+  <style name="hintMenuSwitcher" parent="AppTheme">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="colorControlActivated">@color/background_top</item>
+  </style>
   <style name="statsRow">
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">fill_parent</item>

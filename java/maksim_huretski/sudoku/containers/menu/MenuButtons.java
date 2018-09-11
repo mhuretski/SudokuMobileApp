@@ -1,4 +1,4 @@
-package maksim_huretski.sudoku.parts.menu;
+package maksim_huretski.sudoku.containers.menu;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

@@ -1,4 +1,4 @@
-package maksim_huretski.sudoku.parts.game;
+package maksim_huretski.sudoku.containers.game;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import maksim_huretski.sudoku.R;
 
-public class Container2of3 extends Fragment {
+public class Container3of3 extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_sudoku2of3, container, false);
+        return inflater.inflate(R.layout.fragment_sudoku3of3, container, false);
     }
 
 }

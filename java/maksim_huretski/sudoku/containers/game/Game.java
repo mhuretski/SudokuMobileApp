@@ -1,4 +1,4 @@
-package maksim_huretski.sudoku.parts.game;
+package maksim_huretski.sudoku.containers.game;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,17 +10,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
+import maksim_huretski.sudoku.animation.board.AnimGame;
+import maksim_huretski.sudoku.animation.board.AnimHints;
 import maksim_huretski.sudoku.calculation.Calc;
 import maksim_huretski.sudoku.calculation.HintHelper;
-import maksim_huretski.sudoku.database.SudokuSaver;
 import maksim_huretski.sudoku.calculation.validation.Checker;
 import maksim_huretski.sudoku.calculation.validation.InputValidator;
+import maksim_huretski.sudoku.containers.menu.HintSettingsDialog;
+import maksim_huretski.sudoku.database.SudokuSaver;
 
 @SuppressWarnings("unused")
 public abstract class Game extends Screen {
 
     protected int difficulty;
     private final HintHelper hintHelper = new HintHelper();
+    private final AnimGame animGame = new AnimGame();
     protected final boolean[][] isInitialSudoku = new boolean[9][9];
 /* TODO uncomment when hints are refactored
     private final int[] possibleValuesNumbers = new int[]
@@ -41,6 +45,7 @@ public abstract class Game extends Screen {
         hideGameButton();
         setInitialSudoku();
         showAnimatedValues(sudoku);
+        setHintMenu();
     }
 
     @Override
@@ -161,6 +166,7 @@ public abstract class Game extends Screen {
                 showGameButton();
                 isSolved = true;
                 isClickable = false;
+                animGame.setHintMenuUnClickable(this);
                 updateStatistics();
             }
         }
@@ -222,6 +228,15 @@ public abstract class Game extends Screen {
         cursor.close();
         database.close();
         statistics.close();
+    }
+
+    protected void showAnimatedValues(int[][] sudoku) {
+        animGame.setCellsShown(this, CELLS, sudoku);
+    }
+
+    private void setHintMenu() {
+        final HintSettingsDialog hints = new HintSettingsDialog(this);
+        new AnimHints(this).setHintsMenu(hints);
     }
 
 }

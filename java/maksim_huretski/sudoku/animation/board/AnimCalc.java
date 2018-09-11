@@ -11,11 +11,11 @@ public class AnimCalc {
 
     TextView sudokuCell;
     int delayBeforeStart = 100;
-    private final int delay = 50;
+    final int delay = 50;
     private final int LENGTH = 9;
-    private final int delayUntilPreviousFinished = (LENGTH - 1) * delay;
+    final int delayUntilPreviousFinished = (LENGTH - 1) * delay;
     final String[][] sudokuValues = new String[9][9];
-    private final Handler handler = new Handler();
+    final Handler handler = new Handler();
 
     public void setCellsShown(final Activity game, final int[][] CELLS, final int[][] sudoku) {
         sudokuToString(sudoku);

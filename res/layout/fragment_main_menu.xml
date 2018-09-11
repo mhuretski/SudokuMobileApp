@@ -4,14 +4,14 @@
              xmlns:app="http://schemas.android.com/apk/res-auto"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".parts.menu.MainMenu">
+             tools:context=".containers.menu.MainMenu">
 
   <fragment
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/mainMenuButtonsFrame"
-    android:name="maksim_huretski.sudoku.parts.menu.MenuButtons"
+    android:name="maksim_huretski.sudoku.containers.menu.MenuButtons"
     app:layout_constraintBottom_toBottomOf="parent"/>
 
   <fragment
@@ -19,7 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/menuDifficultyFrame"
-    android:name="maksim_huretski.sudoku.parts.menu.MenuDifficulty"
+    android:name="maksim_huretski.sudoku.containers.menu.MenuDifficulty"
     app:layout_constraintBottom_toBottomOf="parent"/>
 
   <fragment
@@ -27,7 +27,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/menuStatsFrame"
-    android:name="maksim_huretski.sudoku.parts.menu.Statistics"
+    android:name="maksim_huretski.sudoku.containers.menu.Statistics"
     app:layout_constraintBottom_toBottomOf="parent"/>
 
 </FrameLayout>
