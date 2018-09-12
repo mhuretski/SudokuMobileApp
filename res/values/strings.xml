@@ -40,4 +40,10 @@
   <string name="highlightBlocks">Incorrect blocks</string>
   <string name="hintPossibleValues">Possible values</string>
   <string name="hintCalculations">Calculation helper</string>
+  <string name="hintSettingsStorage">hs</string>
+  <string name="hintRows">hr</string>
+  <string name="hintColumns">hc</string>
+  <string name="hintBlocks">hb</string>
+  <string name="hintPosValues">hv</string>
+  <string name="hintCalc">hCalc</string>
 </resources>

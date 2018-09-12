@@ -47,7 +47,6 @@
       <android.support.v7.widget.SwitchCompat
         android:theme="@style/ThemeHintMenuSwitcher"
         style="@style/styleHintMenuSwitcher"
-        android:checked="true"
         android:id="@+id/switcherRows"/>
     </TableRow>
 
@@ -59,7 +58,6 @@
       <android.support.v7.widget.SwitchCompat
         android:theme="@style/ThemeHintMenuSwitcher"
         style="@style/styleHintMenuSwitcher"
-        android:checked="true"
         android:id="@+id/switcherColumns"/>
     </TableRow>
 
@@ -71,7 +69,6 @@
       <android.support.v7.widget.SwitchCompat
         android:theme="@style/ThemeHintMenuSwitcher"
         style="@style/styleHintMenuSwitcher"
-        android:checked="true"
         android:id="@+id/switcherBlocks"/>
     </TableRow>
 
@@ -79,22 +76,22 @@
       <TextView
         style="@style/hintMenuDescription"
         android:text="@string/hintPossibleValues"
-        app:layout_constraintLeft_toLeftOf="@+id/hintPossibleValues"/>
+        app:layout_constraintLeft_toLeftOf="@+id/switcherPossibleValues"/>
       <android.support.v7.widget.SwitchCompat
         android:theme="@style/ThemeHintMenuSwitcher"
         style="@style/styleHintMenuSwitcher"
-        android:id="@+id/hintPossibleValues"/>
+        android:id="@+id/switcherPossibleValues"/>
     </TableRow>
 
     <TableRow style="@style/hintMenuRows">
       <TextView
         style="@style/hintMenuDescription"
         android:text="@string/hintCalculations"
-        app:layout_constraintLeft_toLeftOf="@+id/hintCalculations"/>
+        app:layout_constraintLeft_toLeftOf="@+id/switcherCalculations"/>
       <android.support.v7.widget.SwitchCompat
         android:theme="@style/ThemeHintMenuSwitcher"
         style="@style/styleHintMenuSwitcher"
-        android:id="@+id/hintCalculations"/>
+        android:id="@+id/switcherCalculations"/>
     </TableRow>
 
   </TableLayout>

@@ -19,13 +19,18 @@ import maksim_huretski.sudoku.calculation.validation.InputValidator;
 import maksim_huretski.sudoku.containers.menu.HintSettingsDialog;
 import maksim_huretski.sudoku.database.SudokuSaver;
 
-@SuppressWarnings("unused")
 public abstract class Game extends Screen {
 
     protected int difficulty;
     private final HintHelper hintHelper = new HintHelper();
     private final AnimGame animGame = new AnimGame();
     protected final boolean[][] isInitialSudoku = new boolean[9][9];
+    private boolean hintRows;
+    private boolean hintColumns;
+    private boolean hintBlocks;
+    private boolean hintPosValues;
+    private boolean hintCalc;
+
 /* TODO uncomment when hints are refactored
     private final int[] possibleValuesNumbers = new int[]
             {R.id.vZero, R.id.v0, R.id.v1, R.id.v2, R.id.v3, R.id.v4, R.id.v5, R.id.v6, R.id.v7, R.id.v8};
@@ -237,6 +242,26 @@ public abstract class Game extends Screen {
     private void setHintMenu() {
         final HintSettingsDialog hints = new HintSettingsDialog(this);
         new AnimHints(this).setHintsMenu(hints);
+    }
+
+    public void setHintRows(boolean hintRows) {
+        this.hintRows = hintRows;
+    }
+
+    public void setHintColumns(boolean hintColumns) {
+        this.hintColumns = hintColumns;
+    }
+
+    public void setHintBlocks(boolean hintBlocks) {
+        this.hintBlocks = hintBlocks;
+    }
+
+    public void setHintPosValues(boolean hintPosValues) {
+        this.hintPosValues = hintPosValues;
+    }
+
+    public void setHintCalc(boolean hintCalc) {
+        this.hintCalc = hintCalc;
     }
 
 }

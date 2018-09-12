@@ -12,6 +12,7 @@ import maksim_huretski.sudoku.calculation.validation.InputValidator;
 
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public abstract class Screen extends AppCompatActivity {
 
     protected TextView cell;

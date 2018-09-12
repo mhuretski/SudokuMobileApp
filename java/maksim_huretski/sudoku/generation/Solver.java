@@ -12,7 +12,6 @@ public class Solver implements Calc {
     private boolean[][] columns;
     private boolean[][] blocks;
 
-    @Override
     public void init(int[][] sudoku, int[][] blockIDs) {
         for (int i = 0; i < 9; i++) {
             this.sudoku[i] = sudoku[i].clone();
@@ -30,7 +29,6 @@ public class Solver implements Calc {
         }
     }
 
-    @Override
     public boolean calculateSudoku() {
         FutureTask<Boolean> calculation = new FutureTask<>(new Callable<Boolean>() {
             @Override
