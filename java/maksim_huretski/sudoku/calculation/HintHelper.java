@@ -24,11 +24,6 @@ public class HintHelper implements Calc {
         return calculatedSudoku;
     }
 
-/* TODO uncomment when hints are refactored
-    public int[][][][] getSudokuPossibleValues() {
-        return sudoku;
-    }*/
-
     public void init(int[][] sudoku, int[][] blockIDs) {
         setBlockIDs(blockIDs);
         addDataToSudoku();
@@ -54,9 +49,7 @@ public class HintHelper implements Calc {
         do {
             goFurther = false;
 
-            checkBlock();
-            checkRow();
-            checkColumn();
+            onlyOneValueIsNotSet();
 
             for (int i = 0; i < 9; i++) {
                 minimizePossibleValuesInRow(i);
@@ -105,6 +98,12 @@ public class HintHelper implements Calc {
                 }
             }
         }
+    }
+
+    private void onlyOneValueIsNotSet(){
+        checkBlock();
+        checkRow();
+        checkColumn();
     }
 
     private void checkRow() {
@@ -267,6 +266,8 @@ public class HintHelper implements Calc {
             sudoku[row][column][1][k] = 0;
     }
 
+    //TODO minimize start
+
     private void minimizePossibleValuesInRow(int row) {
         for (int i = 0; i < sudoku[row].length; i++) {
             if (sudoku[row][i][0][0] == 0) {
@@ -402,6 +403,8 @@ public class HintHelper implements Calc {
             }
         }
     }
+
+    //TODO minimize finish
 
     private void fillIfOnlyOnePossibleValueInRow() {
         for (int row = 0; row < sudoku.length; row++) {

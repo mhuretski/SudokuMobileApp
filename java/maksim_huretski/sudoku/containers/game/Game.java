@@ -14,6 +14,7 @@ import maksim_huretski.sudoku.animation.board.AnimGame;
 import maksim_huretski.sudoku.animation.board.AnimHints;
 import maksim_huretski.sudoku.calculation.Calc;
 import maksim_huretski.sudoku.calculation.HintHelper;
+import maksim_huretski.sudoku.calculation.hint_types.PossibleValuesMinimizer;
 import maksim_huretski.sudoku.calculation.validation.Checker;
 import maksim_huretski.sudoku.calculation.validation.InputValidator;
 import maksim_huretski.sudoku.containers.menu.HintSettingsDialog;
@@ -30,12 +31,9 @@ public abstract class Game extends Screen {
     private boolean hintBlocks;
     private boolean hintPosValues;
     private boolean hintCalc;
-
-/* TODO uncomment when hints are refactored
     private final int[] possibleValuesNumbers = new int[]
             {R.id.vZero, R.id.v0, R.id.v1, R.id.v2, R.id.v3, R.id.v4, R.id.v5, R.id.v6, R.id.v7, R.id.v8};
-    private int[][][][] sudokuPossibleValues = new int[9][9][][];
-    private TextView possibleValue;*/
+    private TextView possibleValue;
 
     protected abstract void setInitialSudoku();
 
@@ -75,8 +73,7 @@ public abstract class Game extends Screen {
                     highlighted = true;
                     normalStyle(cell.getId());
                     possibleValues.setVisibility(View.VISIBLE);
-/* TODO uncomment when hints are refactored
-                    setPossibleValuesNumbers();*/
+                    if (hintPosValues) setPossibleValuesNumbers(view);
                     highlightedStyle(view.getId());
                 } else {
                     highlighted = false;
@@ -85,24 +82,15 @@ public abstract class Game extends Screen {
                 }
             } else {
                 possibleValues.setVisibility(View.VISIBLE);
-/* TODO uncomment when hints are refactored
-                setPossibleValuesNumbers();*/
+                if (hintPosValues) setPossibleValuesNumbers(view);
                 highlightedStyle(view.getId());
                 highlighted = true;
             }
         }
     }
 
-/* TODO uncomment when hints are refactored
-    private void setPossibleValuesNumbers() {
-        for (int k = 0; k < 10; k++) {
-                possibleValue = findViewById(possibleValuesNumbers[k]);
-                possibleValue.setVisibility(View.VISIBLE);
-        }
-        hintHelper.init(sudoku, blockIDs);
-        hintHelper.calculateSudoku();
-        sudokuPossibleValues = hintHelper.getSudokuPossibleValues();
-        int position = cell.getId();
+    private void setPossibleValuesNumbers(View view) {
+        int position = view.getId();
         int row = 0;
         int column = 0;
         label:
@@ -115,13 +103,31 @@ public abstract class Game extends Screen {
                 }
             }
         }
-        for (int k = 0; k < 9; k++) {
-            if (sudokuPossibleValues[row][column][1][k] % 2 != 0) {
-                possibleValue = findViewById(possibleValuesNumbers[k + 1]);
+        if (sudoku[row][column] == 0) {
+            setDefaultPossibleValuesVisibility();
+            int[][][][] sudokuPossibleValues = new PossibleValuesMinimizer()
+                    .init(sudoku)
+                    .minimize();
+            for (int k = 0; k < 9; k++) {
+                if (sudokuPossibleValues[row][column][1][k] == 0) {
+                    possibleValue = findViewById(possibleValuesNumbers[k + 1]);
+                    possibleValue.setVisibility(View.INVISIBLE);
+                }
+            }
+        } else {
+            for (int k = 1; k < 10; k++) {
+                possibleValue = findViewById(possibleValuesNumbers[k]);
                 possibleValue.setVisibility(View.INVISIBLE);
             }
         }
-    }*/
+    }
+
+    public void setDefaultPossibleValuesVisibility() {
+        for (int k = 1; k < 10; k++) {
+            possibleValue = findViewById(possibleValuesNumbers[k]);
+            possibleValue.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public void onClickValue(View view) {
@@ -149,16 +155,43 @@ public abstract class Game extends Screen {
         InputValidator iv = new InputValidator();
         iv.init(blockIDs);
         iv.setSudoku(sudoku);
-        isCorrectSudoku = iv.checkInput();
-        if (isCorrectSudoku) findSolution(hintHelper, iv);
-        else highlightIncorrectBlocks(iv);
+        isCorrectSudoku = iv.isCorrectInput();
+        boolean isFilled = new Checker().isFilledSudoku(sudoku);
+        if (isCorrectSudoku) {
+            if (isFilled || hintCalc) findSolution(hintHelper, iv);
+        } else highlightIncorrectValues(iv, isFilled);
+    }
+
+    private void highlightIncorrectValues(InputValidator iv, boolean isFilled) {
+        boolean noHighlightedHints = !hintRows && !hintColumns && !hintBlocks;
+        if ((isFilled || hintCalc) && noHighlightedHints)
+            invalidInputMessage();
+        else {
+            boolean isHighlighted = false;
+            if (iv.getIncorrectRows().size() != 0 && hintRows) {
+                highLightIncorrectRow(iv);
+                isHighlighted = true;
+            }
+            if (iv.getIncorrectColumns().size() != 0 && hintColumns) {
+                highLightIncorrectColumn(iv);
+                isHighlighted = true;
+            }
+            if (iv.getIncorrectBlocks().size() != 0 && hintBlocks) {
+                highLightIncorrectBlock(iv);
+                isHighlighted = true;
+            }
+            if (isHighlighted) {
+                highlighted = true;
+                invalidInputMessage();
+            }
+        }
     }
 
     @Override
     protected void findSolution(Calc calc, InputValidator iv) {
         calc.calculateSudoku();
         iv.setSudoku(calc.getSudoku());
-        if (!iv.checkInput()) {
+        if (!iv.isCorrectInput()) {
             isSolved = false;
             isCorrectSudoku = false;
             highlighted = true;

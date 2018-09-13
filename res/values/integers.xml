@@ -2,4 +2,8 @@
   <integer name="one">1</integer>
   <integer name="angle">45</integer>
   <integer name="straight_angle">90</integer>
+  <integer name="insaneD">10</integer>
+  <integer name="hardD">11</integer>
+  <integer name="normalD">12</integer>
+  <integer name="easyD">13</integer>
 </resources>

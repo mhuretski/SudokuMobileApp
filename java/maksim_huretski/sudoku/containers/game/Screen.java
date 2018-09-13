@@ -74,7 +74,7 @@ public abstract class Screen extends AppCompatActivity {
         }
     }
 
-    protected void highlightIncorrectBlocks(InputValidator iv) {
+    protected void highlightIncorrectValues(InputValidator iv) {
         highlighted = true;
         invalidInputMessage();
         if (iv.getIncorrectRows().size() != 0)
@@ -85,7 +85,7 @@ public abstract class Screen extends AppCompatActivity {
             highLightIncorrectBlock(iv);
     }
 
-    private void highLightIncorrectRow(InputValidator iv) {
+    void highLightIncorrectRow(InputValidator iv) {
         Set<Integer> incorrectRows = iv.getIncorrectRows();
         for (int row : incorrectRows) {
             for (int cell : CELLS[row]) {
@@ -94,7 +94,7 @@ public abstract class Screen extends AppCompatActivity {
         }
     }
 
-    private void highLightIncorrectColumn(InputValidator iv) {
+    void highLightIncorrectColumn(InputValidator iv) {
         Set<Integer> incorrectColumns = iv.getIncorrectColumns();
         for (int column : incorrectColumns) {
             for (int cell[] : CELLS) {
@@ -103,7 +103,7 @@ public abstract class Screen extends AppCompatActivity {
         }
     }
 
-    private void highLightIncorrectBlock(InputValidator iv) {
+    void highLightIncorrectBlock(InputValidator iv) {
         Set<Integer> incorrectBlocks = iv.getIncorrectBlocks();
         for (int block : incorrectBlocks) {
             for (int i = blockIDs[block][0];

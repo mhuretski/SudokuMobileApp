@@ -17,10 +17,11 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
 
     private int difficultyLevel;
     private boolean isMainMenu = true;
-    private final int[][] difficulties = new int[][]{{R.id.insane, R.id.insaneStat},
-            {R.id.hard, R.id.hardStat},
-            {R.id.normal, R.id.normalStat},
-            {R.id.easy, R.id.easyStat}};
+    private final int[][] difficulties = new int[][]{
+            {R.id.insane, R.id.insaneStat, R.integer.insaneD},
+            {R.id.hard, R.id.hardStat, R.integer.hardD},
+            {R.id.normal, R.id.normalStat, R.integer.normalD},
+            {R.id.easy, R.id.easyStat, R.integer.easyD}};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

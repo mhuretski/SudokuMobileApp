@@ -32,12 +32,12 @@ public class NewGame extends Game {
         }
     }
 
-    private void setNextGameInitialStyle() {
+    private void setNextGameInitialStyle(int[][] tempSudoku) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 cell = findViewById(CELLS[i][j]);
                 cell.setText(R.string.vDefault);
-                if (sudoku[i][j] != 0) {
+                if (tempSudoku[i][j] != 0) {
                     cell.setClickable(false);
                     cell.setFocusable(false);
                     cell.setTypeface(null, Typeface.BOLD);
@@ -55,7 +55,7 @@ public class NewGame extends Game {
     public void onClickGameButton(View view) {
         hideGameButton();
         int[][] tempSudoku = new InitialSudoku().generateInitialSudoku(difficulty);
-        setNextGameInitialStyle();
+        setNextGameInitialStyle(tempSudoku);
         new AnimGame().setCellsShown(this, CELLS, tempSudoku, 300);
         super.sudoku = tempSudoku;
         isSolved = false;

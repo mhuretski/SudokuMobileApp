@@ -31,6 +31,7 @@ public class HintSettingsDialog extends Dialog {
         super.dismiss();
         hintPreferences.setHintPreferences();
         getPreferences();
+        getDefaultPossibleValuesVisibility();
     }
 
     private void getPreferences() {
@@ -40,6 +41,11 @@ public class HintSettingsDialog extends Dialog {
         game.setHintBlocks(hintPreferences.isHintBlocks());
         game.setHintPosValues(hintPreferences.isHintPosValues());
         game.setHintCalc(hintPreferences.isHintCalc());
+    }
+
+    private void getDefaultPossibleValuesVisibility() {
+        if (!hintPreferences.isHintPosValues())
+            game.setDefaultPossibleValuesVisibility();
     }
 
     public void onClickHints() {

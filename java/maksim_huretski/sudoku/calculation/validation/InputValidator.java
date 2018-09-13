@@ -19,7 +19,7 @@ public class InputValidator {
         this.sudoku = sudoku;
     }
 
-    public boolean checkInput() {
+    public boolean isCorrectInput() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 checkRow(i, j);

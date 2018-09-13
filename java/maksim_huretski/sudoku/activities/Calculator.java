@@ -77,9 +77,9 @@ public class Calculator extends Screen {
             InputValidator iv = new InputValidator();
             iv.init(blockIDs);
             iv.setSudoku(sudoku);
-            isCorrectSudoku = iv.checkInput();
+            isCorrectSudoku = iv.isCorrectInput();
             if (isCorrectSudoku) findSolution(solver, iv);
-            else highlightIncorrectBlocks(iv);
+            else highlightIncorrectValues(iv);
         } else resetSudoku();
     }
 
@@ -103,7 +103,7 @@ public class Calculator extends Screen {
     protected void findSolution(Calc calc, InputValidator iv) {
         boolean isValid = calc.calculateSudoku();
         iv.setSudoku(calc.getSudoku());
-        if (iv.checkInput() && isValid) {
+        if (iv.isCorrectInput() && isValid) {
             sudoku = calc.getSudoku();
             isDone();
         } else {

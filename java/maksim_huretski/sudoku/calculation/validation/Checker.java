@@ -88,4 +88,9 @@ public class Checker {
         }
     }
 
+    public boolean isFilledSudoku(int[][] sudoku) {
+        isFilled(sudoku);
+        return isFilled;
+    }
+
 }
