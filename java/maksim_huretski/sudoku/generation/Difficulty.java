@@ -4,7 +4,7 @@ import maksim_huretski.sudoku.R;
 
 class Difficulty {
 
-    private int amountOfCellsShown = 41;
+    private int amountOfCellsShown = 45;
     private final int[] positions = new int[9];
     private final int[] amountOfShownCellsInEachRow = new int[9];
     private final boolean[][] shown = new boolean[9][9];
@@ -63,16 +63,16 @@ class Difficulty {
 
     public void setDifficulty(int difficulty) {
         switch (difficulty) {
-            case R.id.easy:
+            case R.integer.easyD:
                 amountOfCellsShown = 36;
                 break;
-            case R.id.normal:
+            case R.integer.normalD:
                 amountOfCellsShown = 45;
                 break;
-            case R.id.hard:
+            case R.integer.hardD:
                 amountOfCellsShown = 54;
                 break;
-            case R.id.insane:
+            case R.integer.insaneD:
                 amountOfCellsShown = 64;
                 break;
         }
