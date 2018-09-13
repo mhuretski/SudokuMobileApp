@@ -8,8 +8,7 @@ import maksim_huretski.sudoku.R;
 
 public class SudokuSaver extends SQLiteOpenHelper {
 
-
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "sudokuDb";
     public static final String KEY_ID = "_id";
 
@@ -19,7 +18,11 @@ public class SudokuSaver extends SQLiteOpenHelper {
 
     public static final String TABLE_STATS = "stats";
     public static final String KEY_SOLVED = "solved";
-    private final int[] difficulties = new int[]{R.id.insane, R.id.hard, R.id.normal, R.id.easy};
+    private final int[] difficulties = new int[]{
+            R.integer.insaneD,
+            R.integer.hardD,
+            R.integer.normalD,
+            R.integer.easyD};
 
     public SudokuSaver(Context context) {
         super(context, SudokuSaver.DATABASE_NAME, null, DATABASE_VERSION);

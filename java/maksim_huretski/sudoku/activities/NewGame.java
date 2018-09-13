@@ -12,7 +12,7 @@ public class NewGame extends Game {
 
     @Override
     protected void setInitialSudoku() {
-        difficulty = getIntent().getIntExtra(getString(R.string.difficultyLevel), R.id.normal);
+        difficulty = getIntent().getIntExtra(getString(R.string.difficultyLevel), R.integer.normalD);
         sudoku = new InitialSudoku().generateInitialSudoku(difficulty);
         setInitialStyle();
     }

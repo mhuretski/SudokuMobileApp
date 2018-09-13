@@ -103,19 +103,29 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
     private void setDifficulty(View view) {
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        int level = view.getId();
+        int level = getDifId(view);
         editor.putInt(getString(R.string.difficultyLevel), level);
         editor.apply();
-        difficultyLevel = sharedPref.getInt(getString(R.string.difficultyLevel), R.id.normal);
+        difficultyLevel = sharedPref.getInt(getString(R.string.difficultyLevel), R.integer.normalD);
+    }
+
+    private int getDifId(View view) {
+        int chosenBtn = view.getId();
+        for (int[] difficulty : difficulties) {
+            if (difficulty[0] == chosenBtn){
+                return difficulty[2];
+            }
+        }
+        return R.integer.normalD;
     }
 
     private void getDifficulty() {
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         if (sharedPref.contains(getString(R.string.difficultyLevel))) {
-            difficultyLevel = sharedPref.getInt(getString(R.string.difficultyLevel), R.id.normal);
+            difficultyLevel = sharedPref.getInt(getString(R.string.difficultyLevel), R.integer.normalD);
             boolean isValid = false;
             for (int difficulty[] : difficulties) {
-                if (difficultyLevel == difficulty[0]) {
+                if (difficultyLevel == difficulty[2]) {
                     isValid = true;
                     break;
                 }
@@ -127,7 +137,7 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
     private void isSavedProgress() {
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.savedGame), Context.MODE_PRIVATE);
         boolean isSolved = sharedPref.getBoolean(getString(R.string.savedGame), true);
-        int savedDifficulty = sharedPref.getInt(getString(R.string.savedProgressDifficulty), R.id.normal);
+        int savedDifficulty = sharedPref.getInt(getString(R.string.savedProgressDifficulty), R.integer.normalD);
         if (!isSolved && savedDifficulty == difficultyLevel) showContinue();
         else hideContinue();
     }
@@ -136,7 +146,7 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
         TextView difText;
         for (int difficulty[] : difficulties) {
             difText = findViewById(difficulty[0]);
-            if (this.difficultyLevel == difficulty[0]) {
+            if (this.difficultyLevel == difficulty[2]) {
                 difText.setTextColor(getResources().getColor(R.color.white));
                 difText.setBackgroundResource(R.drawable.chosen_dif_button);
             } else {
@@ -166,7 +176,7 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
             int timesSolved = cursor.getColumnIndex(SudokuSaver.KEY_SOLVED);
             do {
                 for (int difficulty[] : difficulties) {
-                    if (difficulty[0] == cursor.getInt(id)) {
+                    if (difficulty[2] == cursor.getInt(id)) {
                         stats = findViewById(difficulty[1]);
                         stats.setText(String.valueOf(cursor.getInt(timesSolved)));
                         break;

@@ -79,7 +79,7 @@ public class ContinueGame extends Game {
 
     private void getCurrentDifficulty(){
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.savedGame), Context.MODE_PRIVATE);
-        difficulty = sharedPref.getInt(getString(R.string.savedProgressDifficulty), R.id.normal);
+        difficulty = sharedPref.getInt(getString(R.string.savedProgressDifficulty), R.integer.normalD);
     }
 
 }
