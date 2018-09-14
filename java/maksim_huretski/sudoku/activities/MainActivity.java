@@ -58,11 +58,11 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
                     setDifficulty(findViewById(R.id.normal));
                 intent = new Intent(this, NewGame.class);
                 intent.putExtra(getString(R.string.difficultyLevel), difficultyLevel);
-                startActivity(intent);
+                startActivity(intent, view);
                 break;
             case R.id.continueGame:
                 intent = new Intent(this, ContinueGame.class);
-                startActivity(intent);
+                startActivity(intent, view);
                 break;
             case R.id.sudokuSolver:
                 intent = new Intent(this, Calculator.class);
@@ -112,7 +112,7 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
     private int getDifId(View view) {
         int chosenBtn = view.getId();
         for (int[] difficulty : difficulties) {
-            if (difficulty[0] == chosenBtn){
+            if (difficulty[0] == chosenBtn) {
                 return difficulty[2];
             }
         }

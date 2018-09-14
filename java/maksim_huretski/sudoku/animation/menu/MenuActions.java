@@ -1,5 +1,8 @@
 package maksim_huretski.sudoku.animation.menu;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import maksim_huretski.sudoku.R;
@@ -8,6 +11,18 @@ public abstract class MenuActions extends AppCompatActivity {
 
     private MenuAnimation menuAnimation;
     private View button;
+
+    protected void startActivity(Intent intent, View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            ActivityOptions options = ActivityOptions.makeScaleUpAnimation(
+                    view,
+                    0,
+                    0,
+                    view.getWidth(),
+                    view.getHeight());
+            startActivity(intent, options.toBundle());
+        } else startActivity(intent);
+    }
 
     protected void showDifficulty() {
         menuAnimation.show(R.id.menuDifficultyFrame, this);
