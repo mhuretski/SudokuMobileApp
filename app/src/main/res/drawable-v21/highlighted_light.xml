@@ -1,0 +1,17 @@
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+        android:color="@color/highlighted">
+<item android:id="@android:id/mask">
+  <shape android:shape="rectangle">
+    <solid android:color="@color/black" />
+    <corners android:radius="@dimen/radius" />
+  </shape>
+</item>
+<item android:id="@android:id/background">
+  <shape android:shape="rectangle">
+    <gradient android:endColor="@color/light"
+              android:startColor="@color/dark"
+              android:angle="@integer/angle"/>
+    <corners android:radius="@dimen/highlighted_radius"/>
+  </shape>
+</item>
+</ripple>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/main_window"
+  android:background="@drawable/background"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <TextView
+    android:background="@drawable/message_top"
+    android:text="@string/vDefault"
+    android:visibility="invisible"
+    android:textSize="@dimen/message_text"
+    android:gravity="center"
+    android:textColor="@color/background_bottom"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/radius"
+    android:paddingBottom="@dimen/radius"
+    style="@style/activityGameTextView"
+    android:id="@+id/messageAtTop"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginTop="@dimen/default_layout_margin"/>
+
+  <ImageView
+    style="@style/activityGameImageView"
+    android:visibility="gone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:srcCompat="@drawable/ic_hint_menu"
+    android:id="@+id/hintMenuBtn"
+    android:layout_marginEnd="@dimen/default_layout_margin"
+    android:layout_marginRight="@dimen/default_layout_margin"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/messageAtTop"
+    android:contentDescription="@string/vDefault"/>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/table"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintHorizontal_weight="@integer/one"
+    android:layout_marginTop="@dimen/default_layout_margin"
+    style="@style/activityGameConstraintLayout"
+    app:layout_constraintTop_toBottomOf="@+id/messageAtTop">
+
+    <fragment
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:name="maksim_huretski.sudoku.containers.game.Container1of3"
+      android:id="@+id/sudoku1of3Main"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/sudoku2of3Main"/>
+
+    <fragment
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:name="maksim_huretski.sudoku.containers.game.Container2of3"
+      android:id="@+id/sudoku2of3Main"
+      app:layout_constraintTop_toBottomOf="@+id/sudoku1of3Main"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/sudoku3of3Main"/>
+
+    <fragment
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:name="maksim_huretski.sudoku.containers.game.Container3of3"
+      android:id="@+id/sudoku3of3Main"
+      app:layout_constraintTop_toBottomOf="@+id/sudoku2of3Main"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"/>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <fragment
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    app:layout_constraintTop_toBottomOf="@+id/table"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/gameButton"
+    android:name="maksim_huretski.sudoku.containers.game.PossibleValues"
+    android:id="@+id/possibleValuesMain"/>
+
+  <Button
+    style="@style/gameButton"
+    android:id="@+id/gameButton"
+    android:text="@string/vDefault"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
