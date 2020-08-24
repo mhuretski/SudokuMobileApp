@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import maksim_huretski.sudoku.R;
 import maksim_huretski.sudoku.animation.menu.MenuActions;
+import maksim_huretski.sudoku.animation.menu.MenuLock;
 import maksim_huretski.sudoku.database.SudokuSaver;
 
 public class MainActivity extends MenuActions implements View.OnClickListener {
@@ -36,6 +37,7 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
     protected void onResume() {
         super.onResume();
         isSavedProgress();
+        MenuLock.unlock();
     }
 
     @Override
@@ -54,19 +56,28 @@ public class MainActivity extends MenuActions implements View.OnClickListener {
         Intent intent;
         switch (view.getId()) {
             case R.id.newGame:
-                if (difficultyLevel == 0)
-                    setDifficulty(findViewById(R.id.normal));
-                intent = new Intent(this, NewGame.class);
-                intent.putExtra(getString(R.string.difficultyLevel), difficultyLevel);
-                startActivity(intent, view);
+                if (MenuLock.isUnlocked()) {
+                    MenuLock.lock();
+                    if (difficultyLevel == 0)
+                        setDifficulty(findViewById(R.id.normal));
+                    intent = new Intent(this, NewGame.class);
+                    intent.putExtra(getString(R.string.difficultyLevel), difficultyLevel);
+                    startActivity(intent, view);
+                }
                 break;
             case R.id.continueGame:
-                intent = new Intent(this, ContinueGame.class);
-                startActivity(intent, view);
+                if (MenuLock.isUnlocked()) {
+                    MenuLock.lock();
+                    intent = new Intent(this, ContinueGame.class);
+                    startActivity(intent, view);
+                }
                 break;
             case R.id.sudokuSolver:
-                intent = new Intent(this, Calculator.class);
-                startActivity(intent);
+                if (MenuLock.isUnlocked()) {
+                    MenuLock.lock();
+                    intent = new Intent(this, Calculator.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.difficulty:
                 highlightCurrentDifficulty();
